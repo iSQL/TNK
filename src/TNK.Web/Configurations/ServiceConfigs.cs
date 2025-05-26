@@ -1,4 +1,7 @@
-﻿using TNK.Core.Interfaces;
+﻿using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using TNK.Core.Interfaces;
 using TNK.Infrastructure;
 using TNK.Infrastructure.Email;
 
@@ -11,7 +14,7 @@ public static class ServiceConfigs
     services.AddInfrastructureServices(builder.Configuration, logger)
             .AddMediatrConfigs();
 
-
+    
     if (builder.Environment.IsDevelopment())
     {
       // Use a local test email server
@@ -26,6 +29,9 @@ public static class ServiceConfigs
     {
       services.AddScoped<IEmailSender, MimeKitEmailSender>();
     }
+
+
+
 
     logger.LogInformation("{Project} services registered", "Mediatr and Email Sender");
 

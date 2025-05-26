@@ -5,7 +5,6 @@ using TNK.Core.Services;
 using TNK.Infrastructure.Data;
 using TNK.Infrastructure.Data.Queries;
 using TNK.UseCases.Contributors.List;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace TNK.Infrastructure;
 public static class InfrastructureServiceExtensions
@@ -20,7 +19,6 @@ public static class InfrastructureServiceExtensions
         services.AddDbContext<AppDbContext>(options =>
          options.UseNpgsql(connectionString));
 
-        // Ensure the required package is installed: Microsoft.AspNetCore.Identity.EntityFrameworkCore
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
         {
              options.Password.RequireDigit = false;
