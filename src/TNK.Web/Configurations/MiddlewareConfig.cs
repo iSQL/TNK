@@ -14,14 +14,14 @@ public static class MiddlewareConfig
     }
     else
     {
-      app.UseDefaultExceptionHandler(); // from FastEndpoints
+      app.UseDefaultExceptionHandler(); 
       app.UseHsts();
     }
 
     app.UseFastEndpoints()
-        .UseSwaggerGen(); // Includes AddFileServer and static files middleware
+        .UseSwaggerGen(); 
 
-    app.UseHttpsRedirection(); // Note this will drop Authorization headers
+    app.UseHttpsRedirection(); 
 
     await SeedDatabase(app);
 
@@ -35,10 +35,7 @@ public static class MiddlewareConfig
 
     try
     {
-      var context = services.GetRequiredService<AppDbContext>();
-      //          context.Database.Migrate();
-      context.Database.EnsureCreated();
-      await SeedData.InitializeAsync(context);
+      await SeedData.InitializeAsync(services);
     }
     catch (Exception ex)
     {
