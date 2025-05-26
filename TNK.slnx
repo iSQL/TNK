@@ -1,0 +1,30 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="CleanArchitecture.nuspec" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/TNK.AspireHost/TNK.AspireHost.csproj" />
+    <Project Path="src/TNK.Core/TNK.Core.csproj" />
+    <Project Path="src/TNK.Infrastructure/TNK.Infrastructure.csproj" />
+    <Project Path="src/TNK.ServiceDefaults/TNK.ServiceDefaults.csproj" />
+    <Project Path="src/TNK.UseCases/TNK.UseCases.csproj" />
+    <Project Path="src/TNK.Web/TNK.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TNK.FunctionalTests/TNK.FunctionalTests.csproj">
+      <BuildDependency Project="src/TNK.Web/TNK.Web.csproj" />
+    </Project>
+    <Project Path="tests/TNK.IntegrationTests/TNK.IntegrationTests.csproj">
+      <BuildDependency Project="src/TNK.Infrastructure/TNK.Infrastructure.csproj" />
+    </Project>
+    <Project Path="tests/TNK.UnitTests/TNK.UnitTests.csproj" />
+  </Folder>
+</Solution>
