@@ -29,11 +29,12 @@ public static class ServiceConfigs
     {
       services.AddScoped<IEmailSender, MimeKitEmailSender>();
     }
+    builder.Services.AddScoped<Auth.TokenService>();
 
 
 
 
-    logger.LogInformation("{Project} services registered", "Mediatr and Email Sender");
+    logger.LogInformation("{Project} services registered", "Mediatr, TokenService and Email Sender");
 
     return services;
   }

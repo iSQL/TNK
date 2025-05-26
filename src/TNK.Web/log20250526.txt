@@ -315,3 +315,159 @@ RETURNING "Id";
 2025-05-26 18:14:32.522 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/ - null null
 2025-05-26 18:14:32.673 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/ - 404 0 null 158.2909ms
 2025-05-26 18:14:32.681 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:57679/, Response status code: 404
+2025-05-26 18:58:53.627 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-26 18:58:53.660 +02:00 [INF] Registered 7 endpoints in 977 milliseconds.
+2025-05-26 18:58:55.428 +02:00 [INF] Executed DbCommand (49ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-26 18:58:55.511 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-26 18:58:55.517 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-26 18:58:55.553 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-26 18:58:55.742 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-26 18:58:55.749 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-26 18:58:56.358 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-26 18:58:56.361 +02:00 [INF] Hosting environment: Development
+2025-05-26 18:58:56.362 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-26 19:15:21.450 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-26 19:15:21.494 +02:00 [INF] Registered 7 endpoints in 738 milliseconds.
+2025-05-26 19:15:22.885 +02:00 [INF] Executed DbCommand (47ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-26 19:15:22.951 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-26 19:15:22.957 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-26 19:15:22.978 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-26 19:15:23.150 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-26 19:15:23.156 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-26 19:15:23.201 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-26 19:15:23.203 +02:00 [INF] Hosting environment: Development
+2025-05-26 19:15:23.205 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-26 19:15:28.790 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/ - null null
+2025-05-26 19:15:28.929 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/ - 404 0 null 143.3615ms
+2025-05-26 19:15:28.941 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:57679/, Response status code: 404
+2025-05-26 19:15:32.995 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger - null null
+2025-05-26 19:15:33.015 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger - 302 0 null 20.1435ms
+2025-05-26 19:15:33.124 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-26 19:15:33.170 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 82.7408ms
+2025-05-26 19:15:33.216 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/swagger-ui.css - null null
+2025-05-26 19:15:33.216 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.css - null null
+2025-05-26 19:15:33.219 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/swagger-ui-bundle.js - null null
+2025-05-26 19:15:33.219 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-26 19:15:33.278 +02:00 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-05-26 19:15:33.219 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/swagger-ui-standalone-preset.js - null null
+2025-05-26 19:15:33.296 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 76.5804ms
+2025-05-26 19:15:33.292 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.css - 200 218 text/css 75.9863ms
+2025-05-26 19:15:33.296 +02:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-05-26 19:15:33.311 +02:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-05-26 19:15:33.325 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/swagger-ui.css - 200 154988 text/css 109.4096ms
+2025-05-26 19:15:33.325 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/swagger-ui-standalone-preset.js - 200 229224 text/javascript 106.0492ms
+2025-05-26 19:15:33.325 +02:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-05-26 19:15:33.340 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/swagger-ui-bundle.js - 200 1468327 text/javascript 121.5998ms
+2025-05-26 19:15:33.518 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-26 19:15:33.605 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 86.8448ms
+2025-05-26 19:15:33.651 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/favicon-32x32.png - null null
+2025-05-26 19:15:33.657 +02:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-05-26 19:15:33.660 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/favicon-32x32.png - 200 628 image/png 9.0973ms
+2025-05-26 19:15:33.716 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-26 19:15:33.823 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 106.8274ms
+2025-05-26 19:15:52.441 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 170
+2025-05-26 19:15:52.451 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-26 19:15:52.578 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-26 19:15:52.602 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-26 19:15:52.704 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-05-26 19:15:52.713 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-26 19:15:52.860 +02:00 [INF] Executed DbCommand (14ms) [Parameters=[@p0='?', @p1='?' (DbType = Int32), @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime), @p9='?', @p10='?', @p11='?', @p12='?', @p13='?' (DbType = Boolean), @p14='?', @p15='?' (DbType = Boolean), @p16='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUsers" ("Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16);
+2025-05-26 19:15:52.886 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-05-26 19:15:52.917 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-05-26 19:15:52.925 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-05-26 19:15:52.941 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-05-26 19:15:52.949 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-26 19:15:52.982 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?', @p1='?', @p18='?', @p2='?' (DbType = Int32), @p3='?', @p19='?', @p4='?', @p5='?' (DbType = Boolean), @p6='?', @p7='?', @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime), @p10='?', @p11='?', @p12='?', @p13='?', @p14='?' (DbType = Boolean), @p15='?', @p16='?' (DbType = Boolean), @p17='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUserRoles" ("RoleId", "UserId")
+VALUES (@p0, @p1);
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p2, "ConcurrencyStamp" = @p3, "Email" = @p4, "EmailConfirmed" = @p5, "FirstName" = @p6, "LastName" = @p7, "LockoutEnabled" = @p8, "LockoutEnd" = @p9, "NormalizedEmail" = @p10, "NormalizedUserName" = @p11, "PasswordHash" = @p12, "PhoneNumber" = @p13, "PhoneNumberConfirmed" = @p14, "SecurityStamp" = @p15, "TwoFactorEnabled" = @p16, "UserName" = @p17
+WHERE "Id" = @p18 AND "ConcurrencyStamp" = @p19;
+2025-05-26 19:15:53.004 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-26 19:15:53.012 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 200 null application/json; charset=utf-8 570.5709ms
+2025-05-26 19:16:02.111 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 67
+2025-05-26 19:16:02.118 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-26 19:16:02.143 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-26 19:16:02.335 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-26 19:16:02.398 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-26 19:16:02.407 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-26 19:16:02.410 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 298.8608ms

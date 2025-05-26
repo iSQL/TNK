@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using TNK.Web.Configurations;
+using FastEndpoints.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
@@ -27,6 +28,9 @@ builder.Services.AddAuthentication(options =>
   };
 });
 
+builder.Services.AddAuthorization();
+
+
 var logger = Log.Logger = new LoggerConfiguration()
   .Enrich.FromLogContext()
   .WriteTo.Console()
@@ -47,6 +51,23 @@ builder.Services.AddFastEndpoints()
                 {
                   o.ShortSchemaNames = true;
                 });
+// Configure FastEndpoints.Swagger - NSwag
+builder.Services.AddSwaggerDocument(settings =>
+{
+  settings.DocumentName = "v1.0";
+  settings.Title = "TerminNaKlik API";
+  settings.Version = "v1.0";
+  // Add JWT Bearer authentication to Swagger UI
+  settings.AddAuth("BearerAuth", new NSwag.OpenApiSecurityScheme
+  {
+    Name = "Authorization",
+    In = NSwag.OpenApiSecurityApiKeyLocation.Header,
+    Type = NSwag.OpenApiSecuritySchemeType.Http, 
+    Scheme = "bearer", 
+    BearerFormat = "JWT",
+    Description = "Input your Bearer token in this format: Bearer {token}"
+  });
+}); // If using System.Text.Json source generation
 
 
 var app = builder.Build();
