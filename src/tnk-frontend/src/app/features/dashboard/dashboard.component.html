@@ -1,28 +1,197 @@
 <div class="dashboard-container">
   <header class="dashboard-header">
-    <h2>Dashboard</h2>
+    <h2>TerminNaKlik Dashboard</h2>
     <button ejs-button cssClass="e-danger" (click)="logout()">Logout (Odjavi se)</button>
   </header>
 
-  <div class="welcome-message" *ngIf="userFirstName">
-    <h3>Welcome back, {{ userFirstName }}! (Dobrodošli nazad, {{ userFirstName }}!)</h3>
-  </div>
-  <div class="welcome-message" *ngIf="!userFirstName">
-    <h3>Welcome! (Dobrodošli!)</h3>
-  </div>
-
-  <div class="dashboard-content">
-    <p>This is your main dashboard. More features will be added here soon.</p>
-    <p>(Ovo je vaša glavna kontrolna tabla. Uskoro će ovde biti dodato više funkcija.)</p>
+  <div class="welcome-section">
+    <div class="welcome-message" *ngIf="userFirstName">
+      <h3>Welcome back, {{ userFirstName }}! (Dobrodošli nazad, {{ userFirstName }}!)</h3>
+    </div>
+    <div class="welcome-message" *ngIf="!userFirstName">
+      <h3>Welcome! (Dobrodošli!)</h3>
+    </div>
 
     <div *ngIf="isVendor" class="vendor-actions">
-      <h4>Vendor Options (Opcije za prodavca)</h4>
+      <h4>Vendor Quick Actions (Brze akcije za prodavca)</h4>
       <button ejs-button cssClass="e-primary" (click)="navigateToManageProfile()">
         Manage My Business Profile (Upravljaj mojim poslovnim profilom)
       </button>
-      </div>
+      <button ejs-button cssClass="e-outline" [routerLink]="['/vendor/add-service']">
+        Add New Service (Dodaj novu uslugu)
+      </button>
+      <button ejs-button cssClass="e-outline" [routerLink]="['/vendor/add-timeslot']">
+        Add Available Timeslot (Dodaj slobodan termin)
+      </button>
+    </div>
+  </div>
 
-    <div class="dashboard-widgets">
+  <div class="dashboard-grid-layout">
+    <div class="kpi-cards">
+      <div class="e-card kpi-card">
+        <div class="e-card-content">
+          <div class="kpi-value">125</div>
+          <div class="kpi-label">Total Bookings (Ukupno rezervacija)</div>
+        </div>
       </div>
+      <div class="e-card kpi-card">
+        <div class="e-card-content">
+          <div class="kpi-value">€3,500</div>
+          <div class="kpi-label">Monthly Revenue (Mesečni prihod)</div>
+        </div>
+      </div>
+      <div class="e-card kpi-card">
+        <div class="e-card-content">
+          <div class="kpi-value">4.8 <span class="e-icons e-icon-star"></span></div>
+          <div class="kpi-label">Avg. Rating (Prosečna ocena)</div>
+        </div>
+      </div>
+      <div class="e-card kpi-card">
+        <div class="e-card-content">
+          <div class="kpi-value">10</div>
+          <div class="kpi-label">New Customers (Novi klijenti)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget chart-widget">
+      <div class="widget-header">
+        <span class="e-icons e-icon-chart"></span>
+        <h3>{{ chartTitle }}</h3>
+      </div>
+      <div class="widget-content">
+        <ejs-chart
+          [primaryXAxis]="primaryXAxis"
+          [primaryYAxis]="primaryYAxis"
+          [title]="chartTitle"
+          [tooltip]="tooltip"
+          [legendSettings]="legendSettings"
+        >
+          <e-series-collection>
+            <e-series
+              type="Column"
+              [dataSource]="chartData"
+              xName="month"
+              yName="bookings"
+              name="Bookings"
+              [marker]="{ dataLabel: { visible: false } }"
+              width="2"
+            ></e-series>
+            <e-series
+              type="Line"
+              [dataSource]="chartData"
+              xName="month"
+              yName="revenue"
+              name="Revenue (€)"
+              [marker]="{ visible: true, width: 8, height: 8 }"
+              dashArray="5,5"
+              width="2"
+            ></e-series>
+          </e-series-collection>
+        </ejs-chart>
+      </div>
+    </div>
+
+    <div class="widget grid-widget">
+      <div class="widget-header">
+        <span class="e-icons e-icon-grid"></span>
+        <h3>Recent Transactions (Nedavne transakcije)</h3>
+      </div>
+      <div class="widget-content">
+        <ejs-grid
+          [dataSource]="gridData"
+          [allowPaging]="true"
+          [pageSettings]="gridPageSettings"
+          [allowSorting]="true"
+          [sortSettings]="gridSortSettings"
+          [allowFiltering]="true"
+          [filterSettings]="gridFilterSettings"
+          height="auto"
+          width="auto"
+        >
+          <e-columns>
+            <e-column field="OrderID" headerText="Order ID" textAlign="Right" width="90"></e-column>
+            <e-column field="CustomerName" headerText="Customer Name" width="130"></e-column>
+            <e-column field="OrderDate" headerText="Order Date" format="yMd" textAlign="Right" width="110"></e-column>
+            <e-column field="Amount" headerText="Amount" format="c2" textAlign="Right" width="90"></e-column>
+            <e-column field="Status" headerText="Status" width="100"></e-column>
+          </e-columns>
+        </ejs-grid>
+      </div>
+    </div>
+
+    <div class="widget scheduler-widget">
+      <div class="widget-header">
+        <span class="e-icons e-icon-calendar"></span>
+        <h3>Upcoming Schedule (Nadolazeći raspored)</h3>
+      </div>
+      <div class="widget-content">
+        <ejs-schedule
+          [selectedDate]="selectedDate"
+          [eventSettings]="{ dataSource: scheduleData, fields: {
+            id: 'Id',
+            subject: { name: 'Subject', default: 'No Title' },
+            startTime: { name: 'StartTime' },
+            endTime: { name: 'EndTime' },
+            description: { name: 'Description' }
+          } }"
+          [currentView]="currentView"
+          height="auto"
+          readonly="true"
+        >
+          <e-views>
+            <e-view option="Day"></e-view>
+            <e-view option="Week"></e-view>
+            <e-view option="Month"></e-view>
+          </e-views>
+        </ejs-schedule>
+        <div class="schedule-note">
+          <p>Click <a routerLink="/full-schedule">here</a> to manage your full schedule.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget notification-widget">
+      <div class="widget-header">
+        <span class="e-icons e-icon-bell"></span>
+        <h3>Notifications & Tasks (Obaveštenja i zadaci)</h3>
+      </div>
+      <div class="widget-content">
+        <ul class="notification-list">
+          <li>New booking received from Jane Smith for 2 PM on May 29th.</li>
+          <li>Reminder: Stock check for salon supplies due by end of week.</li>
+          <li>Customer feedback: "Great service!" from Order #10250.</li>
+          <li>Upcoming promotion campaign planning meeting on June 5th.</li>
+        </ul>
+        <button ejs-button cssClass="e-flat" [routerLink]="['/notifications']">View All Notifications</button>
+      </div>
+    </div>
+
+    <div class="widget customer-insights-widget">
+      <div class="widget-header">
+        <span class="e-icons e-icon-user-group"></span>
+        <h3>Customer Insights (Uvidi o klijentima)</h3>
+      </div>
+      <div class="widget-content">
+        <p>Your top customer: **Marko Markovic** (5 bookings this month).</p>
+        <p>Most popular service: **Full Haircut**.</p>
+        <button ejs-button cssClass="e-flat" [routerLink]="['/customers']">Manage Customers</button>
+      </div>
+    </div>
+
+    <div class="widget quick-links-widget">
+      <div class="widget-header">
+        <span class="e-icons e-icon-link"></span>
+        <h3>Quick Links (Brzi linkovi)</h3>
+      </div>
+      <div class="widget-content">
+        <ul>
+          <li><a routerLink="/vendor/services">Manage Services</a></li>
+          <li><a routerLink="/vendor/gallery">Update Gallery</a></li>
+          <li><a routerLink="/settings">Account Settings</a></li>
+          <li><a routerLink="/help">Help & Support</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

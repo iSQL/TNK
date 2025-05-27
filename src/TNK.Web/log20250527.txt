@@ -1638,3 +1638,52 @@ INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
 WHERE a."UserId" = @__userId_0
 2025-05-27 16:29:42.851 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
 2025-05-27 16:29:42.853 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 100.6449ms
+2025-05-27 17:47:13.418 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 17:47:13.487 +02:00 [INF] CORS policy execution successful.
+2025-05-27 17:47:13.489 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 71.036ms
+2025-05-27 17:47:13.491 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 43
+2025-05-27 17:47:13.500 +02:00 [INF] CORS policy execution successful.
+2025-05-27 17:47:13.501 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 17:47:13.504 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 17:47:13.554 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 17:47:13.638 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 17:47:13.646 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 17:47:13.651 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 17:47:13.654 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 163.5773ms
+2025-05-27 17:50:04.179 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 17:50:04.207 +02:00 [INF] CORS policy execution successful.
+2025-05-27 17:50:04.223 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 47.8523ms
+2025-05-27 17:50:04.275 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 43
+2025-05-27 17:50:04.289 +02:00 [INF] CORS policy execution successful.
+2025-05-27 17:50:04.291 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 17:50:04.296 +02:00 [INF] JWT Token Validated for: prodavac@local
+2025-05-27 17:50:04.302 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 17:50:04.311 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 17:50:04.490 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 17:50:04.862 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 17:50:05.160 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 17:50:05.388 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 1112.2732ms

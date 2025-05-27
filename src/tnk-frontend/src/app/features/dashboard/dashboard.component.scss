@@ -1,127 +1,372 @@
+/* src/app/features/dashboard/dashboard.component.scss */
 
-
-// Host container to center the form on the page
 :host {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 120px); // Adjust based on your header/footer height if any
-  padding: 20px;
+  align-items: flex-start;
+  min-height: calc(100vh - 120px);
+  padding: 30px;
   box-sizing: border-box;
-  background-color: #f4f7f6; // A slightly off-white background for the page
+  background-color: #f4f7f6;
+  width: 100%;
 }
 
-.register-container {
+.dashboard-container {
   width: 100%;
-  max-width: 550px; // Can be a bit wider to accommodate more fields comfortably
-  padding: 30px 35px;
+  max-width: 1400px; /* Increased max-width for a fuller dashboard */
   background-color: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); /* More prominent shadow */
+  padding: 40px; /* Increased padding */
+  box-sizing: border-box;
   text-align: center;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px; /* Increased margin */
+  border-bottom: 1px solid #e9ecef; /* Lighter border */
+  padding-bottom: 25px; /* Increased padding */
 
   h2 {
-    margin-bottom: 25px;
-    color: #333;
+    color: #212529; /* Darker text for heading */
+    font-size: 2.5rem; /* Larger font size */
+    font-weight: 700; /* Bolder font */
+    margin: 0;
+  }
+
+  button.e-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border-color: #dc3545;
+    &:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+  }
+}
+
+.welcome-section {
+  margin-bottom: 50px; /* More space below welcome/actions */
+}
+
+.welcome-message {
+  margin-bottom: 30px;
+  h3 {
+    color: #007bff;
     font-size: 1.8rem;
     font-weight: 500;
   }
 }
 
-// For the row containing first name and last name
-.form-row {
+.vendor-actions {
+  background-color: #e6f7ff; /* Lighter blue */
+  border-left: 6px solid #007bff; /* Thicker highlight border */
+  padding: 25px; /* Increased padding */
+  border-radius: 8px;
+  margin-top: 30px;
+  text-align: left;
   display: flex;
-  flex-wrap: wrap; // Allow wrapping on smaller screens
-  gap: 20px;       // Space between the two columns
-  margin-bottom: 0; // Rely on .form-group margin for bottom spacing of individual items
+  flex-wrap: wrap; /* Allow buttons to wrap */
+  gap: 15px; /* Gap between buttons */
+  justify-content: center; /* Center buttons horizontally */
 
-  .form-group.half-width {
-    flex: 1; // Each takes up equal space if side-by-side
-    min-width: calc(50% - 10px); // Adjust for gap, ensures two columns if space allows
-    text-align: left;
-    margin-bottom: 20px; // Standard margin for form groups
+  h4 {
+    width: 100%; /* Full width for heading */
+    color: #0056b3;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    text-align: center;
   }
-}
 
-.form-group {
-  margin-bottom: 20px;
-  text-align: left;
-
-  ejs-textbox,
-  ejs-dropdownlist {
-    width: 100%; // Make Syncfusion components take full width of their container
-  }
-}
-
-// Styling for validation error messages
-.invalid-feedback {
-  display: block; // Make sure it's visible
-  color: #dc3545; // Standard error color (Bootstrap danger)
-  font-size: 0.875em;
-  margin-top: 5px;
-  text-align: left;
-}
-
-// General error message for registration failures
-.error-message {
-  color: #dc3545;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  padding: 10px;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  font-size: 0.9em;
-}
-
-.button-group {
-  margin-top: 25px;
-  margin-bottom: 15px;
-
-  button.e-primary {
-    width: 100%; // Make register button full width
-    // Syncfusion buttons have their own primary styling.
-    // You can override padding, font-size if needed:
-    // padding: 10px 15px;
-    // font-size: 1rem;
-  }
-}
-
-.login-link {
-  margin-top: 20px;
-  font-size: 0.9em;
-  color: #555;
-
-  a {
-    color: #007bff; // Standard link color
-    text-decoration: none;
-    font-weight: 500;
-
-    &:hover {
-      text-decoration: underline;
+  button {
+    flex-grow: 1; /* Allow buttons to grow and fill space */
+    min-width: 200px; /* Minimum width for buttons */
+    /* Syncfusion e-primary button for primary actions */
+    &.e-primary {
+      background-color: #007bff;
+      color: #fff;
+      border-color: #007bff;
+      &:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+      }
+    }
+    /* Syncfusion e-outline button for secondary actions */
+    &.e-outline {
+      border: 1px solid #007bff;
+      color: #007bff;
+      background-color: transparent;
+      &:hover {
+        background-color: #007bff;
+        color: #fff;
+      }
     }
   }
 }
 
-// Responsive adjustments
-@media (max-width: 600px) { // Adjust breakpoint if needed
-  .register-container {
-    padding: 25px 20px;
+.dashboard-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns for large screens */
+  gap: 30px; /* Larger gap between widgets */
+}
+
+/* KPI Cards */
+.kpi-cards {
+  grid-column: span 4; /* KPI row spans all 4 columns */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive KPI cards */
+  gap: 25px;
+  margin-bottom: 30px;
+
+  .kpi-card.e-card {
+    padding: 25px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .kpi-value {
+      font-size: 2.5rem; /* Larger font for value */
+      font-weight: 700;
+      color: #495057; /* Darker color */
+      margin-bottom: 8px;
+    }
+    .kpi-label {
+      font-size: 1rem;
+      color: #6c757d;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .e-icon-star { /* Specific styling for star icon in KPI */
+      font-size: 1.5rem;
+      color: #ffc107; /* Gold color for star */
+      vertical-align: middle;
+      margin-left: 5px;
+    }
+  }
+}
+
+/* General Widget Styling */
+.widget {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  min-height: 250px; /* Base min-height for all widgets */
+
+  .widget-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #f0f0f0; /* Dashed separator */
+
+    .e-icons {
+      font-size: 1.9rem; /* Larger icons */
+      color: #6c757d;
+      margin-right: 12px;
+    }
+
+    h3 {
+      font-size: 1.3rem; /* Slightly larger heading */
+      color: #343a40;
+      margin: 0;
+      font-weight: 600;
+    }
+  }
+
+  .widget-content {
+    flex-grow: 1; /* Allows content to take up available space */
+    display: flex;
+    flex-direction: column; /* Content inside can be column layout */
+    justify-content: flex-start;
+    align-items: flex-start; /* Default align content left */
+
+    p {
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    button.e-flat {
+      color: #007bff;
+      background-color: transparent;
+      border: none;
+      padding-left: 0;
+      padding-right: 0;
+      margin-top: auto; /* Push button to bottom if content fills space */
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+/* Specific Widget Sizes/Layouts */
+.chart-widget {
+  grid-column: span 2; /* Chart spans 2 columns */
+  min-height: 400px;
+  .widget-content {
+    align-items: center; /* Center chart content */
+    ejs-chart {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.grid-widget {
+  grid-column: span 2; /* Grid spans 2 columns */
+  min-height: 400px;
+  .widget-content {
+    ejs-grid {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.scheduler-widget {
+  grid-column: span 2; /* Scheduler spans 2 columns */
+  min-height: 500px; /* Increased height for better calendar view */
+  .widget-content {
+    height: 100%;
+    ejs-schedule {
+      flex-grow: 1;
+      width: 100%;
+      .e-schedule-toolbar-container { /* Adjustments for compact schedule toolbar */
+        padding: 5px;
+      }
+    }
+    .schedule-note {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #555;
+    }
+  }
+}
+
+.notification-widget {
+  grid-column: span 2; /* Notifications span 2 columns */
+  .notification-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      background-color: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 5px;
+      padding: 12px 15px;
+      margin-bottom: 10px;
+      font-size: 0.9em;
+      color: #343a40;
+      text-align: left; /* Ensure text alignment */
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.customer-insights-widget,
+.quick-links-widget {
+  grid-column: span 2; /* Each spans 2 columns */
+  min-height: 200px; /* Smaller height for these widgets */
+  .widget-content {
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    p {
+      text-align: center;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      li {
+        margin-bottom: 8px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        a {
+          color: #007bff;
+          text-decoration: none;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 1199px) {
+  .dashboard-grid-layout {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+  }
+  .kpi-cards {
+    grid-column: span 2;
+  }
+  .chart-widget, .grid-widget, .scheduler-widget, .notification-widget,
+  .customer-insights-widget, .quick-links-widget {
+    grid-column: span 2; /* All widgets span 2 columns */
+  }
+}
+
+@media (max-width: 767px) {
+  .dashboard-container {
+    padding: 20px;
     margin: 15px;
-    max-width: calc(100% - 30px);
   }
-
-  .form-row {
-    flex-direction: column; // Stack name fields on smaller screens
-    gap: 0; // Reset horizontal gap
-    // margin-bottom will be handled by individual form-group.half-width
+  .dashboard-header {
+    flex-direction: column;
+    align-items: center;
+    h2 {
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+    button {
+      width: 100%;
+      margin-top: 15px;
+    }
   }
-
-  .form-group.half-width {
-    min-width: 100%; // Full width when stacked
-    // margin-bottom is already 20px, which is fine when stacked
+  .vendor-actions {
+    flex-direction: column;
+    button {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 10px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
-
-  h2 {
-    font-size: 1.6rem;
+  .dashboard-grid-layout {
+    grid-template-columns: 1fr; /* Single column on small screens */
+  }
+  .kpi-cards {
+    grid-template-columns: 1fr; /* Stack KPI cards */
+    grid-column: span 1;
+  }
+  .widget {
+    grid-column: span 1; /* All widgets stack */
   }
 }
