@@ -1,0 +1,127 @@
+
+
+// Host container to center the form on the page
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px); // Adjust based on your header/footer height if any
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f4f7f6; // A slightly off-white background for the page
+}
+
+.register-container {
+  width: 100%;
+  max-width: 550px; // Can be a bit wider to accommodate more fields comfortably
+  padding: 30px 35px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  h2 {
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+}
+
+// For the row containing first name and last name
+.form-row {
+  display: flex;
+  flex-wrap: wrap; // Allow wrapping on smaller screens
+  gap: 20px;       // Space between the two columns
+  margin-bottom: 0; // Rely on .form-group margin for bottom spacing of individual items
+
+  .form-group.half-width {
+    flex: 1; // Each takes up equal space if side-by-side
+    min-width: calc(50% - 10px); // Adjust for gap, ensures two columns if space allows
+    text-align: left;
+    margin-bottom: 20px; // Standard margin for form groups
+  }
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+
+  ejs-textbox,
+  ejs-dropdownlist {
+    width: 100%; // Make Syncfusion components take full width of their container
+  }
+}
+
+// Styling for validation error messages
+.invalid-feedback {
+  display: block; // Make sure it's visible
+  color: #dc3545; // Standard error color (Bootstrap danger)
+  font-size: 0.875em;
+  margin-top: 5px;
+  text-align: left;
+}
+
+// General error message for registration failures
+.error-message {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+}
+
+.button-group {
+  margin-top: 25px;
+  margin-bottom: 15px;
+
+  button.e-primary {
+    width: 100%; // Make register button full width
+    // Syncfusion buttons have their own primary styling.
+    // You can override padding, font-size if needed:
+    // padding: 10px 15px;
+    // font-size: 1rem;
+  }
+}
+
+.login-link {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #555;
+
+  a {
+    color: #007bff; // Standard link color
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 600px) { // Adjust breakpoint if needed
+  .register-container {
+    padding: 25px 20px;
+    margin: 15px;
+    max-width: calc(100% - 30px);
+  }
+
+  .form-row {
+    flex-direction: column; // Stack name fields on smaller screens
+    gap: 0; // Reset horizontal gap
+    // margin-bottom will be handled by individual form-group.half-width
+  }
+
+  .form-group.half-width {
+    min-width: 100%; // Full width when stacked
+    // margin-bottom is already 20px, which is fine when stacked
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+}

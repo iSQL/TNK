@@ -20,7 +20,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
     const isApiUrl = request.url.startsWith(environment.apiUrl); // Check if the request is to your backend API
 
     if (token && isApiUrl) {
-      // Clone the request and add the authorization header
+
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`

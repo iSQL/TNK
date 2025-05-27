@@ -23,10 +23,12 @@ public static class InfrastructureServiceExtensions
 
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
         {
-             options.Password.RequireDigit = false;
-             options.Password.RequiredLength = 3;
-             options.User.RequireUniqueEmail = true;
-             options.Password.RequireUppercase = false;
+          options.Password.RequireDigit = false;
+          options.Password.RequiredLength = 3;
+          options.User.RequireUniqueEmail = true;
+          options.Password.RequireUppercase = false;
+          options.Password.RequireNonAlphanumeric = false;
+          options.Password.RequireLowercase = false;
 
         }).AddEntityFrameworkStores<AppDbContext>()
           .AddDefaultTokenProviders();

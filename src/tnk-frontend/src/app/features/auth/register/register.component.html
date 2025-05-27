@@ -1,1 +1,106 @@
-<p>register works!</p>
+<div class="register-container">
+  <h2>Create Your TerminNaKlik Account</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+      <div class="form-group half-width">
+        <ejs-textbox
+          id="firstName"
+          formControlName="firstName"
+          placeholder="First Name (Ime)"
+          floatLabelType="Auto"
+          [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+        ></ejs-textbox>
+        <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+          <div *ngIf="f['firstName'].errors['required']">First name is required.</div>
+        </div>
+      </div>
+      <div class="form-group half-width">
+        <ejs-textbox
+          id="lastName"
+          formControlName="lastName"
+          placeholder="Last Name (Prezime)"
+          floatLabelType="Auto"
+          [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+        ></ejs-textbox>
+        <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+          <div *ngIf="f['lastName'].errors['required']">Last name is required.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <ejs-textbox
+        id="email"
+        type="email"
+        formControlName="email"
+        placeholder="Email Address (Email adresa)"
+        floatLabelType="Auto"
+        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+      ></ejs-textbox>
+      <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+        <div *ngIf="f['email'].errors['required']">Email is required.</div>
+        <div *ngIf="f['email'].errors['email']">Please enter a valid email address.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <ejs-textbox
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="Password (Lozinka)"
+        floatLabelType="Auto"
+        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+      ></ejs-textbox>
+      <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+        <div *ngIf="f['password'].errors['required']">Password is required.</div>
+        <div *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters.</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <ejs-textbox
+        id="confirmPassword"
+        type="password"
+        formControlName="confirmPassword"
+        placeholder="Confirm Password (Potvrdi lozinku)"
+        floatLabelType="Auto"
+        [ngClass]="{ 'is-invalid': submitted && (f['confirmPassword'].errors || registerForm.errors?.['passwordMismatch']) }"
+      ></ejs-textbox>
+      <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+        <div *ngIf="f['confirmPassword'].errors['required']">Confirm password is required.</div>
+      </div>
+      <div *ngIf="submitted && registerForm.errors?.['passwordMismatch'] && !f['confirmPassword'].errors?.['required']" class="invalid-feedback">
+        Passwords do not match.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <ejs-dropdownlist
+        id='role'
+        formControlName="role"
+        [dataSource]='roles'
+        [fields]="roleFields" placeholder='Select a Role (Izaberi ulogu)'
+        floatLabelType='Auto'
+        [ngClass]="{ 'is-invalid': submitted && f['role'].errors }">
+      </ejs-dropdownlist>
+      <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
+        <div *ngIf="f['role'].errors['required']">Role is required.</div>
+      </div>
+    </div>
+
+    <div *ngIf="registrationError" class="error-message">
+      {{ registrationError }}
+    </div>
+
+    <div class="form-group button-group">
+      <button ejs-button cssClass="e-primary" [disabled]="registerForm.invalid || isLoading">
+        {{ isLoading ? 'Registering...' : 'Register (Registruj se)' }}
+      </button>
+    </div>
+
+    <div class="login-link">
+      <p>Already have an account? <a routerLink="/login">Login here</a></p>
+    </div>
+  </form>
+</div>
