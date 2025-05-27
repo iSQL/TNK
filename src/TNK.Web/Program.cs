@@ -27,7 +27,21 @@ var secretKey = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]!);
 builder.Services.AddOptionConfigs(builder.Configuration, appLogger, builder);
 builder.Services.AddServiceConfigs(appLogger, builder);
 
-//Autheand Authorization
+//CORS Configuration
+
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy(name: "_localAngularOrigin", //TODO: reuse this name in the app from config or something
+                    policy =>
+                    {
+                      policy.WithOrigins("http://localhost:4200") // Your Angular app's origin
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowCredentials(); 
+                    });
+});
+
+//Auth and Authorization
 builder.Services.AddAuthentication(options =>
 {
   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -68,6 +82,8 @@ builder.Services.AddAuthentication(options =>
     }
   };
 });
+
+
 builder.Services.AddAuthorization();
 
 // API and Swagger Configuration

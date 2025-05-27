@@ -7,7 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 import { environment } from '../../../environments/environment'; // Adjust path if needed
 
 // --- Interfaces for DTOs ---
-// These should match the DTOs your backend expects/returns
+// These should match the DTOs your backend expects/returnss
 
 export interface RegisterRequest {
   firstName: string;

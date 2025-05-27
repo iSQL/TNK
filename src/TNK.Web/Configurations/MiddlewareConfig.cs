@@ -18,6 +18,8 @@ public static class MiddlewareConfig
       app.UseHsts();
     }
 
+
+    app.UseCors("_localAngularOrigin");
     app.UseFastEndpoints()
         .UseSwaggerGen();
     app.UseAuthentication();

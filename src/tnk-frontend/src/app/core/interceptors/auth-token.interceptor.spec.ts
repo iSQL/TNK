@@ -3,8 +3,8 @@ import { HttpTestingController } from '@angular/common/http/testing';
 import { HTTP_INTERCEPTORS, HttpClient, HttpRequest } from '@angular/common/http';
 
 import { AuthTokenInterceptor } from './auth-token.interceptor';
-import { AuthService } from '../services/auth.service'; // Adjust path if needed
-import { environment } from '../../../environments/environment'; // Adjust path if needed
+import { AuthService } from '../services/auth.service'; 
+import { environment } from '../../../environments/environment';
 
 // Create a simple mock for AuthService for this test suite
 class MockAuthService {
