@@ -19,7 +19,10 @@ public static class MiddlewareConfig
     }
 
     app.UseFastEndpoints()
-        .UseSwaggerGen(); 
+        .UseSwaggerGen();
+    app.UseAuthentication();
+    app.UseAuthorization();
+
 
     app.UseHttpsRedirection(); 
 

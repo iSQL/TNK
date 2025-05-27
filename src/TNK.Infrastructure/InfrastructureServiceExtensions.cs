@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using TNK.Core.Identity;
 using TNK.Core.Interfaces;
 using TNK.Core.Services;
@@ -24,13 +26,43 @@ public static class InfrastructureServiceExtensions
              options.Password.RequireDigit = false;
              options.Password.RequiredLength = 3;
              options.User.RequireUniqueEmail = true;
-            options.Password.RequireUppercase = false;
-        })
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders(); 
+             options.Password.RequireUppercase = false;
 
+        }).AddEntityFrameworkStores<AppDbContext>()
+          .AddDefaultTokenProviders();
 
-        services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>))
+    services.ConfigureApplicationCookie(options =>
+    {
+      options.Events = new CookieAuthenticationEvents 
+      {
+        OnRedirectToLogin = context =>
+        {
+          if (context.Request.Path.StartsWithSegments("/api"))
+          {
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+          }
+          else
+          {
+            context.Response.Redirect(context.RedirectUri);
+          }
+          return Task.CompletedTask;
+        },
+        OnRedirectToAccessDenied = context =>
+        {
+          if (context.Request.Path.StartsWithSegments("/api"))
+          {
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
+          }
+          else
+          {
+            context.Response.Redirect(context.RedirectUri);
+          }
+          return Task.CompletedTask;
+        }
+      };
+    });
+
+    services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>))
                .AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>))
                .AddScoped<IListContributorsQueryService, ListContributorsQueryService>()
                .AddScoped<IDeleteContributorService, DeleteContributorService>();

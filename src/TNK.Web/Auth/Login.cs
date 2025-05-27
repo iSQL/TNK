@@ -54,7 +54,7 @@ public class LoginEndpoint : Endpoint<LoginRequest, LoginResponse>
     {
       s.Summary = "User login";
       s.Description = "Authenticates a user and returns a JWT token upon success.";
-      s.ExampleRequest = new LoginRequest { Email = "john.doe@example.com", Password = "Password123!" };
+      s.ExampleRequest = new LoginRequest { Email = "john.doe@vendor.com", Password = "Password123!" };
       // Response example can be more detailed if desired
     });
   }

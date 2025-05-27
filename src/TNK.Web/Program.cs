@@ -1,36 +1,12 @@
 ﻿using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using TNK.Web.Configurations;
 using FastEndpoints.Swagger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using NSwag;
+using TNK.Web.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
-var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-var secretKey = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]!);
-
-builder.Services.AddAuthentication(options =>
-{
-  options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-  options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-  options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-  options.TokenValidationParameters = new TokenValidationParameters
-  {
-    ValidateIssuer = true,
-    ValidateAudience = true,
-    ValidateLifetime = true,
-    ValidateIssuerSigningKey = true,
-    ValidIssuer = jwtSettings["Issuer"],
-    ValidAudience = jwtSettings["Audience"],
-    IssuerSigningKey = new SymmetricSecurityKey(secretKey),
-    ClockSkew = TimeSpan.Zero 
-  };
-});
-
-builder.Services.AddAuthorization();
-
-
 var logger = Log.Logger = new LoggerConfiguration()
   .Enrich.FromLogContext()
   .WriteTo.Console()
@@ -43,36 +19,72 @@ builder.AddLoggerConfigs();
 var appLogger = new SerilogLoggerFactory(logger)
     .CreateLogger<Program>();
 
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var secretKey = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]!);
+
+
+
 builder.Services.AddOptionConfigs(builder.Configuration, appLogger, builder);
 builder.Services.AddServiceConfigs(appLogger, builder);
 
-builder.Services.AddFastEndpoints()
-                .SwaggerDocument(o =>
-                {
-                  o.ShortSchemaNames = true;
-                });
-// Configure FastEndpoints.Swagger - NSwag
-builder.Services.AddSwaggerDocument(settings =>
+//Autheand Authorization
+builder.Services.AddAuthentication(options =>
 {
-  settings.DocumentName = "v1.0";
-  settings.Title = "TerminNaKlik API";
-  settings.Version = "v1.0";
-  // Add JWT Bearer authentication to Swagger UI
-  settings.AddAuth("BearerAuth", new NSwag.OpenApiSecurityScheme
+  options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+  options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+  options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+{
+  options.TokenValidationParameters = new TokenValidationParameters
   {
-    Name = "Authorization",
-    In = NSwag.OpenApiSecurityApiKeyLocation.Header,
-    Type = NSwag.OpenApiSecuritySchemeType.Http, 
-    Scheme = "bearer", 
-    BearerFormat = "JWT",
-    Description = "Input your Bearer token in this format: Bearer {token}"
+    ValidateIssuer = true,
+    ValidateAudience = true,
+    ValidateLifetime = true,
+    ValidateIssuerSigningKey = true,
+    ValidIssuer = jwtSettings["Issuer"],
+    ValidAudience = jwtSettings["Audience"],
+    IssuerSigningKey = new SymmetricSecurityKey(secretKey),
+    ClockSkew = TimeSpan.Zero
+  };
+  options.Events = new JwtBearerEvents
+  {
+    OnAuthenticationFailed = context =>
+    {
+      var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<JwtBearerEvents>>();
+      logger.LogError(context.Exception, "JWT Authentication Failed");
+      return Task.CompletedTask;
+    },
+    OnTokenValidated = context =>
+    {
+      var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<JwtBearerEvents>>();
+      logger.LogInformation("JWT Token Validated for: {User}", context.Principal?.Identity?.Name);
+      return Task.CompletedTask;
+    },
+    OnMessageReceived = context =>
+    {
+      var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<JwtBearerEvents>>();
+      logger.LogInformation("JWT Message Received. Token found in header: {TokenExists}", !string.IsNullOrEmpty(context.Token));
+      return Task.CompletedTask;
+    }
+  };
+});
+builder.Services.AddAuthorization();
+
+// API and Swagger Configuration
+builder.Services
+  .AddFastEndpoints()
+  .SwaggerDocument(o =>
+  {
+    o.ShortSchemaNames = true;
+    o.DocumentSettings = s =>
+    {
+      s.Title = "TerminNaKlik API";
+      s.Version = "v1.0";
+    };
   });
-}); // If using System.Text.Json source generation
 
 
 var app = builder.Build();
-app.UseAuthentication();
-app.UseAuthorization();
 await app.UseAppMiddlewareAndSeedDatabase();
 
 app.Run();
