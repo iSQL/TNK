@@ -1,45 +1,56 @@
 import { Component, OnInit, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AuthService, User } from '../../core/services/auth.service'; 
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil, filter, tap } from 'rxjs/operators';
+
+// Syncfusion Modules - CardModule is removed
+import { ButtonModule } from '@syncfusion/ej2-angular-buttons'; // For ejs-button
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, TranslateModule],
+  imports: [
+    CommonModule, 
+    TranslateModule,
+    // CardModule, // Removed CardModule
+    ButtonModule    // Keep ButtonModule for ejs-button
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   private authService = inject(AuthService);
   private translate = inject(TranslateService);
+  private cdr = inject(ChangeDetectorRef); 
+
   private destroy$ = new Subject<void>();
 
   currentUser: User | null = null; 
   welcomeMessage: string = '';
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.authService.currentUser$
       .pipe(
-        takeUntil(this.destroy$), // Unsubscribe when component is destroyed
-        filter((user): user is User => user !== null && user.email !== null && user.email !== undefined && user.email.trim() !== '') // Ensure user and email are valid
+        takeUntil(this.destroy$), 
+        tap(user => console.log('DashboardComponent: currentUser$ emitted value:', JSON.stringify(user, null, 2))),
+        filter((user): user is User => user !== null && user.email !== null && user.email !== undefined && user.email.trim() !== '')
       )
       .subscribe({
         next: (user) => {
-          this.currentUser = user; // Store the valid user object
+          this.currentUser = user; 
+          console.log(`DashboardComponent: Valid user email found: '${user.email}'. Preparing to translate welcome message.`);
           
-          this.translate.get("DASHBOARD.WELCOME_MESSAGE", { email: user.email })
-          
+          this.translate.get('DASHBOARD.WELCOME_MESSAGE', { email: user.email }) // Ensure placeholder is {{email}} in JSON
             .pipe(takeUntil(this.destroy$)) 
             .subscribe({
               next: (translatedValue: string) => {
+                console.log(`DashboardComponent: Translation result for 'DASHBOARD.WELCOME_MESSAGE': '${translatedValue}'`);
                 this.welcomeMessage = translatedValue;
+                // this.cdr.detectChanges(); 
               },
               error: (err) => console.error('DashboardComponent: Error fetching welcome message translation:', err)
             });
@@ -47,7 +58,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         error: (err) => console.error('DashboardComponent: Error subscribing to currentUser$:', err) 
       });
 
-    // This ensures a guest message is set if the filter doesn't pass or if there's an initial null emission.
     this.authService.currentUser$
       .pipe(takeUntil(this.destroy$))
       .subscribe(user => {
@@ -58,6 +68,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
               .pipe(takeUntil(this.destroy$))
               .subscribe((res: string) => {
                 this.welcomeMessage = res;
+                console.log('DashboardComponent: Translated GUEST welcome message:', res);
+                // this.cdr.detectChanges(); 
               });
             }
         }
@@ -67,6 +79,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+    console.log('DashboardComponent: Unsubscribed from observables.');
   }
 
   logout(): void {

@@ -4,27 +4,32 @@
   </header>
 
   <main class="dashboard-content">
-    <div class="welcome-section card">
-      <div class="card-body">
-        <h2 class="card-title">{{ welcomeMessage }}</h2>
+    <div class="e-card welcome-section-card e-card-customized" tabindex="0"> <div class="e-card-header">
+        <div class="e-card-header-caption">
+          <div class="e-card-header-title">{{ welcomeMessage }}</div>
+          </div>
+      </div>
+      <div class="e-card-content">
         <p>{{ 'DASHBOARD.INFO_TEXT' | translate }}</p>
       </div>
     </div>
-
-    <div class="actions-section mt-4">
-      <button class="btn btn-danger" (click)="logout()">
-        <i class="fas fa-sign-out-alt"></i> {{ 'AUTH.LOGOUT_BUTTON' | translate }}
+    
+    <div class="e-card placeholder-content-card e-card-customized mt-5" tabindex="0">
+      <div class="e-card-header">
+        <div class="e-card-header-caption">
+          <div class="e-card-header-title">{{ 'DASHBOARD.FUTURE_CONTENT_TITLE' | translate }}</div>
+        </div>
+      </div>
+      <div class="e-card-content">
+        <p>{{ 'DASHBOARD.FUTURE_CONTENT_INFO' | translate }}</p>
+        </div>
+      </div>
+      
+      <div class="actions-section mt-4">
+      <button ejs-button cssClass="e-danger e-large logout-button" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> 
+        {{ 'AUTH.LOGOUT_BUTTON' | translate }}
       </button>
-    </div>
-
-    <div class="mt-5 placeholder-content">
-      <h3>{{ 'DASHBOARD.FUTURE_CONTENT_TITLE' | translate }}</h3>
-      <p>{{ 'DASHBOARD.FUTURE_CONTENT_INFO' | translate }}</p>
-      <!--
-      <a routerLink="/profile" class="btn btn-secondary">
-        {{ 'NAV.PROFILE' | translate }}
-      </a>
-      -->
     </div>
   </main>
 </div>
