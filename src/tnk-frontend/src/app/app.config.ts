@@ -10,9 +10,6 @@ import { AuthTokenInterceptor } from './core/interceptors/auth-token.interceptor
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
-  const prefix = './assets/i18n/';
-  const suffix = '.json';
-  console.log(`HttpLoaderFactory: Attempting to load translations from prefix: '<span class="math-inline">\{prefix\}', suffix\: '</span>{suffix}'`);
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 

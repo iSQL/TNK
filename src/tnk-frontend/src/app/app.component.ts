@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import { BottomNavComponent } from './shared/components/bottom-nav/bottom-nav.component'; // Import BottomNav
-import { CommonModule } from '@angular/common'; // Import CommonModule for async pipe
+import { BottomNavComponent } from './shared/components/bottom-nav/bottom-nav.component'; 
+import { CommonModule } from '@angular/common'; 
 
 @Component({
   selector: 'app-root',
@@ -26,6 +26,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Initialization logic
+ 
   }
 }
