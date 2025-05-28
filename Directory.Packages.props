@@ -11,6 +11,7 @@
     <PackageVersion Include="Ardalis.Specification.EntityFrameworkCore" Version="9.1.0" />
     <PackageVersion Include="Azure.Identity" Version="1.14.0" />
     <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="DevExpress.Xpo" Version="24.1.4" />
     <PackageVersion Include="FastEndpoints" Version="6.1.0" />
     <PackageVersion Include="FastEndpoints.ApiExplorer" Version="2.2.0" />
     <PackageVersion Include="FastEndpoints.Swagger" Version="6.1.0" />
@@ -27,6 +28,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.5" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.5" />
+    <PackageVersion Include="Microsoft.Extensions.Localization" Version="9.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.5" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.5" />

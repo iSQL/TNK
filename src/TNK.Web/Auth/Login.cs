@@ -1,7 +1,9 @@
 ﻿using FastEndpoints;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using TNK.Core.Identity; // Your ApplicationUser
+using TNK.Core.Identity; 
+using Microsoft.Extensions.Localization;
+using TNK.Web.Resources;
 
 namespace TNK.Web.Auth;
 
@@ -31,19 +33,22 @@ public class LoginEndpoint : Endpoint<LoginRequest, LoginResponse>
 {
   private readonly UserManager<ApplicationUser> _userManager;
   private readonly SignInManager<ApplicationUser> _signInManager;
-  private readonly TokenService _tokenService; // Inject the token service
-  private readonly IConfiguration _configuration; // For JWT Expiration
+  private readonly TokenService _tokenService;
+  private readonly IConfiguration _configuration;
+  private readonly IStringLocalizer<SharedResources> _localizer;
 
   public LoginEndpoint(
       UserManager<ApplicationUser> userManager,
       SignInManager<ApplicationUser> signInManager,
       TokenService tokenService,
-      IConfiguration configuration)
+      IConfiguration configuration,
+      IStringLocalizer<SharedResources> localizer)
   {
     _userManager = userManager;
     _signInManager = signInManager;
     _tokenService = tokenService;
     _configuration = configuration;
+    _localizer = localizer;
   }
 
   public override void Configure()
@@ -55,28 +60,24 @@ public class LoginEndpoint : Endpoint<LoginRequest, LoginResponse>
       s.Summary = "User login";
       s.Description = "Authenticates a user and returns a JWT token upon success.";
       s.ExampleRequest = new LoginRequest { Email = "john.doe@vendor.com", Password = "Password123!" };
-      // Response example can be more detailed if desired
     });
   }
 
   public override async Task HandleAsync(LoginRequest req, CancellationToken ct)
   {
+    Logger.LogWarning(_localizer["InvalidLoginAttempt"]);
+    Logger.LogInformation("Current UI Culture: {Culture}", System.Threading.Thread.CurrentThread.CurrentUICulture.Name);
+
+
     var user = await _userManager.FindByEmailAsync(req.Email);
     if (user == null)
     {
       Logger.LogWarning("Login failed: User {Email} not found.", req.Email);
-      AddError("Invalid email or password."); // Generic message for security
-      await SendUnauthorizedAsync(ct); // Or SendErrorsAsync(400) or specific 401
+      AddError(_localizer["InvalidLoginAttempt"]);
+      // Use SendErrorsAsync with a 401 status
+      await SendErrorsAsync(statusCode: StatusCodes.Status401Unauthorized, cancellation: ct);
       return;
     }
-
-    // Check if email is confirmed if you have that feature enabled
-    // if (!await _userManager.IsEmailConfirmedAsync(user))
-    // {
-    //     AddError("Email not confirmed.");
-    //     await SendUnauthorizedAsync(ct);
-    //     return;
-    // }
 
     var result = await _signInManager.CheckPasswordSignInAsync(user, req.Password, lockoutOnFailure: true);
 
@@ -85,20 +86,18 @@ public class LoginEndpoint : Endpoint<LoginRequest, LoginResponse>
       Logger.LogWarning("Login failed for user {Email}. Reason: {Reason}", req.Email, result.ToString());
       if (result.IsLockedOut)
       {
-        AddError("Account locked out due to too many failed login attempts.");
+        AddError(_localizer["AccountLockedOut"]);
       }
-      // else if (result.IsNotAllowed) // For things like email not confirmed
-      // {
-      //     AddError("Login not allowed. Please confirm your email or contact support.");
-      // }
       else
       {
-        AddError("Invalid email or password.");
+        AddError(_localizer["InvalidLoginAttempt"]);
       }
-      await SendUnauthorizedAsync(ct);
+      // Use SendErrorsAsync with a 401 status
+      await SendErrorsAsync(statusCode: StatusCodes.Status401Unauthorized, cancellation: ct);
       return;
     }
 
+    // If login is successful, proceed as before
     var tokenString = await _tokenService.GenerateJwtTokenAsync(user);
     var userRoles = await _userManager.GetRolesAsync(user);
     var tokenDurationMinutes = Convert.ToDouble(_configuration["JwtSettings:DurationInMinutes"] ?? "60");

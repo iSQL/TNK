@@ -1,372 +1,166 @@
-/* src/app/features/dashboard/dashboard.component.scss */
+// dashboard.component.scss
 
-:host {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: calc(100vh - 120px);
-  padding: 30px;
-  box-sizing: border-box;
-  background-color: #f4f7f6;
-  width: 100%;
-}
+// Optional: Import shared variables if you have them (e.g., colors, fonts)
+// @import '../../../styles/variables'; // Adjust path as needed
 
+// General container for the dashboard page
 .dashboard-container {
-  width: 100%;
-  max-width: 1400px; /* Increased max-width for a fuller dashboard */
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); /* More prominent shadow */
-  padding: 40px; /* Increased padding */
-  box-sizing: border-box;
-  text-align: center;
+  padding: 1.5rem; // Standard padding
+  max-width: 1200px; // Max width for larger screens
+  margin: 0 auto; // Center the content
+  font-family: 'Inter', sans-serif; // Ensure consistent font
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
 }
 
+// Header section for the dashboard title
 .dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 40px; /* Increased margin */
-  border-bottom: 1px solid #e9ecef; /* Lighter border */
-  padding-bottom: 25px; /* Increased padding */
+  text-align: center;
+  margin-bottom: 2rem;
 
-  h2 {
-    color: #212529; /* Darker text for heading */
-    font-size: 2.5rem; /* Larger font size */
-    font-weight: 700; /* Bolder font */
+  h1 {
+    font-size: 2.25rem; // Prominent title
+    font-weight: 600;
+    color: #2c3e50; // A slightly softer black/dark blue
     margin: 0;
   }
 
-  button.e-danger {
-    background-color: #dc3545;
-    color: #fff;
-    border-color: #dc3545;
-    &:hover {
-      background-color: #c82333;
-      border-color: #bd2130;
+  @media (max-width: 576px) {
+    margin-bottom: 1.5rem;
+    h1 {
+      font-size: 1.75rem;
     }
   }
 }
 
-.welcome-section {
-  margin-bottom: 50px; /* More space below welcome/actions */
-}
-
-.welcome-message {
-  margin-bottom: 30px;
-  h3 {
-    color: #007bff;
-    font-size: 1.8rem;
-    font-weight: 500;
-  }
-}
-
-.vendor-actions {
-  background-color: #e6f7ff; /* Lighter blue */
-  border-left: 6px solid #007bff; /* Thicker highlight border */
-  padding: 25px; /* Increased padding */
-  border-radius: 8px;
-  margin-top: 30px;
-  text-align: left;
-  display: flex;
-  flex-wrap: wrap; /* Allow buttons to wrap */
-  gap: 15px; /* Gap between buttons */
-  justify-content: center; /* Center buttons horizontally */
-
-  h4 {
-    width: 100%; /* Full width for heading */
-    color: #0056b3;
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.4rem;
-    text-align: center;
-  }
-
-  button {
-    flex-grow: 1; /* Allow buttons to grow and fill space */
-    min-width: 200px; /* Minimum width for buttons */
-    /* Syncfusion e-primary button for primary actions */
-    &.e-primary {
-      background-color: #007bff;
-      color: #fff;
-      border-color: #007bff;
-      &:hover {
-        background-color: #0056b3;
-        border-color: #004085;
-      }
-    }
-    /* Syncfusion e-outline button for secondary actions */
-    &.e-outline {
-      border: 1px solid #007bff;
-      color: #007bff;
-      background-color: transparent;
-      &:hover {
-        background-color: #007bff;
-        color: #fff;
-      }
-    }
-  }
-}
-
-.dashboard-grid-layout {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns for large screens */
-  gap: 30px; /* Larger gap between widgets */
-}
-
-/* KPI Cards */
-.kpi-cards {
-  grid-column: span 4; /* KPI row spans all 4 columns */
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Responsive KPI cards */
-  gap: 25px;
-  margin-bottom: 30px;
-
-  .kpi-card.e-card {
-    padding: 25px;
+// Main content area of the dashboard
+.dashboard-content {
+  // Styles for the welcome card
+  .welcome-section.card {
     background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    border-radius: 12px; // Softer corners
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); // Subtle shadow
+    padding: 2rem;
+    border: none;
+    margin-bottom: 2rem;
 
-    .kpi-value {
-      font-size: 2.5rem; /* Larger font for value */
-      font-weight: 700;
-      color: #495057; /* Darker color */
-      margin-bottom: 8px;
+    .card-body {
+      padding: 0; // Remove default card-body padding if card itself has padding
     }
-    .kpi-label {
+
+    .card-title {
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: #007bff; // Primary color, consistent with auth forms
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
       font-size: 1rem;
-      color: #6c757d;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 0; // Remove default p margin if not needed
     }
-    .e-icon-star { /* Specific styling for star icon in KPI */
-      font-size: 1.5rem;
-      color: #ffc107; /* Gold color for star */
-      vertical-align: middle;
-      margin-left: 5px;
+
+    @media (max-width: 576px) {
+      padding: 1.5rem;
+      .card-title {
+        font-size: 1.5rem;
+      }
     }
   }
-}
 
-/* General Widget Styling */
-.widget {
-  background-color: #ffffff;
-  border: 1px solid #e9ecef;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  padding: 25px;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  min-height: 250px; /* Base min-height for all widgets */
+  // Section for actions like logout button
+  .actions-section {
+    text-align: center; // Center the button(s)
+    margin-bottom: 2rem;
 
-  .widget-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px dashed #f0f0f0; /* Dashed separator */
+    .btn {
+      padding: 0.65rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem; // Space between icon and text
+      text-decoration: none;
+      transition: background-color 0.2s ease-in-out, transform 0.1s ease, box-shadow 0.2s ease;
 
-    .e-icons {
-      font-size: 1.9rem; /* Larger icons */
-      color: #6c757d;
-      margin-right: 12px;
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      }
+
+      i { // Assuming Font Awesome or similar for icons
+        font-size: 1.1em; // Slightly larger icon relative to text
+      }
+
+      &.btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+
+        &:hover {
+          background-color: #c82333;
+          border-color: #bd2130;
+        }
+        &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+        }
+      }
+       &.btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+
+        &:hover {
+          background-color: #5a6268;
+          border-color: #545b62;
+        }
+         &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+        }
+      }
     }
+  }
+
+  // Placeholder for future content sections
+  .placeholder-content {
+    margin-top: 2.5rem;
+    padding: 2rem;
+    background-color: #f8f9fa; // A light background for distinction
+    border-radius: 12px;
+    text-align: center;
+    border: 1px dashed #e0e0e0; // Dashed border for placeholder feel
 
     h3 {
-      font-size: 1.3rem; /* Slightly larger heading */
-      color: #343a40;
-      margin: 0;
-      font-weight: 600;
+      font-size: 1.5rem;
+      color: #495057;
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
     }
-  }
-
-  .widget-content {
-    flex-grow: 1; /* Allows content to take up available space */
-    display: flex;
-    flex-direction: column; /* Content inside can be column layout */
-    justify-content: flex-start;
-    align-items: flex-start; /* Default align content left */
 
     p {
-      font-size: 0.95rem;
-      color: #555;
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-
-    button.e-flat {
-      color: #007bff;
-      background-color: transparent;
-      border: none;
-      padding-left: 0;
-      padding-right: 0;
-      margin-top: auto; /* Push button to bottom if content fills space */
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-}
-
-/* Specific Widget Sizes/Layouts */
-.chart-widget {
-  grid-column: span 2; /* Chart spans 2 columns */
-  min-height: 400px;
-  .widget-content {
-    align-items: center; /* Center chart content */
-    ejs-chart {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
-
-.grid-widget {
-  grid-column: span 2; /* Grid spans 2 columns */
-  min-height: 400px;
-  .widget-content {
-    ejs-grid {
-      width: 100%;
-      height: 100%;
-    }
-  }
-}
-
-.scheduler-widget {
-  grid-column: span 2; /* Scheduler spans 2 columns */
-  min-height: 500px; /* Increased height for better calendar view */
-  .widget-content {
-    height: 100%;
-    ejs-schedule {
-      flex-grow: 1;
-      width: 100%;
-      .e-schedule-toolbar-container { /* Adjustments for compact schedule toolbar */
-        padding: 5px;
-      }
-    }
-    .schedule-note {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 0.9em;
-      color: #555;
-    }
-  }
-}
-
-.notification-widget {
-  grid-column: span 2; /* Notifications span 2 columns */
-  .notification-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    li {
-      background-color: #f8f9fa;
-      border: 1px solid #e9ecef;
-      border-radius: 5px;
-      padding: 12px 15px;
-      margin-bottom: 10px;
-      font-size: 0.9em;
-      color: #343a40;
-      text-align: left; /* Ensure text alignment */
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-}
-
-.customer-insights-widget,
-.quick-links-widget {
-  grid-column: span 2; /* Each spans 2 columns */
-  min-height: 200px; /* Smaller height for these widgets */
-  .widget-content {
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    p {
-      text-align: center;
       font-size: 1rem;
-      margin-bottom: 10px;
+      color: #6c757d;
+      margin-bottom: 1.5rem;
     }
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      width: 100%;
-      li {
-        margin-bottom: 8px;
-        &:last-child {
-          margin-bottom: 0;
-        }
-        a {
-          color: #007bff;
-          text-decoration: none;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
+     @media (max-width: 576px) {
+      padding: 1.5rem;
+      h3 {
+        font-size: 1.25rem;
       }
     }
   }
 }
 
-
-/* Responsive Adjustments for Smaller Screens */
-@media (max-width: 1199px) {
-  .dashboard-grid-layout {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
-  }
-  .kpi-cards {
-    grid-column: span 2;
-  }
-  .chart-widget, .grid-widget, .scheduler-widget, .notification-widget,
-  .customer-insights-widget, .quick-links-widget {
-    grid-column: span 2; /* All widgets span 2 columns */
-  }
-}
-
-@media (max-width: 767px) {
+// General responsive adjustments for the dashboard page
+@media (max-width: 768px) {
   .dashboard-container {
-    padding: 20px;
-    margin: 15px;
-  }
-  .dashboard-header {
-    flex-direction: column;
-    align-items: center;
-    h2 {
-      margin-bottom: 10px;
-      font-size: 2rem;
-    }
-    button {
-      width: 100%;
-      margin-top: 15px;
-    }
-  }
-  .vendor-actions {
-    flex-direction: column;
-    button {
-      width: 100%;
-      margin-right: 0;
-      margin-bottom: 10px;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-  .dashboard-grid-layout {
-    grid-template-columns: 1fr; /* Single column on small screens */
-  }
-  .kpi-cards {
-    grid-template-columns: 1fr; /* Stack KPI cards */
-    grid-column: span 1;
-  }
-  .widget {
-    grid-column: span 1; /* All widgets stack */
+    // No specific changes here, handled by inner elements
   }
 }

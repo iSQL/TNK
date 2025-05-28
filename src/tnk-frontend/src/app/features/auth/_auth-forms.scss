@@ -1,0 +1,209 @@
+// _auth-forms.scss
+// Shared styles for Login and Register components
+
+// Variables (consider moving to a global _variables.scss if you have many)
+$auth-primary-color: #007bff; // Example primary color (Syncfusion's Material Blue)
+$auth-primary-hover-color: #0056b3;
+$auth-text-color: #333;
+$auth-label-color: #495057;
+$auth-input-border-color: #ced4da;
+$auth-input-focus-border-color: #80bdff;
+$auth-input-focus-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+$auth-error-color: #dc3545;
+$auth-success-color: #28a745;
+$auth-card-background: #ffffff;
+$auth-page-background: #f4f7f6; // Light grey background for the page
+$auth-font-family: 'Inter', sans-serif; // Ensure Inter is loaded
+
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px); // Adjust 70px based on your bottom-nav height + some padding
+  padding: 2rem 1rem; // Responsive padding
+  background-color: $auth-page-background;
+  font-family: $auth-font-family;
+  box-sizing: border-box;
+}
+
+.auth-card {
+  background: $auth-card-background;
+  padding: 2rem 2.5rem; // More padding for a spacious feel
+  border-radius: 12px; // Softer, more modern rounded corners
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); // Slightly more pronounced shadow
+  width: 100%;
+  max-width: 480px; // Slightly wider card
+  box-sizing: border-box;
+
+  @media (max-width: 576px) {
+    padding: 1.5rem;
+    margin-top: 1rem; // Add some margin on small screens if needed
+  }
+}
+
+.auth-title {
+  font-size: 2rem; // Larger title
+  font-weight: 600;
+  color: $auth-text-color;
+  text-align: center;
+  margin-bottom: 2rem; // More space below title
+}
+
+.form-group {
+  margin-bottom: 1.5rem; // Increased spacing between form groups
+
+  label {
+    display: block;
+    font-weight: 500;
+    color: $auth-label-color;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem; // Comfortable padding
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $auth-text-color;
+  background-color: $auth-card-background;
+  background-clip: padding-box;
+  border: 1px solid $auth-input-border-color;
+  appearance: none; // Remove default styling
+  border-radius: 8px; // Consistent rounded corners
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-sizing: border-box;
+
+  &:focus {
+    color: $auth-text-color;
+    background-color: $auth-card-background;
+    border-color: $auth-input-focus-border-color;
+    outline: 0;
+    box-shadow: $auth-input-focus-box-shadow;
+  }
+
+  // Placeholder styling
+  &::placeholder {
+    color: #6c757d;
+    opacity: 1;
+  }
+
+  // Invalid state
+  &.is-invalid {
+    border-color: $auth-error-color;
+    // padding-right: calc(1.5em + 0.75rem); // For background icon if any
+    // background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5zM6 8.2h.007v.007H6z'/%3e%3c/svg%3e");
+    // background-repeat: no-repeat;
+    // background-position: right calc(0.375em + 0.1875rem) center;
+    // background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+
+    &:focus {
+      border-color: $auth-error-color;
+      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    }
+  }
+}
+
+.invalid-feedback {
+  display: block; // Ensure it's shown when input is invalid
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: $auth-error-color;
+}
+
+.alert {
+  padding: 0.75rem 1.25rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 8px; // Consistent rounded corners
+  font-size: 0.9rem;
+
+  &.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+
+  &.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+}
+
+.auth-button {
+  display: inline-block;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: $auth-primary-color;
+  border: 1px solid $auth-primary-color;
+  padding: 0.75rem 1.5rem; // Good padding for buttons
+  font-size: 1rem;
+  border-radius: 8px; // Consistent rounded corners
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.1s ease;
+  width: 100%; // Make auth buttons full width
+
+  &:hover {
+    color: #fff;
+    background-color: $auth-primary-hover-color;
+    border-color: darken($auth-primary-hover-color, 5%);
+    transform: translateY(-1px); // Subtle lift
+  }
+
+  &:focus {
+    color: #fff;
+    background-color: $auth-primary-hover-color;
+    border-color: darken($auth-primary-hover-color, 5%);
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5); // Focus shadow similar to inputs
+  }
+
+  &:disabled {
+    background-color: #6c757d; // Disabled color
+    border-color: #6c757d;
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.auth-switch-link {
+  margin-top: 2rem; // More space
+  text-align: center;
+  font-size: 0.9rem;
+
+  p {
+    margin-bottom: 0;
+    color: $auth-label-color;
+  }
+
+  a {
+    color: $auth-primary-color;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+      color: $auth-primary-hover-color;
+    }
+  }
+}
+
+.loading-indicator {
+  text-align: center;
+  margin-top: 1rem;
+  color: $auth-label-color;
+  // Add a spinner SVG or CSS animation here if desired
+}

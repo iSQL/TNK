@@ -29,6 +29,7 @@ public static class InfrastructureServiceExtensions
           options.Password.RequireUppercase = false;
           options.Password.RequireNonAlphanumeric = false;
           options.Password.RequireLowercase = false;
+          options.Lockout.MaxFailedAccessAttempts = int.MaxValue;
 
         }).AddEntityFrameworkStores<AppDbContext>()
           .AddDefaultTokenProviders();

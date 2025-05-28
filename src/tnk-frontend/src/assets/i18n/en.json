@@ -1,0 +1,37 @@
+{
+  "APP_TITLE": "TerminNaKlik",
+  "AUTH": {
+    "LOGIN_TITLE": "Login",
+    "REGISTER_TITLE": "Register",
+    "EMAIL_LABEL": "Email Address",
+    "PASSWORD_LABEL": "Password",
+    "LOGIN_BUTTON": "Login",
+    "REGISTER_BUTTON": "Register",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account? Login",
+    "NO_ACCOUNT": "Don't have an account? Register",
+    "LOGOUT_BUTTON": "Logout"
+  },
+  "NAV": {
+    "HOME": "Home",
+    "PROFILE": "Profile",
+    "SETTINGS": "Settings",
+    "DASHBOARD": "Dashboard"
+  },
+  "GENERAL": {
+    "WELCOME": "Welcome",
+    "LOADING": "Loading..."
+  },
+  "VALIDATION": {
+    "EMAIL_REQUIRED": "Email is required.",
+    "EMAIL_INVALID": "Please enter a valid email address.",
+    "PASSWORD_REQUIRED": "Password is required.",
+    "PASSWORD_MINLENGTH": "Password must be at least {minLength} characters long."
+  },
+  "PAGE_NOT_FOUND": {
+    "TITLE": "404 - Page Not Found",
+    "MESSAGE": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.",
+    "SUGGESTION": "Please check the URL or go back to the dashboard.",
+    "GO_TO_DASHBOARD_BUTTON": "Go to Dashboard",
+    "GO_TO_LOGIN_BUTTON": "Go to Login"
+  }
+}

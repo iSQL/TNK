@@ -1,37 +1,32 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service'; // Adjust path if your AuthService is elsewhere
+import { Injectable, inject } from '@angular/core';
+import {
+  CanActivateFn,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  Router,
+} from '@angular/router';
+import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service'; // Correct path to your AuthService
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const AuthGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  // Use the isAuthenticated$ observable for a reactive check,
-  // or the isAuthenticated getter for an immediate check.
-  // Using the getter is simpler for a basic guard.
-  if (authService.isAuthenticated) {
-    return true; // User is authenticated, allow access
-  } else {
-    // User is not authenticated, redirect to login page
-    // You might want to store the attempted URL (state.url) to redirect back after login
-    router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-    return false; // Deny access
-  }
-
-  // Alternative using the observable (more robust if auth state can change rapidly
-  // and you need to wait for the first emission):
-  /*
   return authService.isAuthenticated$.pipe(
-    take(1), // Take the first emitted value and complete
+    take(1), // Take the latest value and complete
     map(isAuthenticated => {
       if (isAuthenticated) {
-        return true;
+        return true; // User is authenticated, allow access
       } else {
-        router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
-        return false;
+        // User is not authenticated, redirect to login page
+        console.log('AuthGuard: User not authenticated, redirecting to login.');
+        return router.createUrlTree(['/login']);
       }
     })
   );
-  */
 };

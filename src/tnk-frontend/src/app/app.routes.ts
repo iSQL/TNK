@@ -1,50 +1,20 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth.guard'; // 1. Import your authGuard
+import { LoginComponent } from './features/auth/login/login.component';
+import { RegisterComponent } from './features/auth/register/register.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { AuthGuard } from './core/guards/auth.guard';
+import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component'; // Adjust path if needed
 
 export const routes: Routes = [
-  // Authentication routes (public)
-  {
-    path: 'login',
-    // We will create LoginComponent later in features/auth/login
-    loadComponent: () =>
-      import('./features/auth/login/login.component').then(m => m.LoginComponent),
-    title: 'Login - TerminNaKlik' // Optional: for browser tab title
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent, 
+    canActivate: [AuthGuard] 
   },
-  {
-    path: 'register',
-    // We will create RegisterComponent later in features/auth/register
-    loadComponent: () =>
-      import('./features/auth/register/register.component').then(m => m.RegisterComponent),
-    title: 'Register - TerminNaKlik'
-  },
-
-  // Protected routes (require authentication)
-  {
-    path: 'dashboard',
-    // We will create DashboardComponent later, perhaps in features/dashboard
-    loadComponent: () =>
-      import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
-    canActivate: [authGuard], // 2. Protect this route with the authGuard
-    title: 'Dashboard - TerminNaKlik'
-  },
-  // Add more protected routes here as needed, e.g., for vendor profile, services, etc.
-  // {
-  //   path: 'vendor/profile',
-  //   loadComponent: () => import('./features/vendor-profile/profile.component').then(m => m.ProfileComponent),
-  //   canActivate: [authGuard]
-  // },
-
-
-  // Default route: Redirect to login if no path is specified
-  {
-    path: '',
-    redirectTo: '/login',
-    pathMatch: 'full'
-  },
-
-  // Wildcard route: Redirect to login (or a 'NotFoundComponent' later) for any unspecified paths
-  {
-    path: '**',
-    redirectTo: '/login' // Or later: loadComponent: () => import('./core/components/not-found/not-found.component').then(m => m.NotFoundComponent)
-  }
+  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Or '/dashboard' if you prefer landing there for authenticated users (guard will handle)
+  
+  // Wildcard route for 404 Page Not Found - MUST BE THE LAST ROUTE
+  { path: '**', component: PageNotFoundComponent } 
 ];

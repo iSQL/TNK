@@ -1,240 +1,230 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { jwtDecode } from 'jwt-decode'; 
-import { environment } from '../../../environments/environment'; // Adjust path if needed
+import { environment } from '../../../environments/environment';
 
-// --- Interfaces for DTOs ---
-// These should match the DTOs your backend expects/returnss
-
-export interface RegisterRequest {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password?: string; // Password might be optional if using external providers later
-  confirmPassword?: string;
-  role: string; // e.g., 'Vendor', 'Customer'
-}
-
-export interface RegisterResponse {
-  userId: string;
-  message: string;
-}
-
-export interface LoginRequest {
-  email: string;
-  password?: string;
-}
-
-export interface LoginResponse {
+/**
+ * Interface for the user object stored and emitted by the service.
+ */
+export interface User {
   token: string;
-  expiration: string; // Assuming ISO date string
-  userId: string;
   email: string;
-  firstName: string;
-  lastName: string;
-  roles: string[];
+  userId?: string; // Optional: if you want to store/use it
+  firstName?: string; // Optional
+  lastName?: string; // Optional
+  roles?: string[];
 }
 
-// Interface for the decoded JWT payload
-interface DecodedToken {
-  sub: string; // Subject (usually user ID)
-  email: string;
-  nameid: string; // Often user ID
-  unique_name: string; // Often username or email
+/**
+ * Interface representing the expected structure of the login API response from the backend.
+ * This should match your backend's LoginResponse DTO.
+ */
+interface LoginApiResponse {
+  token: string;
+  expiration?: string; // Or DateTime
+  userId?: string;
+  email?: string; // Email from backend response
   firstName?: string;
   lastName?: string;
-  role: string | string[]; // Role can be a single string or an array of strings
-  nbf?: number;
-  exp?: number;
-  iat?: number;
-  iss?: string;
-  aud?: string;
+  roles?: string[];
+  // Add any other properties your backend login endpoint returns
 }
 
+
 @Injectable({
-  providedIn: 'root' // Provided in root, so it's a singleton
+  providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = `${environment.apiUrl}/api/auth`; // Base URL for auth endpoints
-  private readonly TOKEN_KEY = 'tnk_auth_token';
+  private http = inject(HttpClient);
+  private router = inject(Router);
+  private apiUrl = environment.apiUrl;
 
-  // BehaviorSubject to hold the current authentication state
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
+  private readonly USER_STORAGE_KEY = 'currentUser';
+
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+
   public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+  public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
-  // BehaviorSubject to hold the current user's decoded token data (or null if not logged in)
-  private currentUserSubject = new BehaviorSubject<DecodedToken | null>(this.getDecodedToken());
-  public currentUser$: Observable<DecodedToken | null> = this.currentUserSubject.asObservable();
-
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {
-    // Initialize auth state on service construction
-    this.checkTokenExpiration();
+  constructor() {
+    this.loadUserFromStorage();
   }
 
-  private hasToken(): boolean {
-    return !!localStorage.getItem(this.TOKEN_KEY);
-  }
+  /**
+   * Loads user data from localStorage on service initialization.
+   * Validates that essential data (token and email) exists.
+   */
+  private loadUserFromStorage(): void {
+    if (typeof localStorage === 'undefined') {
+      console.warn('AuthService: localStorage is not available. User state will not persist across sessions.');
+      return;
+    }
 
-  private checkTokenExpiration(): void {
-    const token = this.getToken();
-    if (token) {
-      const decoded = this.decodeToken(token);
-      if (decoded && decoded.exp) {
-        const isExpired = Date.now() >= decoded.exp * 1000;
-        if (isExpired) {
-          this.logout(); // Token is expired, log out
-        } else {
+    const storedUserJson = localStorage.getItem(this.USER_STORAGE_KEY);
+    if (storedUserJson) {
+      try {
+        const storedUser: User = JSON.parse(storedUserJson);
+        console.log('AuthService: User object parsed from localStorage:', JSON.stringify(storedUser, null, 2));
+
+        // Validate essential fields from stored user data
+        if (storedUser && storedUser.token && storedUser.email && storedUser.email.trim() !== '') {
+          this.currentUserSubject.next(storedUser);
           this.isAuthenticatedSubject.next(true);
-          this.currentUserSubject.next(decoded);
+          console.log('AuthService: User successfully loaded from storage and auth state updated.', storedUser);
+        } else {
+          console.warn('AuthService: Stored user data is invalid (missing token or email). Clearing storage.');
+          this.clearAuthData(false); // Don't navigate, just clear
         }
-      } else {
-        // Token exists but can't be decoded or has no expiration - treat as invalid
-        this.logout();
+      } catch (error) {
+        console.error('AuthService: Error parsing stored user data from localStorage:', error);
+        localStorage.removeItem(this.USER_STORAGE_KEY); // Clear corrupted data
       }
     } else {
-      this.isAuthenticatedSubject.next(false);
-      this.currentUserSubject.next(null);
+      console.log('AuthService: No user found in localStorage.');
     }
   }
 
-  register(request: RegisterRequest): Observable<RegisterResponse> {
-    return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, request).pipe(
-      tap(response => console.log('Registration successful', response)),
-      catchError(this.handleError)
-    );
-  }
+  /**
+   * Logs in the user.
+   * @param credentials Email and password.
+   * @returns Observable of the API response.
+   */
+  login(credentials: { email?: string; password?: string }): Observable<LoginApiResponse> {
+    console.log(`AuthService: Attempting login for email: ${credentials.email}`);
+    return this.http.post<LoginApiResponse>(`${this.apiUrl}/api/auth/login`, credentials).pipe(
+      tap({
+        next: (response) => {
+          console.log('AuthService: Login API response received:', JSON.stringify(response, null, 2));
 
-  login(request: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, request).pipe(
-      tap(response => {
-        if (response && response.token) {
-          this.storeToken(response.token);
-          const decodedToken = this.decodeToken(response.token);
-          this.isAuthenticatedSubject.next(true);
-          this.currentUserSubject.next(decodedToken);
-          console.log('Login successful, token stored.');
+          if (response && response.token) {
+            console.log('AuthService: Token found in API response.');
+
+            // Construct the User object for application state.
+            // Prioritize email from the API response, then from credentials.
+            const userEmail = response.email || credentials.email;
+            if (!userEmail || userEmail.trim() === '') {
+                console.error('AuthService: Critical error - Email is missing from both API response and credentials. Cannot proceed with login.');
+                this.clearAuthData(false); // Don't navigate
+                // Optionally, throw an error or return a specific error state to the component
+                return; // Exit tap if email is missing
+            }
+
+            const userToStore: User = {
+              token: response.token,
+              email: userEmail,
+              userId: response.userId,
+              firstName: response.firstName,
+              lastName: response.lastName,
+              roles: response.roles || [],
+            };
+            console.log('AuthService: User object to be stored:', JSON.stringify(userToStore, null, 2));
+
+            if (typeof localStorage !== 'undefined') {
+              localStorage.setItem(this.USER_STORAGE_KEY, JSON.stringify(userToStore));
+              console.log('AuthService: User data saved to localStorage.');
+            }
+
+            this.currentUserSubject.next(userToStore);
+            this.isAuthenticatedSubject.next(true);
+            console.log('AuthService: Authentication state updated. Navigating to dashboard...');
+
+            this.router.navigate(['/dashboard'])
+              .then(navigated => {
+                if (navigated) {
+                  console.log('AuthService: Navigation to dashboard successful.');
+                } else {
+                  console.error('AuthService: Navigation to dashboard failed (router.navigate returned false). Check route guards and configuration.');
+                }
+              })
+              .catch(err => console.error('AuthService: Error during navigation to dashboard:', err));
+          } else {
+            console.error('AuthService: Login API response did not contain a token or was malformed. Response:', response);
+            this.clearAuthData(false); // Don't navigate
+          }
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error('AuthService: HTTP error during login:', err);
+          this.clearAuthData(false); // Don't navigate, let component handle UI error
         }
-      }),
-      catchError(this.handleError)
+      })
     );
   }
 
+  /**
+   * Registers a new user.
+   * @param userData User registration data.
+   * @returns Observable of the API response.
+   */
+  register(userData: any): Observable<any> { // Consider defining a RegisterRequest and RegisterResponse interface
+    console.log(`AuthService: Attempting registration for email: ${userData.email}`);
+    return this.http.post<any>(`${this.apiUrl}/api/auth/register`, userData).pipe(
+      tap({
+        next: (response) => {
+          console.log('AuthService: Registration successful. API Response:', response);
+          // Typically, after registration, the user is redirected to login.
+          // The component handles showing a success message and navigation.
+          // If API auto-logs in and returns a token, handle it like the login method.
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error('AuthService: HTTP error during registration:', err);
+          // Let component handle UI error display
+        }
+      })
+    );
+  }
+
+  /**
+   * Logs out the current user, clears auth data, and navigates to login.
+   */
   logout(): void {
-    this.removeToken();
-    this.isAuthenticatedSubject.next(false);
+    console.log('AuthService: Logging out user.');
+    this.clearAuthData(true); // Navigate to login after clearing data
+  }
+
+  /**
+   * Clears authentication data from subjects and localStorage.
+   * @param navigateToLogin If true, navigates to the login page.
+   */
+  private clearAuthData(navigateToLogin: boolean): void {
+    console.log(`AuthService: Clearing authentication data. Will navigate to login: ${navigateToLogin}`);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(this.USER_STORAGE_KEY);
+    }
     this.currentUserSubject.next(null);
-    this.router.navigate(['/login']); // Or your desired logout destination
-    console.log('Logged out, token removed.');
+    this.isAuthenticatedSubject.next(false);
+
+    if (navigateToLogin) {
+      this.router.navigate(['/login'])
+        .then(navigated => {
+          if (navigated) {
+            console.log('AuthService: Navigation to login after clearing auth data successful.');
+          } else {
+            console.error('AuthService: Navigation to login after clearing auth data failed.');
+          }
+        })
+        .catch(err => console.error('AuthService: Error during navigation to login after clearing auth data:', err));
+    }
   }
 
-  storeToken(token: string): void {
-    localStorage.setItem(this.TOKEN_KEY, token);
-  }
-
+  /**
+   * Retrieves the stored JWT token.
+   * @returns The token string or null if not found/invalid.
+   */
   getToken(): string | null {
-    return localStorage.getItem(this.TOKEN_KEY);
-  }
+    if (typeof localStorage === 'undefined') return null;
 
-  removeToken(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
-  }
-
-  public get isAuthenticated(): boolean {
-    // More robust check considering token expiration
-    const token = this.getToken();
-    if (!token) {
-      return false;
-    }
-    const decoded = this.decodeToken(token);
-    if (!decoded || !decoded.exp) {
-      return false; // Invalid token or no expiration
-    }
-    const isExpired = Date.now() >= decoded.exp * 1000;
-    if (isExpired) {
-      this.logout(); // Clean up if found expired during a check
-      return false;
-    }
-    return true;
-  }
-
-  private decodeToken(token: string): DecodedToken | null {
-    try {
-      return jwtDecode<DecodedToken>(token);
-    } catch (error) {
-      console.error('Error decoding token:', error);
-      return null;
-    }
-  }
-
-  private getDecodedToken(): DecodedToken | null {
-    const token = this.getToken();
-    if (token) {
-      return this.decodeToken(token);
+    const storedUserJson = localStorage.getItem(this.USER_STORAGE_KEY);
+    if (storedUserJson) {
+      try {
+        const user: User = JSON.parse(storedUserJson);
+        return user.token;
+      } catch (error) {
+        console.error('AuthService: Error parsing token from stored user data:', error);
+        return null;
+      }
     }
     return null;
-  }
-
-  // --- Helper methods to get user info from token ---
-  public getUserId(): string | null {
-    const user = this.currentUserSubject.value;
-    return user ? user.sub || user.nameid : null; // 'sub' is standard, 'nameid' is common from ASP.NET Core Identity
-  }
-
-  public getUserEmail(): string | null {
-    const user = this.currentUserSubject.value;
-    return user ? user.email : null;
-  }
-
-  public getUserRoles(): string[] {
-    const user = this.currentUserSubject.value;
-    if (user && user.role) {
-      return Array.isArray(user.role) ? user.role : [user.role];
-    }
-    return [];
-  }
-
-  public getFirstName(): string | null {
-    const user = this.currentUserSubject.value;
-    return user && user.firstName ? user.firstName : null;
-  }
-
-  public getLastName(): string | null {
-    const user = this.currentUserSubject.value;
-    return user && user.lastName ? user.lastName : null;
-  }
-
-  public hasRole(role: string): boolean {
-    return this.getUserRoles().includes(role);
-  }
-
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occurred!';
-    if (error.error instanceof ErrorEvent) {
-      // Client-side or network error
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // Backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      if (error.status === 0) {
-        errorMessage = 'Cannot connect to API. Please check your network or server.';
-      } else if (error.error && typeof error.error === 'string') {
-        errorMessage = error.error; // Plain text error from backend
-      } else if (error.error && error.error.message) {
-        errorMessage = error.error.message; // Error object with a message property
-      } else if (error.error && error.error.title) { // For RFC7807 ProblemDetails
-        errorMessage = `${error.error.title}${error.error.detail ? ': ' + error.error.detail : ''}`;
-      }
-       else {
-        errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-      }
-    }
-    console.error(errorMessage);
-    return throwError(() => new Error(errorMessage)); // Return an observable error
   }
 }

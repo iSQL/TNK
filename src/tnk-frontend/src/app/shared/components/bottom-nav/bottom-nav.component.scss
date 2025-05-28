@@ -1,0 +1,63 @@
+/* Basic styling for the bottom navigation bar */
+.bottom-nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f8f9fa; /* Light background color */
+  border-top: 1px solid #dee2e6; /* Subtle top border */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  z-index: 1000; /* Ensure it's above other content */
+  padding: 0.5rem 0; /* Padding top and bottom */
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around; /* Distribute items evenly */
+    align-items: center;
+  }
+
+  li {
+    flex-grow: 1; /* Allow items to grow and fill space */
+    text-align: center;
+
+    a {
+      display: flex;
+      flex-direction: column; /* Stack icon and text vertically */
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 0.25rem; /* Padding inside each link */
+      text-decoration: none;
+      color: #495057; /* Default text color */
+      font-size: 0.8rem; /* Smaller font size for nav items */
+      transition: color 0.2s ease-in-out;
+
+      i {
+        font-size: 1.2rem; /* Icon size */
+        margin-bottom: 0.25rem; /* Space between icon and text */
+      }
+
+      &:hover {
+        color: #007bff; /* Highlight color on hover - Syncfusion primary or your theme color */
+      }
+
+      &.active {
+        color: #007bff; /* Active link color - Syncfusion primary or your theme color */
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+/* Example for small screens - already mobile-first, but you can add specific overrides */
+@media (max-width: 576px) {
+  .bottom-nav-bar li a {
+    font-size: 0.7rem; /* Even smaller font on very small screens */
+    padding: 0.4rem 0.1rem;
+    i {
+      font-size: 1.1rem;
+    }
+  }
+}

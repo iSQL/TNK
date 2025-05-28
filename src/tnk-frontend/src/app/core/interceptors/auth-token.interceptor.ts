@@ -16,6 +16,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+      console.log('AuthTokenInterceptor: Intercepting request to:', request.url); 
     const token = this.authService.getToken();
     const isApiUrl = request.url.startsWith(environment.apiUrl); // Check if the request is to your backend API
 

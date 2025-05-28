@@ -1,48 +1,44 @@
-<div class="login-container">
-  <h2>Login to TerminNaKlik</h2>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <ejs-textbox
-        id="email"
-        name="email"
-        formControlName="email"
-        placeholder="Email Address"
-        floatLabelType="Auto"
-        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
-      ></ejs-textbox>
-      <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
-        <div *ngIf="f['email'].errors['required']">Email is required.</div>
-        <div *ngIf="f['email'].errors['email']">Please enter a valid email address.</div>
+<div class="auth-container">
+  <div class="auth-card">
+    <h2 class="auth-title">{{ 'AUTH.LOGIN_TITLE' | translate }}</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group">
+        <label for="email">{{ 'AUTH.EMAIL_LABEL' | translate }}</label>
+        <input type="email" id="email" class="form-control" formControlName="email"
+               [ngClass]="{ 'is-invalid': email?.invalid && (email?.dirty || email?.touched) }">
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="invalid-feedback">
+          <div *ngIf="email?.errors?.['required']">{{ 'VALIDATION.EMAIL_REQUIRED' | translate }}</div>
+          <div *ngIf="email?.errors?.['email']">{{ 'VALIDATION.EMAIL_INVALID' | translate }}</div>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <ejs-textbox
-        id="password"
-        name="password"
-        type="password"
-        formControlName="password"
-        placeholder="Password"
-        floatLabelType="Auto"
-        [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
-      ></ejs-textbox>
-      <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
-        <div *ngIf="f['password'].errors['required']">Password is required.</div>
+      <div class="form-group">
+        <label for="password">{{ 'AUTH.PASSWORD_LABEL' | translate }}</label>
+        <input type="password" id="password" class="form-control" formControlName="password"
+               [ngClass]="{ 'is-invalid': password?.invalid && (password?.dirty || password?.touched) }">
+        <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="invalid-feedback">
+          <div *ngIf="password?.errors?.['required']">{{ 'VALIDATION.PASSWORD_REQUIRED' | translate }}</div>
+          <div *ngIf="password?.errors?.['minlength']">
+            {{ 'VALIDATION.PASSWORD_MINLENGTH' | translate:{minLength: password?.errors?.['minlength'].requiredLength} }}
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div *ngIf="loginError" class="error-message">
-      {{ loginError }}
-    </div>
+      <div *ngIf="isLoading" class="loading-indicator">
+        <p>{{ 'GENERAL.LOADING' | translate }}</p>
+        </div>
 
-    <div class="form-group button-group">
-      <button ejs-button cssClass="e-primary" [disabled]="loginForm.invalid || isLoading">
-        {{ isLoading ? 'Logging in...' : 'Login' }}
+      <div *ngIf="errorMessage && !isLoading" class="alert alert-danger mt-3">
+        {{ errorMessage }} </div>
+
+      <button type="submit" class="btn btn-primary btn-block auth-button" [disabled]="loginForm.invalid || isLoading">
+        {{ 'AUTH.LOGIN_BUTTON' | translate }}
       </button>
-    </div>
+    </form>
 
-    <div class="register-link">
-      <p>Don't have an account? <a routerLink="/register">Register here</a></p>
+    <div class="auth-switch-link mt-4 text-center">
+      <p>{{ 'AUTH.NO_ACCOUNT' | translate }} <a routerLink="/register">{{ 'AUTH.REGISTER_TITLE' | translate }}</a></p>
     </div>
-  </form>
+  </div>
 </div>
