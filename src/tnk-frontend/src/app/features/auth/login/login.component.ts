@@ -1,10 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service'; 
+import { Router, RouterLink, RouterModule } from '@angular/router'; 
+import { AuthService } from '../../../core/services/auth.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
+
+// Syncfusion Modules for the template
+import { TextBoxModule } from '@syncfusion/ej2-angular-inputs';
+import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +17,10 @@ import { HttpErrorResponse } from '@angular/common/http';
     CommonModule,
     ReactiveFormsModule,
     RouterLink,
-    TranslateModule
+    RouterModule, 
+    TranslateModule,
+    TextBoxModule,
+    ButtonModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -32,7 +39,7 @@ export class LoginComponent implements OnInit {
   constructor() {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(3)]], 
+      password: ['', [Validators.required, Validators.minLength(6)]], // Or your preferred minLength
     });
   }
 
@@ -44,26 +51,33 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // Convenience getter for easy access to form fields in the template
+  get f() { 
+    return this.loginForm.controls; 
+  }
+
   onSubmit(): void {
     
     this.submitted = true; 
     this.errorMessage = null; 
-    this.isLoading = true; 
-
+    
     if (this.loginForm.invalid) {
+
       this.markFormGroupTouched(this.loginForm);
-      this.translate.get('VALIDATION.FORM_INVALID').subscribe((res: string) => { 
+      this.translate.get('AUTH.LOGIN_FAILED_GENERAL').subscribe((res: string) => { 
         this.errorMessage = res; 
       });
-      this.isLoading = false; 
       return;
     }
 
+    this.isLoading = true; 
     const credentials = {
-      email: this.loginForm.value.email,
-      password: this.loginForm.value.password,
+      email: this.f['email'].value,
+      password: this.f['password'].value,
     };
 
+
+    
     this.authService.login(credentials).subscribe({
       next: () => {
         this.isLoading = false;
@@ -75,24 +89,16 @@ export class LoginComponent implements OnInit {
 
         let displayMessage: string | null = null;
         if (errorResponse.error) {
-          // Check for FastEndpoints typical structure with generalErrors (from your backend logs)
           if (errorResponse.error.errors && errorResponse.error.errors.generalErrors && Array.isArray(errorResponse.error.errors.generalErrors) && errorResponse.error.errors.generalErrors.length > 0) {
             displayMessage = errorResponse.error.errors.generalErrors.join(' '); 
-            console.log('LoginComponent: Parsed generalErrors:', displayMessage);
           } 
-          // Check for field-specific errors (example for 'Email' field if backend structures it this way)
-          else if (errorResponse.error.errors && errorResponse.error.errors.Email && Array.isArray(errorResponse.error.errors.Email) && errorResponse.error.errors.Email.length > 0){
-            displayMessage = errorResponse.error.errors.Email.join(' ');
-            console.log('LoginComponent: Parsed Email field error:', displayMessage);
-          }
-          // Fallback for other common error message structures
-          else if (errorResponse.error.message) { // Common for many APIs
+          else if (errorResponse.error.message) { 
             displayMessage = errorResponse.error.message;
-          } else if (errorResponse.error.Message) { // Sometimes PascalCase from .NET
+          } else if (errorResponse.error.Message) { 
             displayMessage = errorResponse.error.Message;
-          } else if (typeof errorResponse.error === 'string') { // If the error body is just a string
+          } else if (typeof errorResponse.error === 'string') { 
             displayMessage = errorResponse.error;
-          } else if (errorResponse.error.title && typeof errorResponse.error.title === 'string') { // For RFC7807 ProblemDetails
+          } else if (errorResponse.error.title && typeof errorResponse.error.title === 'string') {
              displayMessage = errorResponse.error.title;
           }
         }
@@ -100,7 +106,6 @@ export class LoginComponent implements OnInit {
         if (displayMessage) {
           this.errorMessage = displayMessage;
         } else {
-          // Fallback to a generic translated message if no specific message could be parsed
           this.translate.get('AUTH.LOGIN_FAILED_GENERAL').subscribe((res: string) => { 
             this.errorMessage = res;
           });
@@ -117,7 +122,4 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-
-  get email() { return this.loginForm.get('email'); }
-  get password() { return this.loginForm.get('password'); }
 }

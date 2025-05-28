@@ -12,9 +12,19 @@
     "LOGOUT_BUTTON": "Odjavi se",
     "LOGIN_FAILED_GENERAL": "Prijava nije uspela. Proverite unete podatke.",
     "LOGIN_ERROR_NETWORK": "Došlo je do greške prilikom prijave. Molimo pokušajte kasnije.",
-    "REGISTER_SUCCESS": "Registracija uspešna! Možete se prijaviti.",
+    "REGISTER_SUCCESS_ALERT": "Registracija uspešna! Možete se prijaviti.",
     "REGISTER_FAILED_BAD_REQUEST": "Registracija nije uspela. Proverite unete podatke.",
-    "REGISTER_ERROR_NETWORK": "Došlo je do greške prilikom registracije. Molimo pokušajte kasnije."
+    "REGISTER_ERROR_NETWORK": "Došlo je do greške prilikom registracije. Molimo pokušajte kasnije.",
+    "REGISTER_PAGE_TITLE": "Kreirajte Vaš TerminNaKlik Nalog",
+    "FIRST_NAME_PLACEHOLDER": "Ime",
+    "LAST_NAME_PLACEHOLDER": "Prezime",
+    "EMAIL_PLACEHOLDER": "Email adresa",
+    "PASSWORD_PLACEHOLDER": "Lozinka",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Potvrdi lozinku",
+    "ROLE_PLACEHOLDER": "Izaberite ulogu",
+    "ROLE_CUSTOMER": "Kupac", 
+    "ROLE_VENDOR": "Prodavac" 
+  
   },
   "NAV": {
     "HOME": "Početna",
@@ -24,14 +34,21 @@
   },
   "GENERAL": {
     "WELCOME": "Dobrodošli",
-    "LOADING": "Učitavanje..."
+    "LOADING": "Učitavanje...",
+    "REGISTERING": "Registrovanje..."
+
   },
   "VALIDATION": {
     "EMAIL_REQUIRED": "Email adresa je obavezna.",
     "EMAIL_INVALID": "Unesite validnu email adresu.",
     "PASSWORD_REQUIRED": "Lozinka je obavezna.",
     "PASSWORD_MINLENGTH": "Lozinka mora imati najmanje {{minLength}} karaktera.",
-    "FORM_INVALID": "Molimo ispravite greške u formi."
+    "FORM_INVALID": "Molimo ispravite greške u formi.",
+    "FIRST_NAME_REQUIRED": "Ime je obavezno.",
+    "LAST_NAME_REQUIRED": "Prezime je obavezno.",
+    "CONFIRM_PASSWORD_REQUIRED": "Potvrda lozinke je obavezna.",
+    "PASSWORDS_DO_NOT_MATCH": "Lozinke se ne podudaraju.",
+    "ROLE_REQUIRED": "Uloga je obavezna."
   },
   "DASHBOARD": {
     "TITLE": "Kontrolna tabla",

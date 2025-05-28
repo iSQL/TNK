@@ -1,28 +1,28 @@
 // _auth-forms.scss
 // Shared styles for Login and Register components
 
-@use 'sass:color'; // Import the sass:color module to use color.adjust
+@use 'sass:color'; // Import the sass:color module
 
 // Variables
-$auth-primary-color: #007bff;
-$auth-primary-hover-color: color.adjust($auth-primary-color, $lightness: -7%); // Adjusted hover color slightly
-$auth-text-color: #333;
+$auth-primary-color: #007bff; // Syncfusion's Material Blue or your theme's primary
+$auth-primary-hover-color: color.adjust($auth-primary-color, $lightness: -8%); // Slightly darker for hover
+$auth-text-color: #212529; // Darker text for better readability
 $auth-label-color: #495057;
 $auth-input-border-color: #ced4da;
-$auth-input-focus-border-color: #80bdff;
+$auth-input-focus-border-color: #80bdff; // Usually matches primary color focus
 $auth-input-focus-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-$auth-error-color: #dc3545;
-$auth-success-color: #28a745;
+$auth-error-color: #dc3545; // Standard danger/error color
+$auth-success-color: #28a745; // Standard success color
 $auth-card-background: #ffffff;
-$auth-page-background: #f4f7f6;
-$auth-font-family: 'Inter', sans-serif;
+$auth-page-background: #f8f9fa; // A very light grey for page background
+$auth-font-family: 'Inter', sans-serif; // Ensure Inter is loaded globally
 
 .auth-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 70px);
+  min-height: calc(100vh - 70px); // Adjust 70px based on your bottom-nav height + desired padding
   padding: 2rem 1rem;
   background-color: $auth-page-background;
   font-family: $auth-font-family;
@@ -33,7 +33,7 @@ $auth-font-family: 'Inter', sans-serif;
   background: $auth-card-background;
   padding: 2rem 2.5rem;
   border-radius: 12px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08); // Softer shadow
   width: 100%;
   max-width: 480px;
   box-sizing: border-box;
@@ -41,6 +41,7 @@ $auth-font-family: 'Inter', sans-serif;
   @media (max-width: 576px) {
     padding: 1.5rem;
     margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); // Lighter shadow on mobile
   }
 }
 
@@ -55,7 +56,7 @@ $auth-font-family: 'Inter', sans-serif;
 .form-group {
   margin-bottom: 1.5rem;
 
-  label {
+  label { // This will style the floating label of ejs-textbox if it's a <label> element
     display: block;
     font-weight: 500;
     color: $auth-label-color;
@@ -64,50 +65,45 @@ $auth-font-family: 'Inter', sans-serif;
   }
 }
 
-.form-control {
-  display: block;
+// General styling for Syncfusion ejs-textbox within our forms
+ejs-textbox,
+ejs-dropdownlist { // Added ejs-dropdownlist here for consistency
   width: 100%;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: $auth-text-color;
-  background-color: $auth-card-background;
-  background-clip: padding-box;
-  border: 1px solid $auth-input-border-color;
-  appearance: none;
-  border-radius: 8px;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  box-sizing: border-box;
-
-  &:focus {
-    color: $auth-text-color;
-    background-color: $auth-card-background;
-    border-color: $auth-input-focus-border-color;
-    outline: 0;
-    box-shadow: $auth-input-focus-box-shadow;
-  }
-
-  &::placeholder {
-    color: #6c757d;
-    opacity: 1;
-  }
-
-  &.is-invalid {
-    border-color: $auth-error-color;
-    &:focus {
-      border-color: $auth-error-color;
-      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
-    }
-  }
+  // Syncfusion components usually have their own focus styling based on the theme.
+  // If you need to override, target their specific classes e.g. .e-input-group.e-input-focus
 }
+
+// Autofill styles for WebKit browsers (Chrome, Safari, Edge)
+// This attempts to make the browser's autofill background transparent or match the input's background
+// so Syncfusion's floating label mechanism can work correctly.
+ejs-textbox input:-webkit-autofill,
+ejs-textbox input:-webkit-autofill:hover,
+ejs-textbox input:-webkit-autofill:focus,
+ejs-textbox input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0px 1000px $auth-card-background inset !important; // Force background to match card
+  transition: background-color 5000s ease-in-out 0s; // Long transition to "trick" browser
+  -webkit-text-fill-color: $auth-text-color !important; // Ensure text color is not overridden by browser
+  font-family: $auth-font-family; // Ensure font consistency
+  font-size: 1rem; // Ensure font size consistency
+}
+
+// Styles for Syncfusion textboxes when they have an error (e.g., from form validation)
+ejs-textbox.ng-invalid.ng-touched .e-float-input:not(.e-input-focus) .e-float-line::before,
+ejs-textbox.ng-invalid.ng-touched .e-float-input:not(.e-input-focus) .e-float-line::after {
+  background-color: $auth-error-color !important; // Make the underline red for error
+}
+ejs-textbox.ng-invalid.ng-touched .e-float-input .e-float-text {
+  color: $auth-error-color !important; // Make the floating label red for error
+}
+
 
 .invalid-feedback {
   display: block;
   width: 100%;
-  margin-top: 0.25rem;
+  margin-top: 0.35rem; // Slightly more space
   font-size: 0.8rem;
   color: $auth-error-color;
+  text-align: left; // Ensure error messages are left-aligned
 }
 
 .alert {
@@ -131,44 +127,32 @@ $auth-font-family: 'Inter', sans-serif;
   }
 }
 
-.auth-button {
-  display: inline-block;
-  font-weight: 500;
-  line-height: 1.5;
-  color: #fff;
-  text-align: center;
-  text-decoration: none;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-  background-color: $auth-primary-color;
-  border: 1px solid $auth-primary-color;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, transform 0.1s ease;
+// .auth-button is applied along with e-primary to Syncfusion buttons
+.auth-button.e-btn { // Target Syncfusion button specifically if needed
   width: 100%;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem; // Syncfusion buttons might have own padding, adjust if needed
+  font-size: 1rem;
+  border-radius: 8px; // Syncfusion buttons have own radius, this might be an override
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, transform 0.1s ease;
 
-  &:hover {
-    color: #fff;
-    background-color: $auth-primary-hover-color;
-    // Use color.adjust for darkening border color consistently
-    border-color: color.adjust($auth-primary-hover-color, $blackness: 5%); // Line 162 original
+  // e-primary should handle the blue color. If you want to override:
+  // background-color: $auth-primary-color !important;
+  // border-color: $auth-primary-color !important;
+  // color: #fff !important;
+
+  &:hover:not(:disabled) {
+    // background-color: $auth-primary-hover-color !important;
+    // border-color: color.adjust($auth-primary-hover-color, $blackness: 5%) !important;
     transform: translateY(-1px);
   }
 
-  &:focus {
-    color: #fff;
-    background-color: $auth-primary-hover-color;
-    // Use color.adjust for darkening border color consistently
-    border-color: color.adjust($auth-primary-hover-color, $blackness: 5%); // Line 169 original
-    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
-  }
 
   &:disabled {
-    background-color: #6c757d;
-    border-color: #6c757d;
+    // e-primary:disabled styles from Syncfusion theme will apply
+    // If you need to override:
+    // background-color: #6c757d !important;
+    // border-color: #6c757d !important;
     opacity: 0.65;
     cursor: not-allowed;
     transform: none;
