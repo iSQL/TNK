@@ -1,6 +1,3 @@
-// src/app/core/services/api.service.ts
-// This service provides a wrapper around HttpClient for making API requests.
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';

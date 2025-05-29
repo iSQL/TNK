@@ -4,7 +4,7 @@ using TNK.Core.BusinessAggregate; // Optional: for basic annotations
 
 namespace TNK.Core.Identity; // Or TNK.Core.UserAggregate;
 
-public class ApplicationUser : IdentityUser
+public class ApplicationUser : IdentityUser, IAggregateRoot
 {
   [MaxLength(100)]
   public string? FirstName { get; set; }

@@ -11,6 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 using NSwag;
 using TNK.Web.Configurations;
 using TNK.Web.Resources;
+using YamlDotNet.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,22 +43,16 @@ builder.AddLoggerConfigs();
 var appLogger = new SerilogLoggerFactory(logger)
     .CreateLogger<Program>();
 
-var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-var secretKey = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]!);
-
-
-
 builder.Services.AddOptionConfigs(builder.Configuration, appLogger, builder);
 builder.Services.AddServiceConfigs(appLogger, builder);
 
 //CORS Configuration
-
 builder.Services.AddCors(options =>
 {
   options.AddPolicy(name: "_localAngularOrigin", //TODO: reuse this name in the app from config or something
                     policy =>
                     {
-                      policy.WithOrigins("http://localhost:4200") // Your Angular app's origin
+                      policy.WithOrigins("http://localhost:4200", "https://localhost:57679") // Your Angular app's origin
                               .AllowAnyHeader()
                               .AllowAnyMethod()
                               .AllowCredentials(); 
@@ -65,6 +60,8 @@ builder.Services.AddCors(options =>
 });
 
 //Auth and Authorization
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var secretKey = Encoding.ASCII.GetBytes(jwtSettings["SecretKey"]!);
 builder.Services.AddAuthentication(options =>
 {
   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -110,6 +107,7 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 // API and Swagger Configuration
+
 builder.Services
   .AddFastEndpoints()
   .SwaggerDocument(o =>
@@ -119,29 +117,21 @@ builder.Services
     {
       s.Title = "TerminNaKlik API";
       s.Version = "v1.0";
+      s.AddAuth(JwtBearerDefaults.AuthenticationScheme, new OpenApiSecurityScheme // Using "Bearer" as the scheme name
+      {
+        Name = "Authorization", // This is the header name
+        In = OpenApiSecurityApiKeyLocation.Header,
+        Type = OpenApiSecuritySchemeType.Http,
+        Scheme = JwtBearerDefaults.AuthenticationScheme, // Specifies the scheme is "Bearer"
+        BearerFormat = "JWT", // Indicates the format of the bearer token
+        Description = "Input your Bearer token in this format - {token}"
+      });
     };
+
   });
 
 
 var app = builder.Build();
-var rm = new ResourceManager(
-    "TNK.Web.Resources.SharedResources",   // your root namespace + folder + class
-    typeof(SharedResources).Assembly);
-
-// test invariant
-var en = rm.GetString("InvalidLoginAttempt", CultureInfo.GetCultureInfo("en"));
-app.Logger.LogInformation("en → {Message}", en);
-
-// test Serbian-Latin
-var sr = rm.GetString("InvalidLoginAttempt", CultureInfo.GetCultureInfo("sr-Latn-RS"));
-app.Logger.LogInformation("sr-Latn-RS → {Message}", sr);
-
-
-
-var resources = typeof(SharedResources).Assembly
-                    .GetManifestResourceNames();
-app.Logger.LogInformation("Embedded resources: {Names}",
-    string.Join("; ", resources));
 
 app.Logger.LogInformation("=== Localization Smoke-Test ===");
 using (var scope = app.Services.CreateScope())
@@ -149,11 +139,9 @@ using (var scope = app.Services.CreateScope())
   var localizer = scope.ServiceProvider
                        .GetRequiredService<IStringLocalizer<SharedResources>>();
 
-  // 1. Default culture (as configured)
   var defaultMsg = localizer["InvalidLoginAttempt"];
   app.Logger.LogInformation("Default (en) → {Message}", defaultMsg);
 
-  // 2. Serbian (Latin)
   var srCulture = new CultureInfo("sr-Latn-RS");
   CultureInfo.CurrentCulture = srCulture;
   CultureInfo.CurrentUICulture = srCulture;
@@ -161,10 +149,7 @@ using (var scope = app.Services.CreateScope())
   var srMsg = localizer["InvalidLoginAttempt"];
   app.Logger.LogInformation("Serbian-Latin (sr-Latn-RS) → {Message}", srMsg);
 }
-
 app.Logger.LogInformation("=== End Smoke-Test ===");
-
-// Configure RequestLocalizationOptions
 app.UseRequestLocalization(
     app.Services
        .GetRequiredService<IOptions<RequestLocalizationOptions>>()

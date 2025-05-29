@@ -4,11 +4,11 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpHandlerFn // For functional interceptors if you switch later
+  HttpHandlerFn // For functional interceptors I switch later
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service'; // Adjust path if needed
-import { environment } from '../../../environments/environment'; // To check if the request is to your API
+import { AuthService } from '../services/auth.service'; 
+import { environment } from '../../../environments/environment'; 
 
 @Injectable()
 export class AuthTokenInterceptor implements HttpInterceptor {
@@ -17,7 +17,7 @@ export class AuthTokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this.authService.getToken();
-    const isApiUrl = request.url.startsWith(environment.apiUrl); // Check if the request is to your backend API
+    const isApiUrl = request.url.startsWith(environment.apiUrl); // Check if the request is to my backend API
 
     if (token && isApiUrl) {
 

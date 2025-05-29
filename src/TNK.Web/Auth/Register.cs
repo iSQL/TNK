@@ -71,7 +71,7 @@ public class RegisterEndpoint : Endpoint<RegisterRequest, RegisterResponse>
 
   public override async Task HandleAsync(RegisterRequest req, CancellationToken ct)
   {
-    var validRoles = new[] { SeedData.VendorRole, SeedData.CustomerRole };
+    var validRoles = new[] { SeedData.VendorRole, SeedData.CustomerRole, SeedData.AdminRole };
     if (!validRoles.Contains(req.Role) || !await _roleManager.RoleExistsAsync(req.Role))
     {
       // Use localized string with parameter

@@ -69,9 +69,10 @@ public static class InfrastructureServiceExtensions
                .AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>))
                .AddScoped<IListContributorsQueryService, ListContributorsQueryService>()
                .AddScoped<IDeleteContributorService, DeleteContributorService>();
+    services.AddScoped<IBusinessProfileRepository, BusinessProfileRepository>();
 
 
-        logger.LogInformation("{Project} services registered", "Infrastructure");
+    logger.LogInformation("{Project} services registered", "Infrastructure");
 
         return services;
     }
