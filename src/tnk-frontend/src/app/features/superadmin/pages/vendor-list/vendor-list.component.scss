@@ -1,0 +1,56 @@
+// src/app/features/superadmin/pages/vendor-list/vendor-list.component.scss
+.vendor-list-page {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      margin: 0;
+      color: #333;
+    }
+  }
+
+  .search-bar-container {
+    // Add styles if needed, e.g., max-width
+  }
+
+  .grid-container {
+    position: relative; // For loading overlay positioning
+  }
+
+  .grid-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; // Ensure it's above the grid
+  }
+
+  // Syncfusion icon styling (example)
+  .e-add-icon::before { content: '\e742'; } // Example, find correct Syncfusion icon content code
+  .e-edit-icon::before { content: '\e70f'; }
+  .e-delete-icon::before { content: '\e74d'; }
+  .e-icon-search::before { content: '\e88a'; }
+
+
+  // Ensure Syncfusion styles are loaded.
+  // These might be global, but if not, import specific component styles.
+  // @import '~@syncfusion/ej2-angular-grids/styles/material.css';
+  // @import '~@syncfusion/ej2-angular-buttons/styles/material.css';
+  // @import '~@syncfusion/ej2-angular-popups/styles/material.css';
+  // @import '~@syncfusion/ej2-angular-inputs/styles/material.css';
+  // @import '~@syncfusion/ej2-angular-spinner/styles/material.css';
+}
+
+// Styles for Syncfusion icons if not globally defined
+.e-icons.e-add-icon:before { content: '\\e823'; /* Example Syncfusion add icon */ }
+.e-icons.e-edit-icon:before { content: '\\e70f'; /* Example Syncfusion edit icon */ }
+.e-icons.e-delete-icon:before { content: '\\e74d'; /* Example Syncfusion delete icon */ }
+.e-icons.e-search-icon:before { content: '\\e88a'; /* Example Syncfusion search icon */ }

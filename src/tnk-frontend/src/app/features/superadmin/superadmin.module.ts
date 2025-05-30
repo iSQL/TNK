@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import { CommonModule } from '@angular/common'; 
 import { SuperadminRoutingModule } from './superadmin-routing.module';
-
-
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
-    CommonModule,
-    SuperadminRoutingModule
-  ]
+    CommonModule, 
+    SuperadminRoutingModule,
+  ],
 })
 export class SuperadminModule { }

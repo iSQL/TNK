@@ -7,11 +7,11 @@ namespace TNK.UseCases.BusinessProfiles.ListAdmin;
 /// </summary>
 public record ListBusinessProfilesAdminQuery : IRequest<Result<Common.Models.PagedResult<BusinessProfileDTO>>>
 {
-  public int PageNumber { get; init; } = 1;
+  public int? PageNumber { get; init; } = 1;
   public int PageSize { get; init; } = 10;
   public string? SearchTerm { get; init; }
 
-  public ListBusinessProfilesAdminQuery(int pageNumber = 1, int pageSize = 10, string? searchTerm = null)
+  public ListBusinessProfilesAdminQuery(int? pageNumber = 1, int pageSize = 10, string? searchTerm = null)
   {
     PageNumber = pageNumber > 0 ? pageNumber : 1;
     PageSize = pageSize > 0 ? pageSize : 10;

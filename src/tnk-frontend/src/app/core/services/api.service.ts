@@ -8,9 +8,7 @@ import { environment } from '../../../environments/environment'; // Ensure this 
   providedIn: 'root'
 })
 export class ApiService {
-  // Base URL for all API requests, loaded from environment configuration.
-  // Assumes your environment.ts (and environment.prod.ts) has an apiUrl property.
-  // e.g., apiUrl: 'http://localhost:5000/api' or just '/api' if using a proxy
+
   private readonly apiUrl = environment.apiUrl;
 
   // Default HTTP options
@@ -55,11 +53,25 @@ export class ApiService {
    * @param params Optional HTTP parameters.
    * @returns An Observable of the response body.
    */
-  get<T>(path: string, params: HttpParams = new HttpParams()): Observable<T> {
+  /* get<T>(path: string, params: HttpParams = new HttpParams()): Observable<T> {
     const fullPath = `${this.apiUrl}${path}`;
     return this.http.get<T>(fullPath, { ...this.httpOptions, params })
       .pipe(catchError(this.handleError));
-  }
+  } */
+
+  get<T>(path: string, params: HttpParams = new HttpParams()): Observable<T> {
+  const fullPath = `${this.apiUrl}${path}`;
+
+  // clone your default options *without* the Content-Type
+  const opts = {
+    params,
+    headers: this.httpOptions.headers.delete('Content-Type'),
+  };
+
+  return this.http
+    .get<T>(fullPath, opts)
+    .pipe(catchError(this.handleError));
+}
 
   /**
    * Performs a POST request.
