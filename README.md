@@ -75,8 +75,6 @@ This architecture ensures that business logic is independent of UI, database, an
 
 ## Project Structure
 
-<details>
-<summary>Project Structure</summary>
 ```text
 .
 ├── docs/                    # ADRs and other documentation
@@ -94,7 +92,7 @@ This architecture ensures that business logic is independent of UI, database, an
 ├── global.json              # .NET SDK version (e.g., 9.0.100-rc.2.24474.11)
 ├── TerminNaKlik.sln         # Visual Studio Solution File
 └── README.md                # This file
-</details>
+```
 
 ## Getting Started
 
