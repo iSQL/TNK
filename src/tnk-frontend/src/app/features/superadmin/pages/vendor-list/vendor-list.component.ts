@@ -120,8 +120,18 @@ export class VendorListComponent implements OnInit, OnDestroy, AfterViewInit {
     this.pageSettings = { pageSize: 10, pageSizes: true, currentPage: 1, pageCount: 5, totalRecordsCount: 0 };
     this.editSettings = { allowEditing: false, allowAdding: false, allowDeleting: false, mode: 'Dialog' };
     this.commands = [
-      { type: 'Edit', buttonOption: { cssClass: 'e-flat e-edit-icon', iconCss: 'e-icons e-edit-icon' } },
-      { type: 'Delete', buttonOption: { cssClass: 'e-flat e-delete-icon', iconCss: 'e-icons e-delete-icon' } }
+      { type: 'Edit', 
+        buttonOption: { 
+          cssClass: 'e-flat', 
+          iconCss: 'e-icons e-edit'
+        } },
+      { 
+        type: 'Delete', 
+        buttonOption: { 
+          cssClass: 'e-flat', 
+          iconCss: 'e-icons e-delete'
+        } 
+      }
     ];
   }
 
