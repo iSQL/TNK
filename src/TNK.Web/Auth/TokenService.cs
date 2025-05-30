@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using TNK.Core.Identity; 
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using TNK.Core.Identity;
 
 namespace TNK.Web.Auth;
 
@@ -32,11 +27,11 @@ public class TokenService
 
     var claims = new List<Claim>
         {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Id), // Subject (user ID)
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id), 
             new Claim(JwtRegisteredClaimNames.Email, user.Email!),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // JWT ID
-            new Claim(ClaimTypes.NameIdentifier, user.Id), // ASP.NET Core uses this for User.Identity.Name
-            new Claim(ClaimTypes.Name, user.UserName!), // For User.Identity.Name in some contexts
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), 
+            new Claim(ClaimTypes.NameIdentifier, user.Id), 
+            new Claim(ClaimTypes.Name, user.UserName!), 
             // Add custom claims like FirstName, LastName if needed directly in the token
             new Claim("firstName", user.FirstName ?? string.Empty),
             new Claim("lastName", user.LastName ?? string.Empty)

@@ -1,15 +1,11 @@
-﻿using FastEndpoints;
-using MediatR;
-using System.Security.Claims;
-using System.Threading;
-using System.Threading.Tasks;
-using TNK.Infrastructure.Data; // For SeedData.VendorRole
-using TNK.UseCases.BusinessProfiles; // For BusinessProfileDTO
-using TNK.UseCases.BusinessProfiles.GetMy; // For GetMyBusinessProfileQuery
+﻿using System.Security.Claims;
+using TNK.Infrastructure.Data; 
+using TNK.UseCases.BusinessProfiles; 
+using TNK.UseCases.BusinessProfiles.GetMy; 
 
 namespace TNK.Web.BusinessProfiles.GetMy;
 
-public class Endpoint : EndpointWithoutRequest<BusinessProfileDTO> // Or EndpointWithoutRequest<BusinessProfileDTO?> if you want to allow null response body for 404
+public class Endpoint : EndpointWithoutRequest<BusinessProfileDTO> 
 {
   private readonly ISender _mediator;
   private readonly ILogger<Endpoint> _logger;
@@ -23,7 +19,9 @@ public class Endpoint : EndpointWithoutRequest<BusinessProfileDTO> // Or Endpoin
   public override void Configure()
   {
     Get("/api/businessprofiles/my");
-    Roles(SeedData.VendorRole); // Secure to Vendor role
+    Description(d => d.AutoTagOverride("BusinessProfiles"));
+
+    Roles(SeedData.VendorRole); 
     Summary(s =>
     {
       s.Summary = "Get the current vendor's business profile";
@@ -56,14 +54,13 @@ public class Endpoint : EndpointWithoutRequest<BusinessProfileDTO> // Or Endpoin
         await SendNotFoundAsync(ct);
         return;
       }
-      // Handle other errors from Ardalis.Result if necessary
       _logger.LogWarning("Error fetching business profile for VendorId {VendorId}. Status: {Status}, Errors: {Errors}",
           vendorId, result.Status, string.Join("; ", result.Errors));
       await SendProblemDetailsAsync("Error retrieving profile", HttpContext.Request.Path, 500, result.Errors.FirstOrDefault(), ct);
       return;
     }
 
-    if (result.Value == null) // If handler returns Success(null) for not found
+    if (result.Value == null) 
     {
       await SendNotFoundAsync(ct);
       return;
@@ -72,7 +69,6 @@ public class Endpoint : EndpointWithoutRequest<BusinessProfileDTO> // Or Endpoin
     await SendOkAsync(result.Value, ct);
   }
 
-  // Helper to send ProblemDetails for non-validation errors (can be shared or in a base class)
   private Task SendProblemDetailsAsync(string title, string instance, int statusCode, string? detail = null, CancellationToken cancellation = default)
   {
     HttpContext.Response.StatusCode = statusCode;

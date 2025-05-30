@@ -1,11 +1,7 @@
-﻿using Ardalis.Result;
-using FastEndpoints;
-using MediatR;
-using Microsoft.AspNetCore.Authentication.BearerToken;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using TNK.Infrastructure.Data; 
-using TNK.UseCases.BusinessProfiles; 
-using TNK.UseCases.BusinessProfiles.CreateAdmin; 
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using TNK.Infrastructure.Data;
+using TNK.UseCases.BusinessProfiles;
+using TNK.UseCases.BusinessProfiles.CreateAdmin;
 
 namespace TNK.Web.Admin.BusinessProfiles;
 
@@ -44,7 +40,6 @@ public record CreateAdminBusinessProfileRequest
 /// API endpoint for SuperAdmins to create a new Business Profile for a specified Vendor.
 /// </summary>
 /// 
-[Tags("Admin_BusinessProfiles")]
 public class Create : Endpoint<CreateAdminBusinessProfileRequest, BusinessProfileDTO>
 {
   private readonly ISender _sender;
@@ -57,7 +52,7 @@ public class Create : Endpoint<CreateAdminBusinessProfileRequest, BusinessProfil
   public override void Configure()
   {
     Post("/api/admin/businessprofiles");
-    Tags("Admin_BusinessProfiles");
+    Description(d => d.AutoTagOverride("Admin_BusinessProfiles"));
     AuthSchemes(JwtBearerDefaults.AuthenticationScheme);
     Roles(SeedData.AdminRole);
     Summary(s =>
@@ -94,16 +89,7 @@ public class Create : Endpoint<CreateAdminBusinessProfileRequest, BusinessProfil
 
     if (result.IsSuccess)
     {
-      // For POST, typically return 201 Created with a Location header and the created resource.
-      // The GetById endpoint for admin business profiles should have a name for RouteName.
-      // Let's assume the GetById endpoint (TNK.Web.Admin.BusinessProfiles.GetById) has a route name.
-      // If not, you might need to add one or adjust this.
-      // For simplicity here, we'll send 201 with the DTO.
-      // A more complete implementation would use SendCreatedAtAsync:
-      // await SendCreatedAtAsync<GetById>(new { BusinessProfileId = result.Value.Id }, result.Value, generateAbsoluteUrl: true, cancellation: ct);
-      // This requires the GetById endpoint to have a .WithName("GetBusinessProfileByIdAdmin") or similar.
-
-      await SendCreatedAtAsync<TNK.Web.Admin.BusinessProfiles.GetById>( // Manually construct route for simplicity if GetById has no name
+      await SendCreatedAtAsync<GetById>( 
                 routeValues: new { BusinessProfileId = result.Value.Id },
                 responseBody: result.Value,
                 generateAbsoluteUrl: true,
@@ -116,7 +102,6 @@ public class Create : Endpoint<CreateAdminBusinessProfileRequest, BusinessProfil
     switch (result.Status)
     {
       case ResultStatus.Invalid:
-        // Add validation errors to the response
         foreach (var error in result.ValidationErrors)
         {
           AddError(error.ErrorMessage, error.Identifier);
@@ -127,7 +112,7 @@ public class Create : Endpoint<CreateAdminBusinessProfileRequest, BusinessProfil
         AddError(result.Errors.FirstOrDefault() ?? "A business profile already exists for this vendor.");
         await SendErrorsAsync(StatusCodes.Status409Conflict, ct);
         return;
-      default: // Includes ResultStatus.Error
+      default: 
         AddError(result.Errors.FirstOrDefault() ?? "An unexpected error occurred while creating the business profile.");
         await SendErrorsAsync(StatusCodes.Status500InternalServerError, ct);
         return;

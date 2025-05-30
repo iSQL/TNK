@@ -1,6 +1,4 @@
-﻿// src/TNK.UseCases/BusinessProfiles/UpdateAdmin/AdminUpdateBusinessProfileCommand.cs
-using Ardalis.Result;
-using MediatR;
+﻿using MediatR;
 
 namespace TNK.UseCases.BusinessProfiles.UpdateAdmin;
 

@@ -1,10 +1,6 @@
-﻿using Ardalis.Result;
-using FastEndpoints;
-using MediatR;
-using Microsoft.AspNetCore.Http; // Required for StatusCodes
-using Microsoft.AspNetCore.Mvc;
-using TNK.Infrastructure.Data; // For SeedData.AdminRole
-using TNK.UseCases.BusinessProfiles.DeleteAdmin; // For AdminDeleteBusinessProfileCommand
+﻿using Microsoft.AspNetCore.Mvc;
+using TNK.Infrastructure.Data; 
+using TNK.UseCases.BusinessProfiles.DeleteAdmin;
 
 namespace TNK.Web.Admin.BusinessProfiles;
 
@@ -24,7 +20,7 @@ public record DeleteAdminBusinessProfileRequest
 /// <summary>
 /// API endpoint for SuperAdmins to delete an existing Business Profile.
 /// </summary>
-public class Delete : Endpoint<DeleteAdminBusinessProfileRequest> // No specific response body DTO for 204
+public class Delete : Endpoint<DeleteAdminBusinessProfileRequest> 
 {
   private readonly ISender _sender;
 
@@ -36,6 +32,7 @@ public class Delete : Endpoint<DeleteAdminBusinessProfileRequest> // No specific
   public override void Configure()
   {
     Delete("/api/admin/businessprofiles/{BusinessProfileId}");
+    Description(d => d.AutoTagOverride("Admin_BusinessProfiles"));
     AuthSchemes(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme);
     Roles(SeedData.AdminRole);
     Summary(s =>
@@ -73,9 +70,8 @@ public class Delete : Endpoint<DeleteAdminBusinessProfileRequest> // No specific
       case ResultStatus.NotFound:
         await SendNotFoundAsync(ct);
         return;
-      // No ResultStatus.Invalid expected from AdminDeleteBusinessProfileCommandHandler for simple delete by ID.
-      // If validation was added to the command itself (e.g., ID > 0), it might occur.
-      default: // Includes ResultStatus.Error
+
+      default: 
         AddError(result.Errors.FirstOrDefault() ?? "An unexpected error occurred while deleting the business profile.");
         await SendErrorsAsync(StatusCodes.Status500InternalServerError, ct);
         return;

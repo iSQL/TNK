@@ -1,10 +1,7 @@
-﻿using Ardalis.Result;
-using FastEndpoints;
-using MediatR; 
-using Microsoft.AspNetCore.Mvc;
-using TNK.Infrastructure.Data; // For SeedData.AdminRole
-using TNK.UseCases.BusinessProfiles; // For BusinessProfileDTO
-using TNK.UseCases.BusinessProfiles.GetByIdAdmin; // For GetBusinessProfileByIdAdminQuery
+﻿using Microsoft.AspNetCore.Mvc;
+using TNK.Infrastructure.Data; 
+using TNK.UseCases.BusinessProfiles; 
+using TNK.UseCases.BusinessProfiles.GetByIdAdmin;
 
 namespace TNK.Web.Admin.BusinessProfiles;
 
@@ -35,6 +32,7 @@ public class GetById : Endpoint<GetByIdAdminRequest, BusinessProfileDTO>
   public override void Configure()
   {
     Get("/api/admin/businessprofiles/{BusinessProfileId}");
+    Description(d => d.AutoTagOverride("Admin_BusinessProfiles"));
     AuthSchemes(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme); 
     Roles(SeedData.AdminRole); 
     Summary(s =>
@@ -46,7 +44,7 @@ public class GetById : Endpoint<GetByIdAdminRequest, BusinessProfileDTO>
       s.Response(403, "Forbidden if the user is not a SuperAdmin.");
       s.Response(404, "Not Found if the business profile does not exist.");
     });
-    Tags("Admin_BusinessProfiles"); // Group in Swagger
+    Tags("Admin_BusinessProfiles"); 
   }
 
   public override async Task HandleAsync(GetByIdAdminRequest req, CancellationToken ct)
@@ -64,11 +62,8 @@ public class GetById : Endpoint<GetByIdAdminRequest, BusinessProfileDTO>
     {
       await SendOkAsync(result.Value, ct);
     }
-    else // Handle other potential errors like Invalid or Error
+    else 
     {
-      // This will send a 500 Internal Server Error by default for ResultStatus.Error
-      // For ResultStatus.Invalid, it might send a 400 Bad Request if using AddError() with validation messages.
-      // You can customize error responses further if needed.
       AddError(result.Errors.FirstOrDefault() ?? "An unexpected error occurred.");
       if (result.ValidationErrors.Any())
       {

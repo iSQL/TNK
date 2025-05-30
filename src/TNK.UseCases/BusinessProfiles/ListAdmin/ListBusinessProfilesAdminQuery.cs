@@ -1,6 +1,4 @@
-﻿using Ardalis.Result;
-using MediatR;
-using TNK.UseCases.Common.Models; // For PagedResult
+﻿using MediatR;
 
 namespace TNK.UseCases.BusinessProfiles.ListAdmin;
 

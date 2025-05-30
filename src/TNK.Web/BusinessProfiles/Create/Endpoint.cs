@@ -1,20 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Linq; // For FirstOrDefault on Errors
 using System.Security.Claims;
-using System.Threading;
-using System.Threading.Tasks;
-using Ardalis.Result; // For ValidationError
-using FastEndpoints;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using TNK.Core.Identity; // Your ApplicationUser
-using TNK.Infrastructure.Data; // For SeedData.VendorRole
+using TNK.Infrastructure.Data; 
 using TNK.UseCases.BusinessProfile.Create;
-using TNK.UseCases.BusinessProfiles.Create; // Your CreateBusinessProfileCommand
 
-namespace TNK.Web.BusinessProfiles.Create; // Ensure this namespace matches your folder structure
+namespace TNK.Web.BusinessProfiles.Create; 
 
-// 1. Request DTO
 public class CreateBusinessProfileRequest
 {
   [Required(ErrorMessage = "Business name is required.")]
@@ -32,7 +22,6 @@ public class CreateBusinessProfileRequest
   public string? Description { get; set; }
 }
 
-// 2. Response DTO
 public class CreateBusinessProfileResponse
 {
   public int ProfileId { get; set; }
@@ -40,7 +29,6 @@ public class CreateBusinessProfileResponse
   public string Message { get; set; } = string.Empty;
 }
 
-// 3. Endpoint Class - Ensure this class definition exists and is public
 public class Endpoint : Endpoint<CreateBusinessProfileRequest, CreateBusinessProfileResponse>
 {
   private readonly ISender _mediator;
@@ -54,7 +42,9 @@ public class Endpoint : Endpoint<CreateBusinessProfileRequest, CreateBusinessPro
 
   public override void Configure()
   {
-    Post("/api/businessprofiles"); // This is the route for POST
+    Post("/api/businessprofiles");
+    Description(d => d.AutoTagOverride("BusinessProfiles"));
+
     Roles(SeedData.VendorRole);
     Summary(s =>
     {
@@ -63,7 +53,6 @@ public class Endpoint : Endpoint<CreateBusinessProfileRequest, CreateBusinessPro
       s.ExampleRequest = new CreateBusinessProfileRequest { Name = "Novi vendor", Address ="Adresa bb", Description ="Bez opisa", PhoneNumber = "" };
     });
     Options(x => x.WithName("CreateBusinessProfile"));
-    // Add other configurations like Description for Produces/Accepts if needed
   }
 
   public override async Task HandleAsync(CreateBusinessProfileRequest req, CancellationToken ct)
@@ -92,7 +81,7 @@ public class Endpoint : Endpoint<CreateBusinessProfileRequest, CreateBusinessPro
           vendorId,
           result.Status,
           string.Join("; ", result.Errors),
-          ArdalisResultExtensions.ValidationErrorsString(result)); // Call as static extension
+          ArdalisResultExtensions.ValidationErrorsString(result)); 
 
       switch (result.Status)
       {

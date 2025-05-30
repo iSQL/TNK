@@ -1,10 +1,6 @@
-﻿using Ardalis.Result;
-using FastEndpoints;
-using MediatR;
-using TNK.Infrastructure.Data; // For SeedData.AdminRole
-using TNK.UseCases.BusinessProfiles; // For BusinessProfileDTO
-using TNK.UseCases.BusinessProfiles.ListAdmin; // For ListBusinessProfilesAdminQuery
-using TNK.UseCases.Common.Models; // For PagedResult
+﻿using TNK.Infrastructure.Data; 
+using TNK.UseCases.BusinessProfiles;
+using TNK.UseCases.BusinessProfiles.ListAdmin; 
 
 namespace TNK.Web.Admin.BusinessProfiles;
 
@@ -47,6 +43,7 @@ public class List : Endpoint<ListAdminRequest, UseCases.Common.Models.PagedResul
   public override void Configure()
   {
     Get("/api/admin/businessprofiles");
+    Description(d => d.AutoTagOverride("Admin_BusinessProfiles"));
     AuthSchemes(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme);
     Roles(SeedData.AdminRole);
     Summary(s =>
@@ -69,9 +66,8 @@ public class List : Endpoint<ListAdminRequest, UseCases.Common.Models.PagedResul
     {
       await SendOkAsync(result.Value, ct);
     }
-    else // Handle potential errors
+    else 
     {
-      // This will send a 500 Internal Server Error by default for ResultStatus.Error
       AddError(result.Errors.FirstOrDefault() ?? "An unexpected error occurred while listing business profiles.");
       if (result.ValidationErrors.Any())
       {

@@ -1,8 +1,5 @@
-﻿// src/TNK.UseCases/BusinessProfiles/GetByIdAdmin/GetBusinessProfileByIdAdminQueryHandler.cs
-using Ardalis.Result;
-using MediatR;
-using TNK.Core.Interfaces; // For IBusinessProfileRepository
-using TNK.Core.BusinessAggregate; // For BusinessProfile entity
+﻿using MediatR;
+using TNK.Core.Interfaces; 
 
 namespace TNK.UseCases.BusinessProfiles.GetByIdAdmin;
 

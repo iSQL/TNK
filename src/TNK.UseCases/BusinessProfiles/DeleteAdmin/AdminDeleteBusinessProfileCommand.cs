@@ -1,5 +1,4 @@
-﻿using Ardalis.Result;
-using MediatR;
+﻿using MediatR;
 
 namespace TNK.UseCases.BusinessProfiles.DeleteAdmin;
 

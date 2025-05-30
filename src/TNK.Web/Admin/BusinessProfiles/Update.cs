@@ -1,9 +1,8 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
-using TNK.Core.BusinessAggregate;
-using TNK.Infrastructure.Data; 
-using TNK.UseCases.BusinessProfiles; 
-using TNK.UseCases.BusinessProfiles.UpdateAdmin; 
+using TNK.Infrastructure.Data;
+using TNK.UseCases.BusinessProfiles;
+using TNK.UseCases.BusinessProfiles.UpdateAdmin;
 
 namespace TNK.Web.Admin.BusinessProfiles;
 
@@ -14,7 +13,7 @@ namespace TNK.Web.Admin.BusinessProfiles;
 public record UpdateAdminBusinessProfileRequest
 {
   [FromRoute] 
-  public int BusinessProfileId { get; init; } // This will be a route parameter
+  public int BusinessProfileId { get; init; }
 
 
   /// <summary>
@@ -53,6 +52,7 @@ public class Update : Endpoint<UpdateAdminBusinessProfileRequest, BusinessProfil
   public override void Configure()
   {
     Put("/api/admin/businessprofiles/{BusinessProfileId}");
+    Description(d => d.AutoTagOverride("Admin_BusinessProfiles"));
     AuthSchemes(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme);
     Roles(SeedData.AdminRole);
     Summary(s =>
@@ -67,7 +67,6 @@ public class Update : Endpoint<UpdateAdminBusinessProfileRequest, BusinessProfil
         Description = "Now offering even more super services."
       };
       s.Response<BusinessProfileDTO>(200, "Business profile updated successfully.");
-      // s.Response(204, "Business profile updated successfully (No Content)."); // Alternative success response
       s.Response(400, "Invalid request parameters.");
       s.Response(401, "Unauthorized if the user is not authenticated.");
       s.Response(403, "Forbidden if the user is not a SuperAdmin.");
@@ -78,9 +77,6 @@ public class Update : Endpoint<UpdateAdminBusinessProfileRequest, BusinessProfil
 
   public override async Task HandleAsync(UpdateAdminBusinessProfileRequest req, CancellationToken ct)
   {
-    // BusinessProfileId is bound from the route by FastEndpoints automatically
-    // if a property with the same name exists in the request DTO or the endpoint class itself.
-    // To make it explicit and clean, we can access it via Route<int>("BusinessProfileId")
     if (req.BusinessProfileId <= 0 )
     {
       AddError("BusinessProfileId in route must be a positive integer.");
@@ -101,8 +97,6 @@ public class Update : Endpoint<UpdateAdminBusinessProfileRequest, BusinessProfil
     if (result.IsSuccess)
     {
       await SendOkAsync(result.Value, ct);
-      // Alternatively, for PUT operations that update, a 204 No Content is also common:
-      // await SendNoContentAsync(ct);
       return;
     }
 
@@ -118,7 +112,7 @@ public class Update : Endpoint<UpdateAdminBusinessProfileRequest, BusinessProfil
         }
         await SendErrorsAsync(StatusCodes.Status400BadRequest, ct);
         return;
-      default: // Includes ResultStatus.Error
+      default: 
         AddError(result.Errors.FirstOrDefault() ?? "An unexpected error occurred while updating the business profile.");
         await SendErrorsAsync(StatusCodes.Status500InternalServerError, ct);
         return;

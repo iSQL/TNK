@@ -1,12 +1,6 @@
-﻿// src/TNK.UseCases/BusinessProfiles/UpdateAdmin/AdminUpdateBusinessProfileCommandHandler.cs
-using Ardalis.Result;
-using MediatR;
-using Microsoft.Extensions.Logging; // Optional: for logging
-using TNK.Core.Interfaces;       // For IBusinessProfileRepository
-using TNK.Core.BusinessAggregate; // For BusinessProfile entity
-using TNK.UseCases.BusinessProfiles; // For BusinessProfileDTO
-using System.Threading;
-using System.Threading.Tasks;
+﻿using MediatR;
+using Microsoft.Extensions.Logging; 
+using TNK.Core.Interfaces;       
 
 namespace TNK.UseCases.BusinessProfiles.UpdateAdmin;
 
@@ -16,14 +10,14 @@ namespace TNK.UseCases.BusinessProfiles.UpdateAdmin;
 public class AdminUpdateBusinessProfileHandler : IRequestHandler<AdminUpdateBusinessProfileCommand, Result<BusinessProfileDTO>>
 {
   private readonly IBusinessProfileRepository _businessProfileRepository;
-  private readonly ILogger<AdminUpdateBusinessProfileHandler> _logger; // Optional
+  private readonly ILogger<AdminUpdateBusinessProfileHandler> _logger; 
 
   public AdminUpdateBusinessProfileHandler(
       IBusinessProfileRepository businessProfileRepository,
-      ILogger<AdminUpdateBusinessProfileHandler> logger) // Optional: ILogger
+      ILogger<AdminUpdateBusinessProfileHandler> logger) 
   {
     _businessProfileRepository = businessProfileRepository;
-    _logger = logger; // Optional
+    _logger = logger; 
   }
 
   public async Task<Result<BusinessProfileDTO>> Handle(AdminUpdateBusinessProfileCommand request, CancellationToken cancellationToken)
@@ -40,7 +34,6 @@ public class AdminUpdateBusinessProfileHandler : IRequestHandler<AdminUpdateBusi
 
     try
     {
-      // Use the entity's own method to update its details, ensuring domain logic is applied
       businessProfileToUpdate.UpdateDetails(
           name: request.Name,
           address: request.Address,
@@ -49,7 +42,6 @@ public class AdminUpdateBusinessProfileHandler : IRequestHandler<AdminUpdateBusi
       ); //
 
       await _businessProfileRepository.UpdateAsync(businessProfileToUpdate, cancellationToken);
-      // Note: SaveChangesAsync is typically called by the UpdateAsync method in EfRepository or by a Unit of Work pattern.
 
       var updatedDto = new BusinessProfileDTO
       (
@@ -64,10 +56,10 @@ public class AdminUpdateBusinessProfileHandler : IRequestHandler<AdminUpdateBusi
       _logger.LogInformation("Business Profile with ID {BusinessProfileId} was updated successfully by a SuperAdmin.", request.BusinessProfileId);
       return Result.Success(updatedDto);
     }
-    catch (System.ArgumentException ex) // Catch validation errors from UpdateDetails if any
+    catch (System.ArgumentException ex) 
     {
       _logger.LogWarning(ex, "Validation error while updating Business Profile with ID {BusinessProfileId}.", request.BusinessProfileId);
-      return Result.Invalid(new ValidationError(ex.ParamName ?? "RequestBody", ex.Message)); // Or a more generic error
+      return Result.Invalid(new ValidationError(ex.ParamName ?? "RequestBody", ex.Message));
     }
     catch (System.Exception ex)
     {

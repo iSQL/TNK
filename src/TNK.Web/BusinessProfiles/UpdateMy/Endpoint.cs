@@ -1,19 +1,11 @@
-﻿using FastEndpoints;
-using MediatR;
-using Microsoft.AspNetCore.Identity; // For context, not directly used for user object here
-using System.ComponentModel.DataAnnotations;
-using System.Linq; // For FirstOrDefault on Errors
+﻿using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using System.Threading;
-using System.Threading.Tasks;
-using TNK.Infrastructure.Data; // For SeedData.VendorRole
-using TNK.UseCases.BusinessProfiles; // For BusinessProfileDTO
-using TNK.UseCases.BusinessProfiles.Update; // For UpdateBusinessProfileCommand
-using Ardalis.Result; // For ValidationError
+using TNK.Infrastructure.Data;
+using TNK.UseCases.BusinessProfiles;
+using TNK.UseCases.BusinessProfiles.Update;
 
-namespace TNK.Web.BusinessProfiles.UpdateMy; // Or TNK.Web.BusinessProfiles.My.Update
+namespace TNK.Web.BusinessProfiles.UpdateMy; 
 
-// 1. Request DTO
 public class UpdateBusinessProfileRequest
 {
   // Name can be optional in the request if we allow partial updates
@@ -32,9 +24,6 @@ public class UpdateBusinessProfileRequest
   public string? Description { get; set; }
 }
 
-// Response DTO - we'll use the BusinessProfileDTO from UseCases
-// public class UpdateBusinessProfileResponse : BusinessProfileDTO { } // Or directly use BusinessProfileDTO
-
 public class Endpoint : Endpoint<UpdateBusinessProfileRequest, BusinessProfileDTO>
 {
   private readonly ISender _mediator;
@@ -48,8 +37,9 @@ public class Endpoint : Endpoint<UpdateBusinessProfileRequest, BusinessProfileDT
 
   public override void Configure()
   {
-    Put("/api/businessprofiles/my"); // Using PUT for update
-    Roles(SeedData.VendorRole); // Secure to Vendor role
+    Put("/api/businessprofiles/my");
+    Description(d => d.AutoTagOverride("BusinessProfiles"));
+    Roles(SeedData.VendorRole);
     Summary(s =>
     {
       s.Summary = "Update the current vendor's business profile";
@@ -64,7 +54,7 @@ public class Endpoint : Endpoint<UpdateBusinessProfileRequest, BusinessProfileDT
     });
     Description(d => d
         .Accepts<UpdateBusinessProfileRequest>("application/json")
-        .Produces<BusinessProfileDTO>(200, "application/json") // Success response with updated DTO
+        .Produces<BusinessProfileDTO>(200, "application/json") 
         .ProducesProblemDetails(400, "application/json")
         .ProducesProblemDetails(404, "application/json")
         .ProducesProblemDetails(500, "application/json")
@@ -98,12 +88,12 @@ public class Endpoint : Endpoint<UpdateBusinessProfileRequest, BusinessProfileDT
           vendorId,
           result.Status,
           string.Join("; ", result.Errors),
-          result.ValidationErrorsString()); // Using the extension method
+          result.ValidationErrorsString()); 
 
       switch (result.Status)
       {
         case Ardalis.Result.ResultStatus.Invalid:
-          foreach (var error in result.ValidationErrors) // Changed from ForEach
+          foreach (var error in result.ValidationErrors) 
           {
             AddError(error.Identifier, error.ErrorMessage);
           }
@@ -112,7 +102,6 @@ public class Endpoint : Endpoint<UpdateBusinessProfileRequest, BusinessProfileDT
         case Ardalis.Result.ResultStatus.NotFound:
           await SendNotFoundAsync(ct);
           return;
-        // Add other specific error handling like Conflict if your handler can return it
         default: // Error, Unauthorized, etc.
           await SendProblemDetailsAsync(
               title: "Update Failed",
@@ -125,11 +114,9 @@ public class Endpoint : Endpoint<UpdateBusinessProfileRequest, BusinessProfileDT
       }
     }
 
-    // Success - result.Value is BusinessProfileDTO
     await SendOkAsync(result.Value, ct);
   }
 
-  // Helper to send ProblemDetails for non-validation errors (can be shared or in a base class)
   private Task SendProblemDetailsAsync(string title, string instance, int statusCode, string? detail = null, CancellationToken cancellation = default)
   {
     HttpContext.Response.StatusCode = statusCode;

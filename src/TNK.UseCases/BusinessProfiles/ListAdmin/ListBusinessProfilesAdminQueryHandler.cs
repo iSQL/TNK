@@ -1,13 +1,5 @@
-﻿// src/TNK.UseCases/BusinessProfiles/ListAdmin/ListBusinessProfilesAdminQueryHandler.cs
-using Ardalis.Result;
-using MediatR;
-using TNK.Core.Interfaces; // For IBusinessProfileRepository
-using TNK.Core.BusinessAggregate; // For BusinessProfile entity
-using TNK.UseCases.Common.Models; // For PagedResult
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+﻿using MediatR;
+using TNK.Core.Interfaces;
 
 namespace TNK.UseCases.BusinessProfiles.ListAdmin;
 
@@ -33,7 +25,7 @@ public class ListBusinessProfilesAdminQueryHandler : IRequestHandler<ListBusines
         id: bp.Id,
         name: bp.Name,
         address: bp.Address,
-        phoneNumber: bp.PhoneNumber, // Assuming PhoneNumber is a string in BusinessProfile entity
+        phoneNumber: bp.PhoneNumber, 
         description: bp.Description,
         vendorId: bp.VendorId
     )).ToList();

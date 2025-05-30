@@ -7,11 +7,9 @@ namespace TNK.Infrastructure.Data;
 
 public static class SeedData
 {
-  // Contributor Data
   public static readonly Contributor Contributor1 = new("Ardalis");
   public static readonly Contributor Contributor2 = new("Snowfrog");
 
-  // Role names - these can be used elsewhere in your application if needed
   public static readonly string AdminRole = "Admin";
   public static readonly string VendorRole = "Vendor";
   public static readonly string CustomerRole = "Customer";
@@ -27,11 +25,9 @@ public static class SeedData
     {
       var scopedProvider = scope.ServiceProvider;
 
-      // 1. Seed Roles
       var roleManager = scopedProvider.GetRequiredService<RoleManager<IdentityRole>>();
       await SeedRolesAsync(roleManager);
 
-      // 2. Seed Contributors (and other application-specific data)
       var dbContext = scopedProvider.GetRequiredService<AppDbContext>();
       await SeedContributorsAsync(dbContext);
 
@@ -46,10 +42,8 @@ public static class SeedData
 
     foreach (var roleName in roleNames)
     {
-      // Check if the role already exists
       if (!await roleManager.RoleExistsAsync(roleName))
       {
-        // Create the role
         await roleManager.CreateAsync(new IdentityRole(roleName));
       }
     }
@@ -57,10 +51,8 @@ public static class SeedData
 
   private static async Task SeedContributorsAsync(AppDbContext dbContext)
   {
-    // Check if contributors already exist to prevent duplicating data
     if (!await dbContext.Contributors.AnyAsync())
     {
-      // Using C# 12 collection expression as in your original code
       dbContext.Contributors.AddRange([Contributor1, Contributor2]);
       await dbContext.SaveChangesAsync();
     }

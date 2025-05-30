@@ -1,13 +1,11 @@
-﻿using FastEndpoints;
+﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
-using TNK.Core.Identity; 
 using Microsoft.Extensions.Localization;
+using TNK.Core.Identity;
 using TNK.Web.Resources;
 
 namespace TNK.Web.Auth;
 
-// Request DTO
 public class LoginRequest
 {
   [Required, EmailAddress]
@@ -17,7 +15,6 @@ public class LoginRequest
   public string Password { get; set; } = string.Empty;
 }
 
-// Response DTO
 public class LoginResponse
 {
   public string Token { get; set; } = string.Empty;
@@ -54,6 +51,8 @@ public class LoginEndpoint : Endpoint<LoginRequest, LoginResponse>
   public override void Configure()
   {
     Post("/api/auth/login");
+    Description(d => d.AutoTagOverride("Auth"));
+
     AllowAnonymous();
     Summary(s =>
     {
@@ -74,7 +73,6 @@ public class LoginEndpoint : Endpoint<LoginRequest, LoginResponse>
     {
       Logger.LogWarning("Login failed: User {Email} not found.", req.Email);
       AddError(_localizer["InvalidLoginAttempt"]);
-      // Use SendErrorsAsync with a 401 status
       await SendErrorsAsync(statusCode: StatusCodes.Status401Unauthorized, cancellation: ct);
       return;
     }
@@ -92,15 +90,13 @@ public class LoginEndpoint : Endpoint<LoginRequest, LoginResponse>
       {
         AddError(_localizer["InvalidLoginAttempt"]);
       }
-      // Use SendErrorsAsync with a 401 status
       await SendErrorsAsync(statusCode: StatusCodes.Status401Unauthorized, cancellation: ct);
       return;
     }
 
-    // If login is successful, proceed as before
     var tokenString = await _tokenService.GenerateJwtTokenAsync(user);
     var userRoles = await _userManager.GetRolesAsync(user);
-    var tokenDurationMinutes = Convert.ToDouble(_configuration["JwtSettings:DurationInMinutes"] ?? "60");
+    var tokenDurationMinutes = Convert.ToDouble(_configuration["JwtSettings:DurationInMinutes"] ?? "360"); //ToDo: Use a sensible default or configuration value
 
     await SendOkAsync(new LoginResponse
     {

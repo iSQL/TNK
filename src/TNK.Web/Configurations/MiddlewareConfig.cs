@@ -1,4 +1,5 @@
 ﻿using Ardalis.ListStartupServices;
+using Microsoft.Extensions.Options;
 using TNK.Infrastructure.Data;
 
 namespace TNK.Web.Configurations;
@@ -18,13 +19,22 @@ public static class MiddlewareConfig
       app.UseHsts();
     }
 
+    //Localization Configuration
+    app.UseRequestLocalization(
+    app.Services
+       .GetRequiredService<IOptions<RequestLocalizationOptions>>()
+       .Value);
 
+    // CORS Configuration
     app.UseCors("_localAngularOrigin");
+
+    // Swagger Configuration
     app.UseFastEndpoints()
         .UseSwaggerGen();
+
+    // Authentication and Authorization Configuration
     app.UseAuthentication();
     app.UseAuthorization();
-
 
     app.UseHttpsRedirection(); 
 
