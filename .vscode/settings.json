@@ -4,6 +4,21 @@
         "**/.svn": true,
         "**/.hg": true,
         "**/.DS_Store": true,
-        "**/Thumbs.db": true
+        "**/Thumbs.db": true,
+        "[!s]*/**": true,
+        "s[!r]*/**": true,
+        "sr[!c]*/**": true,
+        "src/[!t]*/**": true,
+        "src/t[!n]*/**": true,
+        "src/tn[!k]*/**": true,
+        "src/tnk[!-]*/**": true,
+        "src/tnk-[!f]*/**": true,
+        "src/tnk-f[!r]*/**": true,
+        "src/tnk-fr[!o]*/**": true,
+        "src/tnk-fro[!n]*/**": true,
+        "src/tnk-fron[!t]*/**": true,
+        "src/tnk-front[!e]*/**": true,
+        "src/tnk-fronte[!n]*/**": true,
+        "src/tnk-fronten[!d]*/**": true
     }
 }

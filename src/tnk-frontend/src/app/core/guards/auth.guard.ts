@@ -1,32 +1,47 @@
-import { Injectable, inject } from '@angular/core';
+
+import { Injectable } from '@angular/core';
 import {
-  CanActivateFn,
   ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
-  Router,
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service'; // Correct path to your AuthService
+import { AuthService } from '@core/services/auth.service'; 
+import { UserRole } from '@core/models/user-role.enum';
 
-export const AuthGuard: CanActivateFn = (
-  route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
-): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree => {
-  const authService = inject(AuthService);
-  const router = inject(Router);
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard implements CanActivate {
+  constructor(private authService: AuthService, private router: Router) {}
 
-  return authService.isAuthenticated$.pipe(
-    take(1), // Take the latest value and complete
-    map(isAuthenticated => {
-      if (isAuthenticated) {
-        return true; // User is authenticated, allow access
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean | UrlTree {
+    if (!this.authService.isAuthenticated()) {
+      console.log('AuthGuard: Not authenticated, redirecting to login.');
+      return this.router.createUrlTree(['/login'], { queryParams: { returnUrl: state.url } });
+    }
+
+    const expectedRoles = route.data['expectedRoles'] as Array<UserRole>;
+    if (expectedRoles && expectedRoles.length > 0) {
+      const userRoles = this.authService.getUserRoles(); 
+      
+      console.log('AuthGuard: Expected roles:', expectedRoles);
+      console.log('AuthGuard: User roles:', userRoles);
+
+      const hasRequiredRole = expectedRoles.some(role => userRoles.includes(role));
+      if (hasRequiredRole) {
+        return true; 
       } else {
-        // User is not authenticated, redirect to login page
-        console.log('AuthGuard: User not authenticated, redirecting to login.');
-        return router.createUrlTree(['/login']);
+        console.log('AuthGuard: User does not have required role, redirecting.');
+        return this.router.createUrlTree(['/']); 
       }
-    })
-  );
-};
+    }
+
+    return true;
+  }
+}
+

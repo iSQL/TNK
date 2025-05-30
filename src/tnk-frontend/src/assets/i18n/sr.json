@@ -52,11 +52,23 @@
   },
   "DASHBOARD": {
     "TITLE": "Kontrolna tabla",
-    "WELCOME_MESSAGE": "Dobrodošli, {{email}}!",
-    "WELCOME_GUEST": "Dobrodošli!",
-    "INFO_TEXT": "Ovo je vaša personalizovana kontrolna tabla. Uskoro više funkcionalnosti!",
-    "FUTURE_CONTENT_TITLE": "Budući Sadržaj",
-    "FUTURE_CONTENT_INFO": "Ovde će biti prikazane dodatne informacije i alati."
+    "WELCOME_MESSAGE": "Dobrodošli, {{firstName}} {{lastName}}!",
+    "INFO_TEXT": "Evo pregleda vaših aktivnosti.",
+    "EMAIL_LABEL": "Email",
+    "ROLE_LABEL": "Vaša uloga",
+    "ADMIN_INFO": "Imate pristup Superadmin funkcionalnostima.",
+    "GO_TO_SUPERADMIN_BUTTON": "Idi na Superadmin Panel",
+    "VENDOR_INFO": "Upravljajte vašim uslugama i rezervacijama.",
+    "CUSTOMER_INFO": "Pregledajte vaše termine i upravljajte profilom.",
+    "FUTURE_CONTENT_TITLE": "Šta je sledeće?",
+    "FUTURE_CONTENT_INFO": "Više dodataka za kontrolnu tablu i funkcija stiže uskoro!",
+    "LOADING_USER": "Učitavanje korisničkih informacija",
+    "PLEASE_WAIT": "Molimo sačekajte..."
+  },
+    "ROLES": {
+    "Admin": "Administrator",
+    "Vendor": "Prodavac",
+    "Customer": "Klijent"
   },
   "PAGE_NOT_FOUND": {
     "TITLE": "404 - Stranica nije pronađena",

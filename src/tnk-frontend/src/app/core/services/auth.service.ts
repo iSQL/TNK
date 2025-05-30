@@ -1,156 +1,156 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap, shareReplay } from 'rxjs'; // shareReplay is imported
+import { Injectable, NgZone } from '@angular/core'; 
+import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
+import { ApiService } from './api.service';
+import { LoginRequest } from '@features/auth/models/login-request.interface';
+import { LoginResponse } from '@features/auth/models/login-response.interface';
+import { RegisterRequest } from '@features/auth/models/register-request.interface';
+import { UserRole } from '@core/models/user-role.enum';
+import { CurrentUserModel } from '@core/models/current-user.model';
 import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
-
-export interface User {
-  token: string;
-  email: string;
-  userId?: string;
-  firstName?: string;
-  lastName?: string;
-  roles?: string[];
-}
-
-interface LoginApiResponse {
-  token: string;
-  expiration?: string;
-  userId?: string;
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  roles?: string[];
-}
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private http = inject(HttpClient);
-  private router = inject(Router);
-  private apiUrl = environment.apiUrl;
+  private readonly TOKEN_KEY = 'authToken';
 
-  private readonly USER_STORAGE_KEY = 'currentUser';
-  private callIdCounter = 0; 
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasValidToken());
+  public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
 
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  private currentUserRoleSubject = new BehaviorSubject<UserRole | null>(null);
+  public currentUserRole$ = this.currentUserRoleSubject.asObservable();
 
-  public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
-  public currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
+  private currentUserSubject = new BehaviorSubject<CurrentUserModel | null>(null);
+  public currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor() {
-    this.loadUserFromStorage();
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private ngZone: NgZone
+  ) {
+    const token = this.getToken();
+    this.processToken(token);
   }
 
-  private loadUserFromStorage(): void {
-    if (typeof localStorage === 'undefined') {
-      console.warn('AuthService: localStorage is not available.');
-      return;
+  private hasValidToken(): boolean {
+    const token = this.getToken();
+    if (!token) {
+      return false;
     }
-    const storedUserJson = localStorage.getItem(this.USER_STORAGE_KEY);
-    if (storedUserJson) {
+    try {
+      const decodedToken: any = jwtDecode(token);
+      if (typeof decodedToken.exp !== 'number') {
+        console.warn('Token expiration (exp) claim is missing or not a number.');
+        return false;
+      }
+      const isExpired = decodedToken.exp * 1000 < Date.now();
+      return !isExpired;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  private processToken(token: string | null): void {
+    if (token && this.hasValidToken()) {
       try {
-        const storedUser: User = JSON.parse(storedUserJson);
-        if (storedUser && storedUser.token && storedUser.email && storedUser.email.trim() !== '') {
-          this.currentUserSubject.next(storedUser);
-          this.isAuthenticatedSubject.next(true);
-          console.log('AuthService: User loaded from storage.', storedUser);
+        const decodedToken: any = jwtDecode(token);
+        const roleClaim = decodedToken.role as UserRole;
+        let userRole: UserRole | null = null;
+        if (roleClaim && Object.values(UserRole).includes(roleClaim)) {
+          userRole = roleClaim;
+          this.currentUserRoleSubject.next(userRole);
         } else {
-          console.warn('AuthService: Stored user data invalid. Clearing.');
-          this.clearAuthData(false);
+          this.currentUserRoleSubject.next(null);
+          console.warn('Role not found or not recognized in token:', decodedToken.role);
         }
+
+        const user: CurrentUserModel = {
+          id: decodedToken.nameid || decodedToken.sub || '',
+          email: decodedToken.email || '',
+          firstName: decodedToken.firstName || '',
+          lastName: decodedToken.lastName || '',
+          role: userRole,
+        };
+        this.currentUserSubject.next(user);
+        this.isAuthenticatedSubject.next(true);
+
       } catch (error) {
-        console.error('AuthService: Error parsing stored user data.', error);
-        localStorage.removeItem(this.USER_STORAGE_KEY);
+        this.clearAuthDataAndToken();
       }
     } else {
-      console.log('AuthService: No user in localStorage.');
+      this.clearAuthData();
+      if (!this.hasValidToken() && localStorage.getItem(this.TOKEN_KEY)) {
+        localStorage.removeItem(this.TOKEN_KEY);
+      }
     }
   }
 
-  login(credentials: { email?: string; password?: string }): Observable<LoginApiResponse> {
-    this.callIdCounter++;
-    const currentCallId = this.callIdCounter;
-    const httpPostObservable = this.http.post<LoginApiResponse>(`${this.apiUrl}/api/auth/login`, credentials);
-    return httpPostObservable.pipe(
+  private clearAuthData(): void {
+    this.currentUserRoleSubject.next(null);
+    this.currentUserSubject.next(null);
+    this.isAuthenticatedSubject.next(false);
+  }
+  
+  private clearAuthDataAndToken(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
+    this.clearAuthData();
+  }
+
+  login(credentials: LoginRequest): Observable<LoginResponse> {
+    return this.apiService.post<LoginResponse>('/auth/login', credentials).pipe(
       tap({
         next: (response) => {
           if (response && response.token) {
-            const userEmail = response.email || credentials.email;
-            if (!userEmail || userEmail.trim() === '') {
-              this.clearAuthData(false);
-              return;
-            }
-            const userToStore: User = {
-              token: response.token,
-              email: userEmail,
-              userId: response.userId,
-              firstName: response.firstName,
-              lastName: response.lastName,
-              roles: response.roles || [],
-            };
-            if (typeof localStorage !== 'undefined') {
-              localStorage.setItem(this.USER_STORAGE_KEY, JSON.stringify(userToStore));
-            }
-            this.currentUserSubject.next(userToStore);
-            this.isAuthenticatedSubject.next(true);
-            this.router.navigate(['/dashboard']);
+            this.setToken(response.token);
+            this.processToken(response.token);
           } else {
-            console.error(`AuthService (Call #${currentCallId}): TAP NEXT - Token missing in response. Clearing auth.`);
-            this.clearAuthData(false);
+            this.clearAuthDataAndToken();
+            console.error('Login successful but no token received.');
           }
         },
-        error: (err: HttpErrorResponse) => {
-          console.error(`AuthService (Call #${currentCallId}): TAP ERROR - HTTP error for ${credentials.email}: Status ${err.status}`, JSON.stringify(err.error, null, 2)); // Log D
-          this.clearAuthData(false);
-        },
-        complete: () => {
+        error: (err) => {
+          this.clearAuthDataAndToken();
         }
-      }),
-      shareReplay({ bufferSize: 1, refCount: true }) // Ensures the source (HTTP POST) executes once per unique observable instance
-                                                    // if this *specific* observable instance is subscribed to multiple times.
-                                                    // It does not prevent the login() method itself from being called twice.
+      })
     );
   }
 
-  register(userData: any): Observable<any> {
-    this.callIdCounter++;
-    const currentCallId = this.callIdCounter;
-    return this.http.post<any>(`${this.apiUrl}/api/auth/register`, userData).pipe(
-      tap({ }),
-      shareReplay({ bufferSize: 1, refCount: true })
-    );
+  register(userInfo: RegisterRequest): Observable<any> {
+    return this.apiService.post('/register', userInfo);
   }
 
   logout(): void {
-    this.clearAuthData(true);
-  }
-
-  private clearAuthData(navigateToLogin: boolean): void {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.removeItem(this.USER_STORAGE_KEY);
-    }
-    this.currentUserSubject.next(null);
-    this.isAuthenticatedSubject.next(false);
-    if (navigateToLogin) {
-      this.router.navigate(['/login']);
-    }
+    this.clearAuthDataAndToken();
+    
+    
+    this.ngZone.run(() => {
+      this.router.navigateByUrl('/login', { replaceUrl: true });
+    });
   }
 
   getToken(): string | null {
-    if (typeof localStorage === 'undefined') return null;
-    const storedUserJson = localStorage.getItem(this.USER_STORAGE_KEY);
-    if (storedUserJson) {
-      try {
-        const user: User = JSON.parse(storedUserJson);
-        return user.token;
-      } catch (error) {
-        console.error('AuthService: Error parsing token from stored user data:', error);
-        return null;
-      }
-    }
-    return null;
+    return localStorage.getItem(this.TOKEN_KEY);
+  }
+
+  private setToken(token: string): void {
+    localStorage.setItem(this.TOKEN_KEY, token);
+  }
+
+  isAuthenticated(): boolean {
+    return this.hasValidToken();
+  }
+
+  getUserRoles(): UserRole[] {
+    const role = this.currentUserRoleSubject.value;
+    return role ? [role] : [];
+  }
+
+  getUserId(): string | null {
+    return this.currentUserSubject.value?.id || null;
+  }
+
+  public getCurrentUserSnapshot(): CurrentUserModel | null {
+    return this.currentUserSubject.value;
   }
 }
