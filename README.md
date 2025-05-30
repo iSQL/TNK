@@ -77,7 +77,7 @@ This architecture ensures that business logic is independent of UI, database, an
 
 <details>
 <summary>Project Structure</summary>
-
+```text
 .
 ├── docs/                    # ADRs and other documentation
 ├── src/
