@@ -4,6 +4,7 @@
       "HEADER_TITLE": "Superadmin Panel",
       "NAV_DASHBOARD": "Kontrolna tabla",
       "NAV_VENDORS": "Prodavci",
+      "NAV_USERS": "Upravljanje Korisnicima", 
       "NAV_MAIN_DASHBOARD": "Glavna Kontrolna Tabla",
       "FOOTER_TEXT": "© 2025 TerminNaKlik Superadmin"
     },
@@ -47,6 +48,20 @@
         "DESCRIPTION_LABEL": "Opis",
         "DESCRIPTION_PLACEHOLDER": "Unesite opis"
       }
+    },
+    "USERS": { 
+      "LIST": {
+        "PAGE_TITLE": "Upravljanje Korisnicima",
+        "SEARCH_PLACEHOLDER": "Pretražite po imenu, prezimenu ili email-u...",
+        "HEADER_ID": "Korisnički ID",
+        "HEADER_FIRST_NAME": "Ime",
+        "HEADER_LAST_NAME": "Prezime",
+        "HEADER_EMAIL": "Email",
+        "HEADER_PHONE": "Telefon",
+        "HEADER_ROLES": "Uloge",
+        "HEADER_EMAIL_CONFIRMED": "Email Potvrđen",
+        "NO_USERS_FOUND": "Nema pronađenih korisnika."
+      }
     }
   },
   "COMMON": {
@@ -59,9 +74,18 @@
     "CONFIRMATION_TITLE": "Potvrda",
     "YES": "Da",
     "NO": "Ne",
-    "SUCCESS": "Uspeh",
-    "ERROR": "Greška",
-    "WARNING": "Upozorenje"
+    "SUCCESS": "Uspeh", 
+    "ERROR": "Greška",  
+    "WARNING": "Upozorenje", 
+    "INFO": "Informacija",
+    "SUCCESS_TITLE": "Uspeh", 
+    "ERROR_TITLE": "Greška",   
+    "WARNING_TITLE": "Upozorenje",
+    "INFO_TITLE": "Informacija", 
+    "ERROR_FETCHING_DATA": "Došlo je do greške prilikom preuzimanja podataka.",
+    "ERROR_SEARCHING_DATA": "Došlo je do greške prilikom pretrage.", 
+    "SEARCH": "Pretraži",
+    "CLEAR_SEARCH": "Očisti pretragu" 
   },
   "AUTH": {
     "LOGIN_TITLE": "Prijava",
