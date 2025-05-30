@@ -1,0 +1,35 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h1>{{ 'DASHBOARD.TITLE' | translate }}</h1>
+  </header>
+
+  <main class="dashboard-content">
+    <div class="e-card welcome-section-card e-card-customized" tabindex="0"> <div class="e-card-header">
+        <div class="e-card-header-caption">
+          <div class="e-card-header-title">{{ welcomeMessage }}</div>
+          </div>
+      </div>
+      <div class="e-card-content">
+        <p>{{ 'DASHBOARD.INFO_TEXT' | translate }}</p>
+      </div>
+    </div>
+    
+    <div class="e-card placeholder-content-card e-card-customized mt-5" tabindex="0">
+      <div class="e-card-header">
+        <div class="e-card-header-caption">
+          <div class="e-card-header-title">{{ 'DASHBOARD.FUTURE_CONTENT_TITLE' | translate }}</div>
+        </div>
+      </div>
+      <div class="e-card-content">
+        <p>{{ 'DASHBOARD.FUTURE_CONTENT_INFO' | translate }}</p>
+        </div>
+      </div>
+      
+      <div class="actions-section mt-4">
+      <button ejs-button cssClass="e-danger e-large logout-button" (click)="logout()">
+        <i class="fas fa-sign-out-alt"></i> 
+        {{ 'AUTH.LOGOUT_BUTTON' | translate }}
+      </button>
+    </div>
+  </main>
+</div>

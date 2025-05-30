@@ -1,0 +1,166 @@
+// dashboard.component.scss
+
+// Optional: Import shared variables if you have them (e.g., colors, fonts)
+// @import '../../../styles/variables'; // Adjust path as needed
+
+// General container for the dashboard page
+.dashboard-container {
+  padding: 1.5rem; // Standard padding
+  max-width: 1200px; // Max width for larger screens
+  margin: 0 auto; // Center the content
+  font-family: 'Inter', sans-serif; // Ensure consistent font
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
+}
+
+// Header section for the dashboard title
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    font-size: 2.25rem; // Prominent title
+    font-weight: 600;
+    color: #2c3e50; // A slightly softer black/dark blue
+    margin: 0;
+  }
+
+  @media (max-width: 576px) {
+    margin-bottom: 1.5rem;
+    h1 {
+      font-size: 1.75rem;
+    }
+  }
+}
+
+// Main content area of the dashboard
+.dashboard-content {
+  // Styles for the welcome card
+  .welcome-section.card {
+    background-color: #ffffff;
+    border-radius: 12px; // Softer corners
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); // Subtle shadow
+    padding: 2rem;
+    border: none;
+    margin-bottom: 2rem;
+
+    .card-body {
+      padding: 0; // Remove default card-body padding if card itself has padding
+    }
+
+    .card-title {
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: #007bff; // Primary color, consistent with auth forms
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #555;
+      margin-bottom: 0; // Remove default p margin if not needed
+    }
+
+    @media (max-width: 576px) {
+      padding: 1.5rem;
+      .card-title {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  // Section for actions like logout button
+  .actions-section {
+    text-align: center; // Center the button(s)
+    margin-bottom: 2rem;
+
+    .btn {
+      padding: 0.65rem 1.5rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem; // Space between icon and text
+      text-decoration: none;
+      transition: background-color 0.2s ease-in-out, transform 0.1s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      }
+
+      i { // Assuming Font Awesome or similar for icons
+        font-size: 1.1em; // Slightly larger icon relative to text
+      }
+
+      &.btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+
+        &:hover {
+          background-color: #c82333;
+          border-color: #bd2130;
+        }
+        &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+        }
+      }
+       &.btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+
+        &:hover {
+          background-color: #5a6268;
+          border-color: #545b62;
+        }
+         &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+        }
+      }
+    }
+  }
+
+  // Placeholder for future content sections
+  .placeholder-content {
+    margin-top: 2.5rem;
+    padding: 2rem;
+    background-color: #f8f9fa; // A light background for distinction
+    border-radius: 12px;
+    text-align: center;
+    border: 1px dashed #e0e0e0; // Dashed border for placeholder feel
+
+    h3 {
+      font-size: 1.5rem;
+      color: #495057;
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #6c757d;
+      margin-bottom: 1.5rem;
+    }
+     @media (max-width: 576px) {
+      padding: 1.5rem;
+      h3 {
+        font-size: 1.25rem;
+      }
+    }
+  }
+}
+
+// General responsive adjustments for the dashboard page
+@media (max-width: 768px) {
+  .dashboard-container {
+    // No specific changes here, handled by inner elements
+  }
+}
