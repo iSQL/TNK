@@ -6,7 +6,7 @@
 
 To create a seamless and efficient online booking experience for a variety of services, empowering local businesses and providing convenience to customers. The platform aims to be intuitive, reliable, and tailored to the needs of the Serbian market with bilingual support (Serbian and English).
 
-## ✨ Key Features
+## Key Features
 
 ### Core Functionality
 * **Multi-Vendor Platform:** Supports numerous independent vendors offering various services.
@@ -34,7 +34,7 @@ To create a seamless and efficient online booking experience for a variety of se
 * **Promotions and Discount Codes:** (Post-launch V2)
 * **Calendar Integrations (Google, Outlook):** (Post-launch V2)
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ### Backend
 * **Framework:** .NET 9 with ASP.NET Core for Web API
@@ -61,7 +61,7 @@ To create a seamless and efficient online booking experience for a variety of se
 * **IDE:** Visual Studio 2022 (for backend), VS Code (for frontend)
 * **CI/CD:** (To be set up - Azure DevOps)
 
-## 🏗️ Architecture
+## Architecture
 
 The project follows the **Clean Architecture** principles for the backend, promoting separation of concerns, testability, and maintainability.
 
@@ -73,26 +73,26 @@ The project follows the **Clean Architecture** principles for the backend, promo
 
 This architecture ensures that business logic is independent of UI, database, and external frameworks.
 
-## 📂 Project Structure
+## Project Structure
 
 .
-├── docs/                 # ADRs and other documentation
+├── docs/                    # ADRs and other documentation
 ├── src/
-│   ├── TNK.Core/         # Domain Layer: Entities, Value Objects, Domain Services, Interfaces
-│   ├── TNK.UseCases/     # Application Layer: Commands, Queries, Handlers, DTOs
-│   ├── TNK.Infrastructure/ # Infrastructure Layer: EF Core, Repositories, External Services
-│   ├── TNK.Web/          # Presentation Layer: ASP.NET Core API, Endpoints, Auth
-│   └── tnk-frontend/     # Frontend: Angular SPA
+│   ├── TNK.Core/            # Domain Layer: Entities, Value Objects, Domain Services, Interfaces
+│   ├── TNK.UseCases/        # Application Layer: Commands, Queries, Handlers, DTOs
+│   ├── TNK.Infrastructure/  # Infrastructure Layer: EF Core, Repositories, External Services
+│   ├── TNK.Web/             # Presentation Layer: ASP.NET Core API, Endpoints, Auth
+│   └── tnk-frontend/        # Frontend: Angular SPA
 ├── tests/
 │   ├── TNK.UnitTests/
 │   ├── TNK.IntegrationTests/
 │   └── TNK.FunctionalTests/
 ├── .gitignore
-├── global.json           # .NET SDK version (e.g., 9.0.100-rc.2.24474.11)
-├── TerminNaKlik.sln      # Visual Studio Solution File (or similar for your project structure)
-└── README.md             # This file
+├── global.json              # .NET SDK version (e.g., 9.0.100-rc.2.24474.11)
+├── TerminNaKlik.sln         # Visual Studio Solution File (or similar for your project structure)
+└── README.md                # This file
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 * **.NET SDK `9.0.100-rc.2.24474.11`** (or the specific .NET 9 SDK version defined in `global.json`)
@@ -143,7 +143,7 @@ This architecture ensures that business logic is independent of UI, database, an
     ```
     * Access at `http://localhost:4200/`.
 
-##🧪 Running Tests
+## Running Tests
 
 ### Backend Tests
 1.  Navigate to the solution root directory (`cd TNK`).
@@ -154,11 +154,11 @@ This architecture ensures that business logic is independent of UI, database, an
 2.  Run unit tests: `ng test`
 3.  Run e2e tests: `ng e2e`
 
-## 📄 API Documentation
+## API Documentation
 
 Swagger/OpenAPI documentation is available at `https://localhost:7042/swagger` (or your backend URL + `/swagger`) when the backend is running.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please read our `CONTRIBUTING.md` for guidelines on how to contribute to the project, including coding standards, pull request processes, and more.
 
@@ -166,10 +166,10 @@ Also, please adhere to our `CODE_OF_CONDUCT.md`.
 
 **Additionally, if you use any part of this code, we kindly request that you provide credit to the TerminNaKlik (TNK) project and its contributors.**
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
 This project was started using the **Ardalis Clean Architecture solution template** by Steve "ardalis" Smith. We are grateful for this foundation which has significantly helped in structuring the backend. You can find more about the template [here](https://github.com/ardalis/CleanArchitecture).
 
 ---
 
-Happy Coding! ✨
+Happy Coding!
