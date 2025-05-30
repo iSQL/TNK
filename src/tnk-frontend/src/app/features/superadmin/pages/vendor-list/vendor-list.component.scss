@@ -12,9 +12,6 @@
     }
   }
 
-  .search-bar-container {
-    // Add styles if needed, e.g., max-width
-  }
 
   .grid-container {
     position: relative; // For loading overlay positioning
@@ -49,8 +46,3 @@
   // @import '~@syncfusion/ej2-angular-spinner/styles/material.css';
 }
 
-// Styles for Syncfusion icons if not globally defined
-.e-icons.e-add-icon:before { content: '\\e823'; /* Example Syncfusion add icon */ }
-.e-icons.e-edit-icon:before { content: '\\e70f'; /* Example Syncfusion edit icon */ }
-.e-icons.e-delete-icon:before { content: '\\e74d'; /* Example Syncfusion delete icon */ }
-.e-icons.e-search-icon:before { content: '\\e88a'; /* Example Syncfusion search icon */ }

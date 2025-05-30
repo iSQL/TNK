@@ -16,21 +16,24 @@ import {
   ActionEventArgs,
   DataStateChangeEventArgs,
   NotifyArgs,
-  // Import Grid services that are used
   PageService,
   SortService,
-  CommandColumnService // For command columns
+  CommandColumnService,
+  EditService
 } from '@syncfusion/ej2-angular-grids';
 import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
-import { DialogModule, DialogComponent } from '@syncfusion/ej2-angular-popups';
+import { DialogModule, DialogComponent } from '@syncfusion/ej2-angular-popups'; // Added Toast, ToastModel
 import { TextBoxModule, TextBoxComponent } from '@syncfusion/ej2-angular-inputs';
 import { createSpinner, showSpinner, hideSpinner } from '@syncfusion/ej2-popups';
+import { ToastUtility } from '@syncfusion/ej2-notifications';
 
 
 // Project Services & Models
 import { SuperadminVendorService } from '../../services/vendor.service';
 import { BusinessProfileAdminDTO, PagedResult } from '../../models/business-profile-admin.dto';
 import { SuperadminVendorFormComponent, VendorFormOutput } from '../../components/vendor-form/vendor-form.component';
+import { CreateBusinessProfileAdminRequest } from '../../models/create-business-profile-admin.request';
+import { UpdateBusinessProfileAdminRequest } from '../../models/update-business-profile-admin.request';
 
 @Component({
   selector: 'app-superadmin-vendor-list',
@@ -39,19 +42,21 @@ import { SuperadminVendorFormComponent, VendorFormOutput } from '../../component
     CommonModule,
     TranslateModule,
     FormsModule,
-    GridModule, // GridModule itself
+    GridModule,
     ButtonModule,
     DialogModule,
     TextBoxModule,
     SuperadminVendorFormComponent
+    // Note: Syncfusion Toast is often used programmatically or via a global instance,
+    // so ToastModule might not be needed in 'imports' if you use ToastUtility or a global Toast.
+    // For this example, we'll assume programmatic usage or a template-defined toast if you add one.
   ],
-  providers: [ // Provide necessary Syncfusion Grid services for standalone components
-    PageService,    // For Paging
-    SortService,    // For Sorting
-    CommandColumnService // For Command Columns (Edit, Delete)
-    // Add FilterService if allowFiltering is true and server-side,
-    // Add EditService if using built-in grid editing modes,
-    // Add ToolbarService if using built-in toolbar features extensively.
+  providers: [
+    PageService,
+    SortService,
+    CommandColumnService,
+    EditService
+    
   ],
   templateUrl: './vendor-list.component.html',
   styleUrls: ['./vendor-list.component.scss']
@@ -92,6 +97,15 @@ export class VendorListComponent implements OnInit, OnDestroy, AfterViewInit {
   public isConfirmDialogVisible = false;
   public vendorToDelete: BusinessProfileAdminDTO | null = null;
 
+  // For Syncfusion Toast (if defined in template, otherwise use ToastUtility)
+  // @ViewChild('toastElement') private toastObj?: ToastComponent;
+  // public toastSettings: ToastModel = {
+  //   position: { X: 'Right', Y: 'Top' },
+  //   showCloseButton: true,
+  //   newestOnTop: true,
+  //   showProgressBar: true
+  // };
+
   private searchTerms = new Subject<string>();
   private searchSubscription!: Subscription;
   private currentSearchTerm: string = '';
@@ -104,10 +118,10 @@ export class VendorListComponent implements OnInit, OnDestroy, AfterViewInit {
     private cdr: ChangeDetectorRef
     ) {
     this.pageSettings = { pageSize: 10, pageSizes: true, currentPage: 1, pageCount: 5, totalRecordsCount: 0 };
-    this.editSettings = { allowEditing: false, allowAdding: false, allowDeleting: false, mode: 'Dialog' }; // Using custom dialogs
+    this.editSettings = { allowEditing: false, allowAdding: false, allowDeleting: false, mode: 'Dialog' };
     this.commands = [
-      { type: 'Edit', buttonOption: { cssClass: 'e-flat e-edit-icon', iconCss: 'e-icons e-edit-icon', /* click: this.onEditClick.bind(this) */ } },
-      { type: 'Delete', buttonOption: { cssClass: 'e-flat e-delete-icon', iconCss: 'e-icons e-delete-icon', /* click: this.onDeleteClick.bind(this) */ } }
+      { type: 'Edit', buttonOption: { cssClass: 'e-flat e-edit-icon', iconCss: 'e-icons e-edit-icon' } },
+      { type: 'Delete', buttonOption: { cssClass: 'e-flat e-delete-icon', iconCss: 'e-icons e-delete-icon' } }
     ];
   }
 
@@ -121,7 +135,6 @@ export class VendorListComponent implements OnInit, OnDestroy, AfterViewInit {
         this.isLoading = true;
         this.currentSearchTerm = term;
         this.pageSettings.currentPage = 1;
-        // this.gridInstance?.goToPage(1); // Let loadVendors handle page settings for fetch
         return this.fetchVendorsObservable();
       })
     ).subscribe(data => {
@@ -135,8 +148,8 @@ export class VendorListComponent implements OnInit, OnDestroy, AfterViewInit {
       this.cdr.detectChanges();
     }, error => {
       this.isLoading = false;
+      this.showToast('error', this.translate.instant('COMMON.ERROR_FETCHING_DATA'));
       console.error('Error during search:', error);
-      // TODO: Show error toast
     });
   }
 
@@ -178,9 +191,9 @@ export class VendorListComponent implements OnInit, OnDestroy, AfterViewInit {
         this.cdr.detectChanges();
       },
       (error) => {
-        console.error('Error fetching vendors:', error);
         this.isLoading = false;
-        // TODO: Show error toast
+        this.showToast('error', this.translate.instant('COMMON.ERROR_FETCHING_DATA'));
+        console.error('Error fetching vendors:', error);
       }
     );
   }
@@ -193,7 +206,7 @@ export class VendorListComponent implements OnInit, OnDestroy, AfterViewInit {
 
   dataStateChange(state: DataStateChangeEventArgs): void {
     if (state.action) {
-        const actionArgs = state.action as NotifyArgs; // Cast to NotifyArgs to access requestType
+        const actionArgs = state.action as NotifyArgs;
         if (actionArgs.requestType === 'paging') {
             if (state.skip !== undefined && state.take !== undefined) {
                 this.pageSettings.currentPage = Math.floor(state.skip / state.take) + 1;
@@ -201,31 +214,51 @@ export class VendorListComponent implements OnInit, OnDestroy, AfterViewInit {
             }
             this.loadVendors();
         }
-        // else if (actionArgs.requestType === 'sorting') {
-        //   const sortColumn = state.sorted?.[0]?.name;
-        //   const sortDirection = state.sorted?.[0]?.direction;
-        //   // Update your service call with sorting parameters and call loadVendors()
-        // }
     }
   }
 
   actionBegin(args: ActionEventArgs): void {
-    if ((args.requestType as string) === 'commandClick') {
-      const commandArgs = args as CommandClickEventArgs;
-      const vendorData = commandArgs.rowData as BusinessProfileAdminDTO;
-      if (commandArgs.commandColumn?.type === 'Edit') {
-        args.cancel = true; // Prevent default grid action, we handle it manually
-        this.openEditVendorDialog(vendorData);
-      } else if (commandArgs.commandColumn?.type === 'Delete') {
-        args.cancel = true; // Prevent default grid action
-        this.openDeleteConfirmDialog(vendorData);
-      }
+  console.log('actionBegin triggered. Event Arguments:', args);
+  console.log('Request Type:', args.requestType);
+
+  if ((args.requestType as string) === 'commandClick') {
+    console.log('Command click detected!');
+    const commandArgs = args as CommandClickEventArgs;
+    console.log('Command Column Type:', commandArgs.commandColumn?.type);
+    console.log('Row Data:', commandArgs.rowData);
+
+    const vendorData = commandArgs.rowData as BusinessProfileAdminDTO;
+    if (commandArgs.commandColumn?.type === 'Edit') {
+      console.log('Edit command identified. Opening edit dialog...');
+      args.cancel = true;
+      this.openEditVendorDialog(vendorData);
+    } else if (commandArgs.commandColumn?.type === 'Delete') {
+      console.log('Delete command identified. Opening delete dialog...');
+      args.cancel = true;
+      this.openDeleteConfirmDialog(vendorData);
+    } else {
+      console.log('Command type not recognized:', commandArgs.commandColumn?.type);
     }
   }
+}
 
-  actionComplete(args: ActionEventArgs): void {
-    // Can be used for post-action logic if needed
+onCommandClick(args: CommandClickEventArgs) {
+  const vendor = args.rowData as BusinessProfileAdminDTO;
+
+  switch (args.commandColumn?.type) {
+    case 'Edit':
+      this.openEditVendorDialog(vendor);
+      break;
+    case 'Delete':
+      this.openDeleteConfirmDialog(vendor);
+      break;
   }
+
+  // prevent any default action
+  args.cancel = true;
+}
+
+  actionComplete(args: ActionEventArgs): void { /* For future use */ }
 
   onSearchInput(event: any): void {
     const searchTerm = (event.target as HTMLInputElement)?.value || event.value || '';
@@ -257,11 +290,56 @@ export class VendorListComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   handleFormClose(output: VendorFormOutput): void {
-    this.isDialogVisible = false;
-    this.selectedVendor = null;
-    if (output.success && output.refresh !== false) {
-      this.loadVendors();
+    this.isDialogVisible = false; // Always close dialog
+    if (output.success && output.data) {
+      this.isLoading = true;
+      if (this.isEditMode && output.id) {
+        // UPDATE
+        const updatePayload: UpdateBusinessProfileAdminRequest = {
+          name: output.data.name,
+          address: output.data.address,
+          phoneNumber: output.data.phoneNumber,
+          description: output.data.description
+        };
+        this.vendorService.updateVendor(output.id, updatePayload).subscribe({
+          next: () => {
+            this.isLoading = false;
+            this.showToast('success', this.translate.instant('SUPERADMIN.VENDORS.LIST.UPDATE_SUCCESS_MESSAGE'));
+            this.loadVendors(); // Refresh grid
+          },
+          error: (err) => {
+            this.isLoading = false;
+            this.showToast('error', this.translate.instant('SUPERADMIN.VENDORS.LIST.UPDATE_ERROR_MESSAGE'));
+            console.error('Error updating vendor:', err);
+          }
+        });
+      } else if (!this.isEditMode && output.data.vendorId) {
+        // CREATE
+        const createPayload: CreateBusinessProfileAdminRequest = {
+          vendorId: output.data.vendorId, // Ensure vendorId is present for create
+          name: output.data.name,
+          address: output.data.address,
+          phoneNumber: output.data.phoneNumber,
+          description: output.data.description
+        };
+        this.vendorService.createVendor(createPayload).subscribe({
+          next: () => {
+            this.isLoading = false;
+            this.showToast('success', this.translate.instant('SUPERADMIN.VENDORS.LIST.CREATE_SUCCESS_MESSAGE'));
+            this.loadVendors(); // Refresh grid
+          },
+          error: (err) => {
+            this.isLoading = false;
+            this.showToast('error', this.translate.instant('SUPERADMIN.VENDORS.LIST.CREATE_ERROR_MESSAGE'));
+            console.error('Error creating vendor:', err);
+          }
+        });
+      } else {
+         this.isLoading = false; // Should not happen if form is valid
+         console.error('Form output data is insufficient for create/update.', output.data);
+      }
     }
+    this.selectedVendor = null; // Clear selected vendor regardless
   }
 
   openDeleteConfirmDialog(vendor: BusinessProfileAdminDTO): void {
@@ -276,9 +354,7 @@ export class VendorListComponent implements OnInit, OnDestroy, AfterViewInit {
       this.vendorService.deleteVendor(this.vendorToDelete.id).subscribe({
         next: () => {
           this.isLoading = false;
-          this.translate.get('SUPERADMIN.VENDORS.LIST.DELETE_SUCCESS_MESSAGE', { name: this.vendorToDelete?.name }).subscribe(msg => {
-             alert(msg); // Replace with actual toast
-          });
+          this.showToast('success', this.translate.instant('SUPERADMIN.VENDORS.LIST.DELETE_SUCCESS_MESSAGE', { name: this.vendorToDelete?.name }));
           this.loadVendors();
           this.vendorToDelete = null;
           this.confirmDialog.hide();
@@ -286,15 +362,29 @@ export class VendorListComponent implements OnInit, OnDestroy, AfterViewInit {
         },
         error: (err) => {
           this.isLoading = false;
+          this.showToast('error', this.translate.instant('SUPERADMIN.VENDORS.LIST.DELETE_ERROR_MESSAGE'));
           console.error('Error deleting vendor:', err);
-           this.translate.get('SUPERADMIN.VENDORS.LIST.DELETE_ERROR_MESSAGE').subscribe(msg => {
-            alert(msg); // Replace with actual toast
-          });
           this.vendorToDelete = null;
           this.confirmDialog.hide();
           this.isConfirmDialogVisible = false;
         }
       });
     }
+  }
+
+  // Helper for showing toasts (using ToastUtility for simplicity)
+  private showToast(type: 'success' | 'error' | 'warning' | 'info', content: string, title?: string): void {
+    const toastTitle = title || this.translate.instant(`COMMON.${type.toUpperCase()}`); // e.g., COMMON.SUCCESS
+    let cssClass = `e-toast-${type}`; // e.g., e-toast-success
+
+    ToastUtility.show({
+      title: toastTitle,
+      content: content,
+      cssClass: cssClass,
+      timeOut: 5000,
+      position: { X: 'Right', Y: 'Top' },
+      showCloseButton: true,
+      // icon: `e-icons e-${type}-icon` // You might need to define these CSS classes for icons
+    });
   }
 }

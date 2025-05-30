@@ -104,7 +104,7 @@ export class ApiService {
    */
   delete<T>(path: string): Observable<T> {
     const fullPath = `${this.apiUrl}${path}`;
-    return this.http.delete<T>(fullPath, this.httpOptions)
+    return this.http.delete<T>(fullPath)
       .pipe(catchError(this.handleError));
   }
 
