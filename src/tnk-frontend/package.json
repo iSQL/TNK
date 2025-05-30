@@ -26,6 +26,7 @@
     "@syncfusion/ej2-angular-grids": "^29.2.7",
     "@syncfusion/ej2-angular-inputs": "^29.2.5",
     "@syncfusion/ej2-angular-layouts": "^29.2.4",
+    "@syncfusion/ej2-angular-popups": "^29.2.7",
     "@syncfusion/ej2-angular-schedule": "^29.2.7",
     "@syncfusion/ej2-material-theme": "~29.2.4",
     "jwt-decode": "^4.0.0",

@@ -1,0 +1,46 @@
+<div class="superadmin-layout">
+  <header class="superadmin-header">
+    <h1>{{ 'SUPERADMIN.LAYOUT.HEADER_TITLE' | translate }}</h1>
+    <div class="header-actions">
+      <span *ngIf="currentUser">
+        {{ currentUser.firstName }} {{ currentUser.lastName }}
+        <ng-container *ngIf="currentUser.role">
+          ({{ ('ROLES.' + currentUser.role!) | translate }}) </ng-container>
+      </span>
+      <button ejs-button cssClass="e-small e-danger" (click)="logout()">
+        {{ 'AUTH.LOGOUT_BUTTON' | translate }}
+      </button>
+    </div>
+  </header>
+
+  <div class="superadmin-body">
+    <aside class="superadmin-sidebar">
+      <nav>
+        <ul>
+          <li>
+            <a routerLink="dashboard" routerLinkActive="active-link">
+              {{ 'SUPERADMIN.LAYOUT.NAV_DASHBOARD' | translate }}
+            </a>
+          </li>
+          <li>
+            <a routerLink="vendors" routerLinkActive="active-link">
+              {{ 'SUPERADMIN.LAYOUT.NAV_VENDORS' | translate }}
+            </a>
+          </li>
+          <li>
+            <a routerLink="/dashboard" routerLinkActive="active-link">
+              {{ 'SUPERADMIN.LAYOUT.NAV_MAIN_DASHBOARD' | translate }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="superadmin-content">
+      <router-outlet></router-outlet> </main>
+  </div>
+
+  <footer class="superadmin-footer">
+    <p>{{ 'SUPERADMIN.LAYOUT.FOOTER_TEXT' | translate }}</p>
+  </footer>
+</div>

@@ -4,16 +4,56 @@
   </header>
 
   <main class="dashboard-content">
-    <div class="e-card welcome-section-card e-card-customized" tabindex="0"> <div class="e-card-header">
-        <div class="e-card-header-caption">
-          <div class="e-card-header-title">{{ welcomeMessage }}</div>
+    <ng-container *ngIf="currentUser; else loadingUser">
+      <div class="e-card welcome-section-card e-card-customized" tabindex="0">
+        <div class="e-card-header">
+          <div class="e-card-header-caption">
+            <div class="e-card-header-title">
+              {{ 'DASHBOARD.WELCOME_MESSAGE' | translate: { firstName: currentUser.firstName, lastName: currentUser.lastName } }}
+            </div>
+          </div>
+        </div>
+        <div class="e-card-content">
+          <p>{{ 'DASHBOARD.INFO_TEXT' | translate }}</p>
+          <p>
+            <strong>{{ 'DASHBOARD.EMAIL_LABEL' | translate }}:</strong> {{ currentUser.email }}
+          </p>
+          <p *ngIf="currentUser.role">
+            <strong>{{ 'DASHBOARD.ROLE_LABEL' | translate }}:</strong> {{ ('ROLES.' + currentUser.role) | translate }}
+          </p>
+
+          <div *ngIf="currentUser.role === UserRoleEnum.Admin" class="role-specific-content admin-content mt-3">
+            <p>{{ 'DASHBOARD.ADMIN_INFO' | translate }}</p>
+            <button ejs-button cssClass="e-primary" routerLink="/superadmin">
+              {{ 'DASHBOARD.GO_TO_SUPERADMIN_BUTTON' | translate }}
+            </button>
+          </div>
+
+          <div *ngIf="currentUser.role === UserRoleEnum.Vendor" class="role-specific-content vendor-content mt-3">
+            <p>{{ 'DASHBOARD.VENDOR_INFO' | translate }}</p>
+            </div>
+
+          <div *ngIf="currentUser.role === UserRoleEnum.Customer" class="role-specific-content customer-content mt-3">
+            <p>{{ 'DASHBOARD.CUSTOMER_INFO' | translate }}</p>
+            </div>
+
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #loadingUser>
+      <div class="e-card welcome-section-card e-card-customized" tabindex="0">
+        <div class="e-card-header">
+          <div class="e-card-header-caption">
+            <div class="e-card-header-title">{{ 'DASHBOARD.LOADING_USER' | translate }}</div>
+          </div>
+        </div>
+        <div class="e-card-content">
+          <p>{{ 'DASHBOARD.PLEASE_WAIT' | translate }}</p>
           </div>
       </div>
-      <div class="e-card-content">
-        <p>{{ 'DASHBOARD.INFO_TEXT' | translate }}</p>
-      </div>
-    </div>
-    
+    </ng-template>
+
     <div class="e-card placeholder-content-card e-card-customized mt-5" tabindex="0">
       <div class="e-card-header">
         <div class="e-card-header-caption">
@@ -22,13 +62,12 @@
       </div>
       <div class="e-card-content">
         <p>{{ 'DASHBOARD.FUTURE_CONTENT_INFO' | translate }}</p>
-        </div>
       </div>
-      
-      <div class="actions-section mt-4">
-      <button ejs-button cssClass="e-danger e-large logout-button" (click)="logout()">
-        <i class="fas fa-sign-out-alt"></i> 
-        {{ 'AUTH.LOGOUT_BUTTON' | translate }}
+    </div>
+
+    <div class="actions-section mt-4">
+      <button ejs-button cssClass="e-danger e-large logout-button" (click)="authService.logout()">
+        <span class="e-btn-icon e-icons e-logout-icon"></span> {{ 'AUTH.LOGOUT_BUTTON' | translate }}
       </button>
     </div>
   </main>

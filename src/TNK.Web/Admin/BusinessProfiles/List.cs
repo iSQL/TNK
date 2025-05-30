@@ -9,23 +9,9 @@ namespace TNK.Web.Admin.BusinessProfiles;
 /// </summary>
 public record ListAdminRequest
 {
-  /// <summary>
-  /// Page number for pagination. Defaults to 1.
-  /// </summary>
-  [QueryParam]
-  public int PageNumber { get; init; } = 1;
-
-  /// <summary>
-  /// Number of items per page. Defaults to 10.
-  /// </summary>
-  [QueryParam]
-  public int PageSize { get; init; } = 10;
-
-  /// <summary>
-  /// Optional search term to filter business profiles.
-  /// </summary>
-  [QueryParam]
-  public string? SearchTerm { get; init; }
+  [QueryParam] public int? PageNumber { get; init; }
+  [QueryParam] public int PageSize { get; init; }
+  [QueryParam] public string? SearchTerm { get; init; }
 }
 
 /// <summary>

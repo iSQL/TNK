@@ -4,11 +4,11 @@ namespace TNK.UseCases.BusinessProfiles.ListAdmin;
 
 public class BusinessProfilesAdminSpec : Specification<Core.BusinessAggregate.BusinessProfile>
 {
-  public BusinessProfilesAdminSpec(int pageNumber, int pageSize, string? searchTerm)
+  public BusinessProfilesAdminSpec(int? pageNumber, int pageSize, string? searchTerm)
   {
     
-    int validPageNumber = pageNumber > 0 ? pageNumber : 1;
-    int validPageSize = pageSize > 0 ? pageSize : 10; 
+    int validPageNumber = (int)(pageNumber > 0 ? pageNumber : 1);
+    int validPageSize = (int)(pageSize > 0 ? pageSize : 10); 
 
     Query.Skip((validPageNumber - 1) * validPageSize)
          .Take(validPageSize);

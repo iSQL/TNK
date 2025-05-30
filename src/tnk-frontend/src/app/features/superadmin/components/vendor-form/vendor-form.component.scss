@@ -1,0 +1,26 @@
+// src/app/features/superadmin/components/vendor-form/vendor-form.component.scss
+.vendor-form-container {
+  padding: 10px 20px 20px 20px; // Padding for content within a dialog
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    // Ensure Syncfusion textboxes take full width if needed
+    ejs-textbox {
+      width: 100%;
+    }
+  }
+
+  .sf-validation-message { // Custom class for Syncfusion-like validation messages
+    color: #f44336; // Material Design error color
+    font-size: 0.75em;
+    margin-top: 0.25em;
+  }
+
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px; // Space between buttons
+    margin-top: 2rem;
+  }
+}
