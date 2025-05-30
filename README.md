@@ -75,6 +75,9 @@ This architecture ensures that business logic is independent of UI, database, an
 
 ## Project Structure
 
+<details>
+<summary>Project Structure</summary>
+
 .
 ├── docs/                    # ADRs and other documentation
 ├── src/
@@ -89,8 +92,9 @@ This architecture ensures that business logic is independent of UI, database, an
 │   └── TNK.FunctionalTests/
 ├── .gitignore
 ├── global.json              # .NET SDK version (e.g., 9.0.100-rc.2.24474.11)
-├── TerminNaKlik.sln         # Visual Studio Solution File (or similar for your project structure)
+├── TerminNaKlik.sln         # Visual Studio Solution File
 └── README.md                # This file
+</details>
 
 ## Getting Started
 
