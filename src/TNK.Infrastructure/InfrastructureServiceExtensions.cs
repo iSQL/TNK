@@ -1,7 +1,9 @@
 ﻿using TNK.Core.Interfaces;
+using TNK.Core.ServiceManagementAggregate.Interfaces;
 using TNK.Core.Services;
 using TNK.Infrastructure.Data;
 using TNK.Infrastructure.Data.Queries;
+using TNK.Infrastructure.Data.ServiceManagementRepositories;
 using TNK.UseCases.Contributors.List;
 
 
@@ -19,10 +21,17 @@ public static class InfrastructureServiceExtensions
      options.UseSqlite(connectionString));
 
     services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>))
-           .AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>))
-           .AddScoped<IListContributorsQueryService, ListContributorsQueryService>()
-           .AddScoped<IDeleteContributorService, DeleteContributorService>();
+               .AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>))
+               .AddScoped<IListContributorsQueryService, ListContributorsQueryService>()
+               .AddScoped<IDeleteContributorService, DeleteContributorService>();
+    services.AddScoped<IBusinessProfileRepository, BusinessProfileRepository>();
 
+    // Register Service Management repositories
+    services.AddScoped<IServiceRepository, ServiceRepository>();
+    services.AddScoped<IWorkerRepository, WorkerRepository>();
+    services.AddScoped<IScheduleRepository, ScheduleRepository>();
+    services.AddScoped<IAvailabilitySlotRepository, AvailabilitySlotRepository>();
+    services.AddScoped<IBookingRepository, BookingRepository>();
 
     logger.LogInformation("{Project} services registered", "Infrastructure");
 
