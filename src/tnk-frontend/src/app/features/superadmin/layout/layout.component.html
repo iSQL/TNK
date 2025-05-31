@@ -1,46 +1,37 @@
+<!-- 
+  Assuming you have a layout structure similar to this.
+  This example uses a simple list for navigation. 
+  Adapt to your existing layout component structure (e.g., ejs-sidebar, custom nav).
+-->
 <div class="superadmin-layout">
-  <header class="superadmin-header">
-    <h1>{{ 'SUPERADMIN.LAYOUT.HEADER_TITLE' | translate }}</h1>
-    <div class="header-actions">
-      <span *ngIf="currentUser">
-        {{ currentUser.firstName }} {{ currentUser.lastName }}
-        <ng-container *ngIf="currentUser.role">
-          ({{ ('ROLES.' + currentUser.role!) | translate }}) </ng-container>
-      </span>
-      <button ejs-button cssClass="e-small e-danger" (click)="logout()">
-        {{ 'AUTH.LOGOUT_BUTTON' | translate }}
-      </button>
-    </div>
-  </header>
+  <nav class="superadmin-navigation">
+    <ul>
+      <li>
+        <a routerLink="dashboard" routerLinkActive="active-link" class="nav-link">
+          <span class="e-icons e-home"></span> {{ 'SUPERADMIN.LAYOUT.NAV_DASHBOARD' | translate }}
+        </a>
+      </li>
+      <li>
+        <a routerLink="vendors" routerLinkActive="active-link" class="nav-link">
+          <span class="e-icons e-business"></span> {{ 'SUPERADMIN.LAYOUT.NAV_VENDORS' | translate }}
+        </a>
+      </li>
+      <li>
+        <a routerLink="users" routerLinkActive="active-link" class="nav-link">
+          <span class="e-icons e-user"></span> {{ 'SUPERADMIN.LAYOUT.NAV_USERS' | translate }}
+        </a>
+      </li>
+      </ul>
+  </nav>
 
-  <div class="superadmin-body">
-    <aside class="superadmin-sidebar">
-      <nav>
-        <ul>
-          <li>
-            <a routerLink="dashboard" routerLinkActive="active-link">
-              {{ 'SUPERADMIN.LAYOUT.NAV_DASHBOARD' | translate }}
-            </a>
-          </li>
-          <li>
-            <a routerLink="vendors" routerLinkActive="active-link">
-              {{ 'SUPERADMIN.LAYOUT.NAV_VENDORS' | translate }}
-            </a>
-          </li>
-          <li>
-            <a routerLink="/dashboard" routerLinkActive="active-link">
-              {{ 'SUPERADMIN.LAYOUT.NAV_MAIN_DASHBOARD' | translate }}
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </aside>
-
-    <main class="superadmin-content">
-      <router-outlet></router-outlet> </main>
-  </div>
-
-  <footer class="superadmin-footer">
-    <p>{{ 'SUPERADMIN.LAYOUT.FOOTER_TEXT' | translate }}</p>
-  </footer>
+  <main class="superadmin-content">
+    <router-outlet></router-outlet>
+  </main>
 </div>
+
+<!-- 
+  Make sure your layout.component.scss or global styles 
+  have definitions for .superadmin-layout, .superadmin-navigation, 
+  .superadmin-content, .nav-link, .active-link etc.
+  and that Syncfusion icons are properly loaded and styled.
+-->

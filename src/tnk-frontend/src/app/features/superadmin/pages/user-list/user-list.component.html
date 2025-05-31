@@ -1,0 +1,106 @@
+<div class="user-list-page control-pane">
+  <header class="page-header">
+    <h2>{{ 'SUPERADMIN.USERS.LIST.PAGE_TITLE' | translate }}</h2>
+    <!-- Optional: Add User button if needed later 
+    <button ejs-button cssClass="e-primary" iconCss="e-icons e-plus">
+      {{ 'SUPERADMIN.USERS.LIST.ADD_USER_BUTTON' | translate }}
+    </button> 
+    -->
+  </header>
+
+  <div class="search-bar-container mt-3 mb-3">
+    <ejs-textbox
+      #searchInput
+      [placeholder]="'SUPERADMIN.USERS.LIST.SEARCH_PLACEHOLDER' | translate"
+      (input)="onSearchInput($event)"
+      (keyup.enter)="applySearch()"
+      cssClass="e-input-group e-bigger"
+      floatLabelType="Auto">
+      <e-input-group-icon 
+        ejs-button 
+        cssClass="e-input-group-button e-flat e-icon-search" 
+        (click)="applySearch()"
+        [title]="'COMMON.SEARCH' | translate">
+      </e-input-group-icon>
+      <e-input-group-icon 
+        *ngIf="searchInput?.value"
+        ejs-button 
+        cssClass="e-input-group-button e-flat e-icon-clear" 
+        (click)="clearSearch()"
+        [title]="'COMMON.CLEAR_SEARCH' | translate">
+      </e-input-group-icon>
+    </ejs-textbox>
+  </div>
+  
+  <div #gridContainer class="grid-container mt-3">
+    <ejs-grid #userGrid
+      [dataSource]="gridData"
+      [allowPaging]="true"
+      [pageSettings]="pageSettings"
+      [allowSorting]="true" 
+      (dataStateChange)="dataStateChange($event)"
+      [height]="gridHeight" 
+      gridLines="Both"
+      [locale]="translate.currentLang"
+      [enableHover]="true"
+      [allowResizing]="true">
+      <e-columns>
+        <e-column field="userId" 
+                  headerText="{{ 'SUPERADMIN.USERS.LIST.HEADER_ID' | translate }}" 
+                  width="220" 
+                  minWidth="180"
+                  [clipMode]="'EllipsisWithTooltip'"></e-column>
+        <e-column field="firstName" 
+                  headerText="{{ 'SUPERADMIN.USERS.LIST.HEADER_FIRST_NAME' | translate }}" 
+                  width="130" 
+                  minWidth="100"
+                  [clipMode]="'EllipsisWithTooltip'"></e-column>
+        <e-column field="lastName" 
+                  headerText="{{ 'SUPERADMIN.USERS.LIST.HEADER_LAST_NAME' | translate }}" 
+                  width="130" 
+                  minWidth="100"
+                  [clipMode]="'EllipsisWithTooltip'"></e-column>
+        <e-column field="email" 
+                  headerText="{{ 'SUPERADMIN.USERS.LIST.HEADER_EMAIL' | translate }}" 
+                  width="200" 
+                  minWidth="150"
+                  [clipMode]="'EllipsisWithTooltip'"></e-column>
+        <e-column field="phoneNumber"
+                  headerText="{{ 'SUPERADMIN.USERS.LIST.HEADER_PHONE' | translate }}"
+                  width="130"
+                  minWidth="100"
+                  [clipMode]="'EllipsisWithTooltip'"></e-column>
+        <e-column field="roles" 
+                  headerText="{{ 'SUPERADMIN.USERS.LIST.HEADER_ROLES' | translate }}" 
+                  width="150" 
+                  minWidth="120"
+                  [valueAccessor]="rolesValueAccessor"
+                  [clipMode]="'EllipsisWithTooltip'"></e-column>
+        <e-column field="emailConfirmed" 
+                  headerText="{{ 'SUPERADMIN.USERS.LIST.HEADER_EMAIL_CONFIRMED' | translate }}" 
+                  width="120" 
+                  minWidth="100"
+                  textAlign="Center"
+                  [valueAccessor]="emailConfirmedValueAccessor"
+                  ></e-column>
+        <!-- 
+        <e-column headerText="{{ 'COMMON.ACTIONS' | translate }}" width="120" textAlign="Center" [isFrozen]="true">
+          <ng-template #template let-data>
+            <button ejs-button iconCss="e-icons e-edit" cssClass="e-small e-flat" 
+                    (click)="onEditUser(data)" 
+                    [title]="'COMMON.EDIT' | translate"></button>
+            <button ejs-button iconCss="e-icons e-delete" cssClass="e-small e-flat e-danger" 
+                    (click)="onDeleteUser(data)" 
+                    [title]="'COMMON.DELETE' | translate"></button>
+          </ng-template>
+        </e-column>
+        -->
+      </e-columns>
+      <ng-template #emptyRecordTemplate>
+        <div class="empty-grid-message">
+          {{ 'SUPERADMIN.USERS.LIST.NO_USERS_FOUND' | translate }}
+        </div>
+      </ng-template>
+    </ejs-grid>
+  </div>
+</div>

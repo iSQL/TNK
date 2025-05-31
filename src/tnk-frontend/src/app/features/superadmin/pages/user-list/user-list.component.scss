@@ -1,0 +1,103 @@
+
+.user-list-page {
+  padding: 1.5rem; // Consistent padding
+  display: flex;
+  flex-direction: column;
+  height: 100%; // Allow page to fill available space if needed by parent
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-shrink: 0; // Prevent header from shrinking
+
+    h2 {
+      margin: 0;
+      font-size: 1.75rem; // Slightly larger title
+      color: var(--tnk-text-primary, #333); // Use CSS variables if defined
+    }
+
+  }
+
+  .search-bar-container {
+    margin-bottom: 1.5rem; // More space below search
+    flex-shrink: 0; // Prevent search bar from shrinking
+
+    .e-textbox.e-input-group {
+      // Ensure textbox takes full width or desired width
+      // width: 100%;
+      // max-width: 500px; // Example max width
+    }
+    
+    .e-input-group-button.e-icon-search::before,
+    .e-input-group-button.e-icon-clear::before {
+      font-family: 'e-icons'; // Ensure Syncfusion icons are loaded
+      // Adjust icon size or color if needed
+    }
+    .e-input-group-button.e-icon-search::before {
+      content: '\e88a'; // Syncfusion Search icon code
+    }
+    .e-input-group-button.e-icon-clear::before {
+      content: '\e7fc'; // Syncfusion Clear/Close icon code
+    }
+  }
+
+  .grid-container {
+    position: relative; // For Syncfusion spinner
+    flex-grow: 1; // Allow grid to take remaining space
+    min-height: 300px; // Minimum height for the grid
+    overflow: hidden; // Prevent container scrollbars, grid has its own
+
+    .e-grid {
+      // Add any custom grid styling here
+      // Example: border-radius for the grid
+      // border-radius: var(--tnk-border-radius, 8px);
+      // overflow: hidden; // If using border-radius on grid itself
+
+      .e-headercell, .e-rowcell {
+        padding: 0.75rem; // Adjust cell padding
+      }
+    }
+    
+    .empty-grid-message {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px; // Or adjust to preference
+      color: var(--tnk-text-secondary, #757575);
+      font-style: italic;
+    }
+  }
+
+  // Styling for Syncfusion Toast (ensure this is globally available or scoped here)
+  // These classes are typically added to global styles.scss
+  .e-toast-success {
+    .e-toast-title { color: #155724 !important; }
+    .e-toast-message { color: #155724 !important; }
+    background-color: #d4edda !important;
+    border-color: #c3e6cb !important;
+  }
+
+  .e-toast-error {
+    .e-toast-title { color: #721c24 !important; }
+    .e-toast-message { color: #721c24 !important; }
+    background-color: #f8d7da !important;
+    border-color: #f5c6cb !important;
+  }
+
+  .e-toast-warning {
+    .e-toast-title { color: #856404 !important; }
+    .e-toast-message { color: #856404 !important; }
+    background-color: #fff3cd !important;
+    border-color: #ffeeba !important;
+  }
+
+  .e-toast-info {
+    .e-toast-title { color: #0c5460 !important; }
+    .e-toast-message { color: #0c5460 !important; }
+    background-color: #d1ecf1 !important;
+    border-color: #bee5eb !important;
+  }
+}
+
