@@ -1,0 +1,60 @@
+.pnf-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 120px); // Adjust if you have a persistent header/footer
+  text-align: center;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif; // Or your project's font
+}
+
+.pnf-content {
+  max-width: 600px;
+
+  h1 {
+    font-size: 3rem; // Or even larger like 6rem for "404"
+    font-weight: bold;
+    color: #dc3545; // A common error color, or your theme's error color
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: #333;
+    margin-bottom: 1rem;
+
+    &:last-of-type {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+    text-decoration: none; // Ensure links styled as buttons don't have underlines
+
+    &.btn-primary {
+      // Ensure you have styles for .btn and .btn-primary if not using a framework like Bootstrap
+      // Example:
+      background-color: #007bff; // Or your theme's primary color
+      color: white;
+      border: 1px solid #007bff;
+
+      &:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .pnf-content h1 {
+    font-size: 2.5rem;
+  }
+  .pnf-content p {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,49 @@
+<div class="superadmin-dashboard-page">
+  <h2>{{ 'SUPERADMIN.DASHBOARD.PAGE_TITLE' | translate }}</h2>
+  <p>{{ 'SUPERADMIN.DASHBOARD.WELCOME_TEXT' | translate }}</p>
+
+  <div class="dashboard-metrics">
+    <div class="e-card metric-card">
+      <div class="e-card-header">
+        <div class="e-card-header-caption">
+          <div class="e-card-title">{{ 'SUPERADMIN.DASHBOARD.TOTAL_VENDORS_LABEL' | translate }}</div>
+        </div>
+      </div>
+      <div class="e-card-content">
+        <p class="metric-value">
+          {{ totalVendors !== null ? totalVendors : ('COMMON.LOADING' | translate) }}
+        </p>
+      </div>
+    </div>
+
+    <div class="e-card metric-card">
+      <div class="e-card-header">
+        <div class="e-card-header-caption">
+          <div class="e-card-title">{{ 'SUPERADMIN.DASHBOARD.NEW_SIGNUPS_LABEL' | translate }}</div>
+        </div>
+      </div>
+      <div class="e-card-content">
+        <p class="metric-value">
+          {{ newSignups !== null ? newSignups : ('COMMON.LOADING' | translate) }}
+        </p>
+      </div>
+    </div>
+
+    <div class="e-card metric-card">
+      <div class="e-card-header">
+        <div class="e-card-header-caption">
+          <div class="e-card-title">{{ 'SUPERADMIN.DASHBOARD.ACTIVE_BOOKINGS_LABEL' | translate }}</div>
+        </div>
+      </div>
+      <div class="e-card-content">
+        <p class="metric-value">
+          {{ activeBookings !== null ? activeBookings : ('COMMON.LOADING' | translate) }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <p>{{ 'SUPERADMIN.DASHBOARD.MORE_INFO_TEXT' | translate }}</p>
+  </div>
+</div>

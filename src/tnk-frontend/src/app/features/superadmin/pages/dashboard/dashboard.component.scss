@@ -1,0 +1,35 @@
+.superadmin-dashboard-page {
+  h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  .dashboard-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem; // Space between cards
+
+    .metric-card {
+      flex: 1 1 250px; // Flex properties for responsiveness
+      min-width: 200px;
+      // Using Syncfusion e-card styles by default. Add custom styles if needed.
+      // Example: border: 1px solid #eee;
+
+      .e-card-header-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+      }
+
+      .metric-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #007bff; // Example color for metric values
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
+  .mt-4 {
+    margin-top: 1.5rem; // Utility class for margin-top
+  }
+}

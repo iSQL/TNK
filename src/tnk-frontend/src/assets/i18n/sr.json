@@ -1,0 +1,180 @@
+{
+  "SUPERADMIN": {
+    "LAYOUT": {
+      "HEADER_TITLE": "Superadmin Panel",
+      "NAV_DASHBOARD": "Kontrolna tabla",
+      "NAV_VENDORS": "Prodavci",
+      "NAV_USERS": "Upravljanje Korisnicima", 
+      "NAV_MAIN_DASHBOARD": "Glavna Kontrolna Tabla",
+      "FOOTER_TEXT": "© 2025 TerminNaKlik Superadmin"
+    },
+    "DASHBOARD": {
+      "PAGE_TITLE": "Superadmin Kontrolna Tabla",
+      "WELCOME_TEXT": "Dobrodošli na Superadmin kontrolni panel.",
+      "TOTAL_VENDORS_LABEL": "Ukupno Prodavaca",
+      "NEW_SIGNUPS_LABEL": "Nove Registracije (Poslednjih 7 Dana)",
+      "ACTIVE_BOOKINGS_LABEL": "Aktivne Rezervacije",
+      "MORE_INFO_TEXT": "Koristite bočnu traku za navigaciju do različitih sekcija za upravljanje."
+    },
+    "VENDORS": {
+      "LIST": {
+        "PAGE_TITLE": "Upravljanje Prodavcima",
+        "CREATE_NEW_BUTTON": "Dodaj Novog Prodavca",
+        "SEARCH_PLACEHOLDER": "Pretraži prodavce...",
+        "HEADER_ID": "ID",
+        "HEADER_NAME": "Naziv",
+        "HEADER_VENDOR_ID": "ID Prodavca (Korisnika)",
+        "HEADER_ADDRESS": "Adresa",
+        "HEADER_PHONE": "Telefon",
+        "HEADER_ACTIONS": "Akcije",
+        "DELETE_CONFIRM_MESSAGE": "Da li ste sigurni da želite da obrišete prodavca \"{{vendorName}}\"?",
+        "DELETE_SUCCESS_MESSAGE": "Prodavac \"{{name}}\" je uspešno obrisan.",
+        "DELETE_ERROR_MESSAGE": "Došlo je do greške prilikom brisanja prodavca."
+      },
+      "FORM": {
+        "CREATE_TITLE": "Kreiraj Novi Poslovni Profil",
+        "EDIT_TITLE": "Izmeni Poslovni Profil",
+        "VENDOR_ID_LABEL": "ID Prodavca (Korisnika)",
+        "VENDOR_ID_PLACEHOLDER": "Unesite ID korisnika (prodavca)",
+        "VENDOR_ID_REQUIRED_ERROR": "ID prodavca je obavezan.",
+        "NAME_LABEL": "Naziv Poslovnog Profila",
+        "NAME_PLACEHOLDER": "Unesite naziv poslovnog profila",
+        "NAME_REQUIRED_ERROR": "Naziv je obavezan.",
+        "NAME_MINLENGTH_ERROR": "Naziv mora imati najmanje {{requiredLength}} karaktera.",
+        "ADDRESS_LABEL": "Adresa",
+        "ADDRESS_PLACEHOLDER": "Unesite adresu",
+        "PHONE_LABEL": "Broj Telefona",
+        "PHONE_PLACEHOLDER": "Unesite broj telefona",
+        "DESCRIPTION_LABEL": "Opis",
+        "DESCRIPTION_PLACEHOLDER": "Unesite opis"
+      }
+    },
+    "USERS": { 
+      "LIST": {
+        "PAGE_TITLE": "Upravljanje Korisnicima",
+        "SEARCH_PLACEHOLDER": "Pretražite po imenu, prezimenu ili email-u...",
+        "HEADER_ID": "Korisnički ID",
+        "HEADER_FIRST_NAME": "Ime",
+        "HEADER_LAST_NAME": "Prezime",
+        "HEADER_EMAIL": "Email",
+        "HEADER_PHONE": "Telefon",
+        "HEADER_ROLES": "Uloge",
+        "HEADER_EMAIL_CONFIRMED": "Email Potvrđen",
+        "NO_USERS_FOUND": "Nema pronađenih korisnika."
+      }
+    }
+  },
+  "COMMON": {
+    "LOADING": "Učitavanje...",
+    "SAVE_CHANGES_BUTTON": "Sačuvaj Izmene",
+    "CREATE_BUTTON": "Kreiraj",
+    "CANCEL_BUTTON": "Otkaži",
+    "SAVING_BUTTON": "Čuvanje",
+    "FORM_INVALID_MESSAGE": "Molimo ispravite greške u formi.",
+    "CONFIRMATION_TITLE": "Potvrda",
+    "YES": "Da",
+    "NO": "Ne",
+    "SUCCESS": "Uspeh", 
+    "ERROR": "Greška",  
+    "WARNING": "Upozorenje", 
+    "INFO": "Informacija",
+    "SUCCESS_TITLE": "Uspeh", 
+    "ERROR_TITLE": "Greška",   
+    "WARNING_TITLE": "Upozorenje",
+    "INFO_TITLE": "Informacija", 
+    "ERROR_FETCHING_DATA": "Došlo je do greške prilikom preuzimanja podataka.",
+    "ERROR_SEARCHING_DATA": "Došlo je do greške prilikom pretrage.", 
+    "SEARCH": "Pretraži",
+    "CLEAR_SEARCH": "Očisti pretragu" 
+  },
+  "AUTH": {
+    "LOGIN_TITLE": "Prijava",
+    "REGISTER_TITLE": "Registracija",
+    "EMAIL_LABEL": "Email adresa",
+    "PASSWORD_LABEL": "Lozinka",
+    "LOGIN_BUTTON": "Prijavi se",
+    "REGISTER_BUTTON": "Registruj se",
+    "ALREADY_HAVE_ACCOUNT": "Već imate nalog? Prijavite se",
+    "NO_ACCOUNT": "Nemate nalog? Registrujte se",
+    "LOGOUT_BUTTON": "Odjavi se",
+    "LOGIN_FAILED_GENERAL": "Prijava nije uspela. Proverite unete podatke.",
+    "LOGIN_ERROR_NETWORK": "Došlo je do greške prilikom prijave. Molimo pokušajte kasnije.",
+    "REGISTER_SUCCESS_ALERT": "Registracija uspešna! Možete se prijaviti.",
+    "REGISTER_FAILED_BAD_REQUEST": "Registracija nije uspela. Proverite unete podatke.",
+    "REGISTER_ERROR_NETWORK": "Došlo je do greške prilikom registracije. Molimo pokušajte kasnije.",
+    "REGISTER_PAGE_TITLE": "Kreirajte Vaš TerminNaKlik Nalog",
+    "FIRST_NAME_PLACEHOLDER": "Ime",
+    "LAST_NAME_PLACEHOLDER": "Prezime",
+    "EMAIL_PLACEHOLDER": "Email adresa",
+    "PASSWORD_PLACEHOLDER": "Lozinka",
+    "CONFIRM_PASSWORD_PLACEHOLDER": "Potvrdi lozinku",
+    "ROLE_PLACEHOLDER": "Izaberite ulogu",
+    "ROLE_CUSTOMER": "Klijent",
+    "ROLE_VENDOR": "Prodavac",
+    "LOGIN": {
+      "TITLE": "Prijava",
+      "EMAIL_PLACEHOLDER": "Unesite Vaš email",
+      "PASSWORD_PLACEHOLDER": "Unesite Vašu lozinku",
+      "SUBMIT_BUTTON": "Prijavi se",
+      "LOADING_BUTTON": "Prijavljivanje",
+      "INVALID_FORM": "Molimo proverite unete podatke.",
+      "SUCCESS": "Uspešno ste se prijavili!",
+      "FAILURE_DEFAULT": "Prijava nije uspela. Pokušajte ponovo.",
+      "EMAIL_REQUIRED_ERROR": "Email je obavezan.",
+      "EMAIL_INVALID_ERROR": "Unesite validnu email adresu.",
+      "PASSWORD_REQUIRED_ERROR": "Lozinka je obavezna.",
+      "FORM_VALIDATION": "Validacija Forme"
+    }
+  },
+  "APP_TITLE": "TerminNaKlik",
+  "NAV": {
+    "HOME": "Početna",
+    "PROFILE": "Profil",
+    "SETTINGS": "Podešavanja",
+    "DASHBOARD": "Kontrolna tabla"
+  },
+  "GENERAL": {
+    "WELCOME": "Dobrodošli",
+    "LOADING": "Učitavanje...",
+    "REGISTERING": "Registrovanje..."
+  },
+  "VALIDATION": {
+    "EMAIL_REQUIRED": "Email adresa je obavezna.",
+    "EMAIL_INVALID": "Unesite validnu email adresu.",
+    "PASSWORD_REQUIRED": "Lozinka je obavezna.",
+    "PASSWORD_MINLENGTH": "Lozinka mora imati najmanje {{minLength}} karaktera.",
+    "FORM_INVALID": "Molimo ispravite greške u formi.",
+    "FIRST_NAME_REQUIRED": "Ime je obavezno.",
+    "LAST_NAME_REQUIRED": "Prezime je obavezno.",
+    "CONFIRM_PASSWORD_REQUIRED": "Potvrda lozinke je obavezna.",
+    "PASSWORDS_DO_NOT_MATCH": "Lozinke se ne podudaraju.",
+    "ROLE_REQUIRED": "Uloga je obavezna."
+  },
+  "DASHBOARD": {
+    "TITLE": "Kontrolna tabla",
+    "WELCOME_MESSAGE": "Dobrodošli, {{firstName}} {{lastName}}!",
+    "INFO_TEXT": "Evo pregleda vaših aktivnosti.",
+    "EMAIL_LABEL": "Email",
+    "ROLE_LABEL": "Vaša uloga",
+    "ADMIN_INFO": "Imate pristup Superadmin funkcionalnostima.",
+    "GO_TO_SUPERADMIN_BUTTON": "Idi na Superadmin Panel",
+    "VENDOR_INFO": "Upravljajte vašim uslugama i rezervacijama.",
+    "CUSTOMER_INFO": "Pregledajte vaše termine i upravljajte profilom.",
+    "FUTURE_CONTENT_TITLE": "Šta je sledeće?",
+    "FUTURE_CONTENT_INFO": "Više dodataka za kontrolnu tablu i funkcija stiže uskoro!",
+    "LOADING_USER": "Učitavanje korisničkih informacija",
+    "PLEASE_WAIT": "Molimo sačekajte..."
+  },
+  "ROLES": {
+    "Admin": "Administrator",
+    "Vendor": "Prodavac",
+    "Customer": "Klijent"
+  },
+  "PAGE_NOT_FOUND": {
+    "TITLE": "404 - Stranica nije pronađena",
+    "MESSAGE": "Izgleda da stranica koju tražite ne postoji ili je premeštena.",
+    "SUGGESTION": "Molimo proverite URL adresu ili se vratite na početnu stranu.",
+    "GO_TO_DASHBOARD_BUTTON": "Idi na kontrolnu tablu",
+    "GO_TO_LOGIN_BUTTON": "Idi na stranicu za prijavu"
+  }
+}

@@ -1,0 +1,78 @@
+<div class="vendor-list-page">
+  <header class="page-header">
+    <h2>{{ 'SUPERADMIN.VENDORS.LIST.PAGE_TITLE' | translate }}</h2>
+    <button ejs-button cssClass="e-primary" (click)="openCreateVendorDialog()">
+      <span class="e-btn-icon e-icons e-add-icon"></span> {{ 'SUPERADMIN.VENDORS.LIST.CREATE_NEW_BUTTON' | translate }}
+    </button>
+  </header>
+
+  <div class="search-bar-container mt-3 mb-3">
+    <ejs-textbox
+      #searchInput
+      [placeholder]="'SUPERADMIN.VENDORS.LIST.SEARCH_PLACEHOLDER' | translate"
+      (input)="onSearchInput($event)"
+      cssClass="e-input-group"
+      floatLabelType="Auto">
+      <e-input-group-icon ejs-button cssClass="e-input-group-button e-icon-search" (click)="applySearch()"></e-input-group-icon>
+    </ejs-textbox>
+  </div>
+
+  <div #gridContainer class="grid-container mt-3">
+    <ejs-grid #vendorGrid
+      [dataSource]="gridData"
+      [allowPaging]="true"
+      [pageSettings]="pageSettings"
+      [allowSorting]="true"
+      [allowFiltering]="false"  
+      [editSettings]="editSettings"
+      (actionBegin)="actionBegin($event)"
+      (actionComplete)="actionComplete($event)"
+      (commandClick)="onCommandClick($event)"
+      (dataStateChange)="dataStateChange($event)"
+      height="450"
+      gridLines="Both">
+      <e-columns>
+        <e-column field="id" headerText="{{ 'SUPERADMIN.VENDORS.LIST.HEADER_ID' | translate }}" width="80" textAlign="Right" isPrimaryKey="true"></e-column>
+        <e-column field="name" headerText="{{ 'SUPERADMIN.VENDORS.LIST.HEADER_NAME' | translate }}" width="200"></e-column>
+        <e-column field="vendorId" headerText="{{ 'SUPERADMIN.VENDORS.LIST.HEADER_VENDOR_ID' | translate }}" width="250"></e-column>
+        <e-column field="address" headerText="{{ 'SUPERADMIN.VENDORS.LIST.HEADER_ADDRESS' | translate }}" width="250"></e-column>
+        <e-column field="phoneNumber" headerText="{{ 'SUPERADMIN.VENDORS.LIST.HEADER_PHONE' | translate }}" width="150"></e-column>
+        <e-column headerText="{{ 'SUPERADMIN.VENDORS.LIST.HEADER_ACTIONS' | translate }}" width="150" textAlign="Center" [commands]="commands"></e-column>
+      </e-columns>
+    </ejs-grid>
+    </div>
+</div>
+
+<ejs-dialog #vendorDialog
+    header="{{ (isEditMode ? 'SUPERADMIN.VENDORS.FORM.EDIT_TITLE' : 'SUPERADMIN.VENDORS.FORM.CREATE_TITLE') | translate }}"
+    [isModal]="true"
+    target=".vendor-list-page" 
+    width="500px"
+    [showCloseIcon]="true"
+    [visible]="isDialogVisible"
+    (close)="dialogClose()">
+    <ng-template #content>
+        <app-superadmin-vendor-form *ngIf="isDialogVisible"
+            [vendorData]="selectedVendor"
+            [isEditMode]="isEditMode"
+            (formClose)="handleFormClose($event)">
+        </app-superadmin-vendor-form>
+    </ng-template>
+</ejs-dialog>
+
+<ejs-dialog #confirmDialog
+    header="{{ 'COMMON.CONFIRMATION_TITLE' | translate }}"
+    [isModal]="true"
+    target=".vendor-list-page"
+    width="350px"
+    [showCloseIcon]="true"
+    [visible]="isConfirmDialogVisible"
+    (close)="confirmDialog.hide()">
+    <ng-template #content>
+        <p>{{ 'SUPERADMIN.VENDORS.LIST.DELETE_CONFIRM_MESSAGE' | translate: { vendorName: vendorToDelete?.name } }}</p>
+    </ng-template>
+    <ng-template #footerTemplate>
+        <button ejs-button cssClass="e-primary" (click)="deleteConfirmed()">{{ 'COMMON.YES' | translate }}</button>
+        <button ejs-button cssClass="e-danger" (click)="confirmDialog.hide()">{{ 'COMMON.NO' | translate }}</button>
+    </ng-template>
+</ejs-dialog>

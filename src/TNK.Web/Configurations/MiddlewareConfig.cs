@@ -1,4 +1,5 @@
 ﻿using Ardalis.ListStartupServices;
+using Microsoft.Extensions.Options;
 using TNK.Infrastructure.Data;
 
 namespace TNK.Web.Configurations;
@@ -14,14 +15,28 @@ public static class MiddlewareConfig
     }
     else
     {
-      app.UseDefaultExceptionHandler(); // from FastEndpoints
+      app.UseDefaultExceptionHandler(); 
       app.UseHsts();
     }
 
-    app.UseFastEndpoints()
-        .UseSwaggerGen(); // Includes AddFileServer and static files middleware
+    //Localization Configuration
+    app.UseRequestLocalization(
+    app.Services
+       .GetRequiredService<IOptions<RequestLocalizationOptions>>()
+       .Value);
 
-    app.UseHttpsRedirection(); // Note this will drop Authorization headers
+    // CORS Configuration
+    app.UseCors("_localAngularOrigin");
+
+    // Swagger Configuration
+    app.UseFastEndpoints()
+        .UseSwaggerGen();
+
+    // Authentication and Authorization Configuration
+    app.UseAuthentication();
+    app.UseAuthorization();
+
+    app.UseHttpsRedirection(); 
 
     await SeedDatabase(app);
 
@@ -35,10 +50,7 @@ public static class MiddlewareConfig
 
     try
     {
-      var context = services.GetRequiredService<AppDbContext>();
-      //          context.Database.Migrate();
-      context.Database.EnsureCreated();
-      await SeedData.InitializeAsync(context);
+      await SeedData.InitializeAsync(services);
     }
     catch (Exception ex)
     {

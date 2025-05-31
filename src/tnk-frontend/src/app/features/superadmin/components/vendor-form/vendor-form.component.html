@@ -1,0 +1,74 @@
+<div class="vendor-form-container">
+  <form [formGroup]="vendorForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-group">
+      <ejs-textbox
+        formControlName="vendorId"
+        type="text"
+        [placeholder]="'SUPERADMIN.VENDORS.FORM.VENDOR_ID_LABEL' | translate" 
+        [floatLabelType]="'Auto'"
+        [readonly]="isEditMode" 
+        required>
+      </ejs-textbox>
+      <div *ngIf="vendorForm.get('vendorId')?.invalid && (vendorForm.get('vendorId')?.dirty || vendorForm.get('vendorId')?.touched)" class="e-error sf-validation-message">
+        <div *ngIf="vendorForm.get('vendorId')?.hasError('required')">
+          {{ 'SUPERADMIN.VENDORS.FORM.VENDOR_ID_REQUIRED_ERROR' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <ejs-textbox
+        formControlName="name"
+        type="text"
+        [placeholder]="'SUPERADMIN.VENDORS.FORM.NAME_LABEL' | translate" 
+        [floatLabelType]="'Auto'"
+        required>
+      </ejs-textbox>
+      <div *ngIf="vendorForm.get('name')?.invalid && (vendorForm.get('name')?.dirty || vendorForm.get('name')?.touched)" class="e-error sf-validation-message">
+        <div *ngIf="vendorForm.get('name')?.hasError('required')">
+          {{ 'SUPERADMIN.VENDORS.FORM.NAME_REQUIRED_ERROR' | translate }}
+        </div>
+        <div *ngIf="vendorForm.get('name')?.hasError('minlength')">
+          {{ 'SUPERADMIN.VENDORS.FORM.NAME_MINLENGTH_ERROR' | translate: { requiredLength: vendorForm.get('name')?.errors?.['minlength']?.requiredLength } }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <ejs-textbox
+        formControlName="address"
+        type="text"
+        [placeholder]="'SUPERADMIN.VENDORS.FORM.ADDRESS_LABEL' | translate" 
+        [floatLabelType]="'Auto'">
+      </ejs-textbox>
+    </div>
+
+    <div class="form-group">
+      <ejs-textbox
+        formControlName="phoneNumber"
+        type="text"
+        [placeholder]="'SUPERADMIN.VENDORS.FORM.PHONE_LABEL' | translate" 
+        [floatLabelType]="'Auto'">
+      </ejs-textbox>
+    </div>
+
+    <div class="form-group">
+      <ejs-textbox
+        formControlName="description"
+        [multiline]="true"
+        [placeholder]="'SUPERADMIN.VENDORS.FORM.DESCRIPTION_LABEL' | translate" 
+        [floatLabelType]="'Auto'">
+      </ejs-textbox>
+    </div>
+
+    <div class="form-actions">
+      <button ejs-button type="button" cssClass="e-danger" (click)="onCancel()" [disabled]="isLoading">
+        {{ 'COMMON.CANCEL_BUTTON' | translate }}
+      </button>
+      <button ejs-button type="submit" cssClass="e-primary" [disabled]="isLoading || vendorForm.invalid">
+        <span *ngIf="!isLoading">{{ submitButtonKey | translate }}</span>
+        <span *ngIf="isLoading">{{ 'COMMON.SAVING_BUTTON' | translate }}...</span>
+      </button>
+    </div>
+  </form>
+</div>

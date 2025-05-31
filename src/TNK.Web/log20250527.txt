@@ -1,0 +1,1689 @@
+2025-05-27 08:11:16.700 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 08:11:16.738 +02:00 [INF] Registered 9 endpoints in 177,967 milliseconds.
+2025-05-27 08:11:18.127 +02:00 [INF] Executed DbCommand (49ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:11:18.195 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:11:18.203 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:11:18.223 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 08:11:18.405 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 08:11:18.411 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 08:11:18.456 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 08:11:18.458 +02:00 [INF] Hosting environment: Development
+2025-05-27 08:11:18.460 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 08:11:28.761 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 08:11:28.914 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 157.1688ms
+2025-05-27 08:11:28.973 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 08:11:28.983 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 10.5467ms
+2025-05-27 08:11:29.307 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 08:11:29.350 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 42.6576ms
+2025-05-27 08:11:29.441 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 08:11:29.497 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 55.3647ms
+2025-05-27 08:11:45.069 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 66
+2025-05-27 08:11:45.080 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 08:11:45.188 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 08:11:45.376 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 08:11:45.429 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 08:11:45.442 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 08:11:45.450 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 380.5736ms
+2025-05-27 08:12:54.422 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 08:12:54.445 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 08:12:54.452 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2025-05-27 08:12:54.454 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 401 0 null 32.9059ms
+2025-05-27 08:14:38.604 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 08:14:38.622 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 18.4747ms
+2025-05-27 08:14:38.948 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 08:14:38.954 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 5.8213ms
+2025-05-27 08:14:38.977 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 08:14:38.994 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 17.6377ms
+2025-05-27 08:14:39.083 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 08:14:39.090 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 6.1273ms
+2025-05-27 08:14:49.921 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 08:14:49.927 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 08:14:49.929 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2025-05-27 08:14:49.931 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 401 0 null 10.183ms
+2025-05-27 08:21:34.814 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 08:21:34.841 +02:00 [INF] Registered 9 endpoints in 277 milliseconds.
+2025-05-27 08:21:35.864 +02:00 [INF] Executed DbCommand (37ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:21:35.922 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:21:35.928 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:21:35.946 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 08:21:36.044 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 08:21:36.050 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 08:21:36.537 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 08:21:36.540 +02:00 [INF] Hosting environment: Development
+2025-05-27 08:21:36.541 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 08:21:57.349 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 08:21:57.382 +02:00 [INF] Registered 9 endpoints in 12,639 milliseconds.
+2025-05-27 08:21:58.648 +02:00 [INF] Executed DbCommand (48ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:21:58.716 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:21:58.723 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:21:58.745 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 08:21:58.941 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 08:21:58.948 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 08:21:59.544 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 08:21:59.547 +02:00 [INF] Hosting environment: Development
+2025-05-27 08:21:59.548 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 08:22:14.313 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 08:22:14.368 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 08:22:14.374 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2025-05-27 08:22:14.380 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 401 0 null 72.112ms
+2025-05-27 08:24:54.437 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 08:24:54.554 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 117.0413ms
+2025-05-27 08:24:54.859 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 08:24:54.868 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 9.0924ms
+2025-05-27 08:24:54.887 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 08:24:54.920 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 32.6585ms
+2025-05-27 08:24:55.011 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 08:24:55.080 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 69.529ms
+2025-05-27 08:26:50.698 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 08:26:50.720 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 21.8576ms
+2025-05-27 08:26:50.750 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 08:26:50.750 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 08:26:50.755 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 5.1991ms
+2025-05-27 08:26:50.772 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 21.8453ms
+2025-05-27 08:26:51.075 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 08:26:51.080 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 5.5876ms
+2025-05-27 08:27:48.839 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 08:27:48.880 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 08:27:48.883 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2025-05-27 08:27:48.885 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 401 0 null 47.1514ms
+2025-05-27 08:28:05.318 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 08:28:05.353 +02:00 [INF] Registered 9 endpoints in 324 milliseconds.
+2025-05-27 08:28:07.789 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 08:28:07.824 +02:00 [INF] Registered 9 endpoints in 673 milliseconds.
+2025-05-27 08:28:09.441 +02:00 [INF] Executed DbCommand (63ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:28:09.515 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:28:09.521 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:28:09.544 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 08:28:09.740 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 08:28:09.748 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 08:28:09.795 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 08:28:09.797 +02:00 [INF] Hosting environment: Development
+2025-05-27 08:28:09.798 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 08:28:18.214 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 08:28:18.278 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 08:28:18.284 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2025-05-27 08:28:18.291 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 401 0 null 80.6899ms
+2025-05-27 08:31:33.799 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 08:31:33.960 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 160.9092ms
+2025-05-27 08:31:34.248 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 08:31:34.265 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 16.7176ms
+2025-05-27 08:31:34.283 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 08:31:34.321 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 38.019ms
+2025-05-27 08:31:34.417 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 08:31:34.471 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 54.3531ms
+2025-05-27 08:31:36.796 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 08:31:36.803 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 08:31:36.805 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2025-05-27 08:31:36.807 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 401 0 null 10.6104ms
+2025-05-27 08:31:53.767 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 08:31:53.780 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 13.3268ms
+2025-05-27 08:31:53.835 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 08:31:53.835 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 08:31:53.847 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 11.8095ms
+2025-05-27 08:31:53.854 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 18.6948ms
+2025-05-27 08:31:54.152 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 08:31:54.159 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 6.9232ms
+2025-05-27 08:32:00.174 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 08:32:00.182 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 08:32:00.184 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2025-05-27 08:32:00.187 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 401 0 null 13.386ms
+2025-05-27 08:34:57.157 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 08:34:57.175 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 15.0171ms
+2025-05-27 08:34:57.226 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 08:34:57.226 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 08:34:57.296 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 69.8384ms
+2025-05-27 08:34:57.297 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 71.1823ms
+2025-05-27 08:34:57.634 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 08:34:57.641 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 7.5831ms
+2025-05-27 08:35:13.654 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 08:35:13.687 +02:00 [INF] Registered 9 endpoints in 538 milliseconds.
+2025-05-27 08:35:14.972 +02:00 [INF] Executed DbCommand (52ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:35:15.044 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:35:15.051 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:35:15.072 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 08:35:15.262 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 08:35:15.271 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 08:35:15.322 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 08:35:15.323 +02:00 [INF] Hosting environment: Development
+2025-05-27 08:35:15.325 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 08:36:33.190 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 08:36:33.252 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 08:36:33.257 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2025-05-27 08:36:33.264 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 401 0 null 77.4238ms
+2025-05-27 08:55:55.281 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 08:55:55.313 +02:00 [INF] Registered 9 endpoints in 1,822 milliseconds.
+2025-05-27 08:55:56.814 +02:00 [INF] Executed DbCommand (67ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:55:56.886 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:55:56.892 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:55:56.910 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 08:55:57.136 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 08:55:57.143 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 08:55:57.189 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 08:55:57.191 +02:00 [INF] Hosting environment: Development
+2025-05-27 08:55:57.193 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 08:56:08.056 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/ - null null
+2025-05-27 08:56:08.231 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/ - 302 0 null 179.9036ms
+2025-05-27 08:56:08.246 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 08:56:08.285 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 38.9537ms
+2025-05-27 08:56:08.345 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 08:56:08.356 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 10.7216ms
+2025-05-27 08:56:08.581 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 08:56:08.618 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 37.6218ms
+2025-05-27 08:56:08.667 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 08:56:08.780 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 113.5657ms
+2025-05-27 08:56:50.809 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 67
+2025-05-27 08:56:50.823 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 08:56:50.975 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 08:56:51.163 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 08:56:51.217 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 08:56:51.230 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 08:56:51.237 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 428.3649ms
+2025-05-27 08:56:59.135 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 08:56:59.148 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 08:56:59.153 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2025-05-27 08:56:59.156 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 401 0 null 21.2646ms
+2025-05-27 08:59:52.462 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 08:59:52.527 +02:00 [INF] Registered 9 endpoints in 1,006 milliseconds.
+2025-05-27 08:59:53.859 +02:00 [INF] Executed DbCommand (54ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:59:53.931 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:59:53.937 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 08:59:53.957 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 08:59:54.144 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 08:59:54.151 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 08:59:54.857 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 08:59:54.859 +02:00 [INF] Hosting environment: Development
+2025-05-27 08:59:54.862 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 09:00:11.277 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger - null null
+2025-05-27 09:00:11.439 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger - 302 0 null 168.0469ms
+2025-05-27 09:00:11.449 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 09:00:11.484 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 35.0494ms
+2025-05-27 09:00:11.526 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 09:00:11.536 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 10.168ms
+2025-05-27 09:00:11.737 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 09:00:11.781 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 44.1602ms
+2025-05-27 09:00:11.832 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 09:00:11.900 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 68.3882ms
+2025-05-27 09:00:24.291 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 09:00:24.321 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 09:00:24.326 +02:00 [INF] AuthenticationScheme: Identity.Application was challenged.
+2025-05-27 09:00:24.331 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 401 0 null 40.4244ms
+2025-05-27 09:08:49.153 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 09:08:49.199 +02:00 [INF] Registered 9 endpoints in 779 milliseconds.
+2025-05-27 09:08:50.567 +02:00 [INF] Executed DbCommand (50ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 09:08:50.639 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 09:08:50.645 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 09:08:50.667 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 09:08:50.853 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 09:08:50.859 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 09:08:51.627 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 09:08:51.629 +02:00 [INF] Hosting environment: Development
+2025-05-27 09:08:51.630 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 09:09:45.150 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/ - null null
+2025-05-27 09:09:45.325 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 09:09:45.334 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/ - 404 0 null 192.5263ms
+2025-05-27 09:09:45.344 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:57679/, Response status code: 404
+2025-05-27 09:09:48.175 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/ - null null
+2025-05-27 09:09:48.187 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 09:09:48.189 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/ - 404 0 null 14.9659ms
+2025-05-27 09:09:48.196 +02:00 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET https://localhost:57679/, Response status code: 404
+2025-05-27 09:09:57.632 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger - null null
+2025-05-27 09:09:57.644 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger - 302 0 null 12.6613ms
+2025-05-27 09:09:57.651 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 09:09:57.687 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 36.1235ms
+2025-05-27 09:09:57.742 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 09:09:57.752 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 9.6657ms
+2025-05-27 09:09:58.023 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 09:09:58.061 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 37.7296ms
+2025-05-27 09:09:58.117 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 09:09:58.169 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 52.1043ms
+2025-05-27 09:12:21.847 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 09:12:21.911 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 64.3354ms
+2025-05-27 09:12:21.955 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 09:12:21.956 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 09:12:21.968 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 11.8768ms
+2025-05-27 09:12:21.984 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 28.9399ms
+2025-05-27 09:12:22.366 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 09:12:22.373 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 7.1937ms
+2025-05-27 09:12:32.482 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 09:12:32.518 +02:00 [INF] Registered 9 endpoints in 758 milliseconds.
+2025-05-27 09:12:33.853 +02:00 [INF] Executed DbCommand (53ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 09:12:33.931 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 09:12:33.937 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 09:12:33.956 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 09:12:34.132 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 09:12:34.137 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 09:12:34.710 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 09:12:34.712 +02:00 [INF] Hosting environment: Development
+2025-05-27 09:12:34.713 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 09:12:36.747 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/ - null null
+2025-05-27 09:12:36.876 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/ - 302 0 null 132.865ms
+2025-05-27 09:12:36.885 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 09:12:36.986 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 09:12:36.986 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 100.9784ms
+2025-05-27 09:12:36.995 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 9.5307ms
+2025-05-27 09:12:37.076 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 09:12:37.119 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 42.9858ms
+2025-05-27 09:12:37.190 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 09:12:37.252 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 62.3411ms
+2025-05-27 09:12:48.516 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 09:12:48.585 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 09:12:48.647 +02:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/26/2025 9:14:49 PM', Current time (UTC): '5/27/2025 7:12:48 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-05-27 09:12:48.664 +02:00 [ERR] JWT Authentication Failed
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/26/2025 9:14:49 PM', Current time (UTC): '5/27/2025 7:12:48 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-05-27 09:12:48.670 +02:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/26/2025 9:14:49 PM', Current time (UTC): '5/27/2025 7:12:48 AM'.
+2025-05-27 09:12:48.681 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 09:12:48.687 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-27 09:12:48.691 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 401 0 null 174.7566ms
+2025-05-27 09:13:02.842 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 66
+2025-05-27 09:13:02.851 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 09:13:02.856 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 09:13:02.972 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 09:13:03.149 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 09:13:03.167 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 09:13:03.180 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 09:13:03.187 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 345.049ms
+2025-05-27 09:13:15.290 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 09:13:15.297 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 09:13:15.313 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 09:13:15.318 +02:00 [INF] Executing endpoint 'HTTP: POST /api/businessprofiles'
+2025-05-27 09:27:54.301 +02:00 [INF] Executed endpoint 'HTTP: POST /api/businessprofiles'
+2025-05-27 09:27:54.312 +02:00 [ERR] An unhandled exception has occurred while executing the request.
+System.MissingMethodException: Method not found: 'System.Threading.Tasks.Task`1<System.__Canon> MediatR.RequestHandlerDelegate`1.Invoke()'.
+   at Ardalis.SharedKernel.LoggingBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start[TStateMachine](TStateMachine& stateMachine)
+   at Ardalis.SharedKernel.LoggingBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken)
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`2.<>c__DisplayClass1_1.<Handle>b__2(CancellationToken t)
+   at MediatR.Wrappers.RequestHandlerWrapperImpl`2.Handle(IRequest`1 request, IServiceProvider serviceProvider, CancellationToken cancellationToken)
+   at MediatR.Mediator.Send[TResponse](IRequest`1 request, CancellationToken cancellationToken)
+   at TNK.Web.BusinessProfiles.Create.Endpoint.HandleAsync(CreateBusinessProfileRequest req, CancellationToken ct) in C:\Users\marem\projects\TNK\src\TNK.Web\BusinessProfiles\Create\Endpoint.cs:line 87
+   at FastEndpoints.Endpoint`2.ExecAsync(CancellationToken ct)
+   at FastEndpoints.Endpoint`2.ExecAsync(CancellationToken ct)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at NSwag.AspNetCore.Middlewares.SwaggerUiIndexMiddleware.Invoke(HttpContext context)
+   at NSwag.AspNetCore.Middlewares.RedirectToIndexMiddleware.Invoke(HttpContext context)
+   at NSwag.AspNetCore.Middlewares.OpenApiDocumentMiddleware.Invoke(HttpContext context)
+   at Ardalis.ListStartupServices.ShowAllServicesMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-05-27 09:27:54.340 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 500 null text/plain; charset=utf-8 879049.773ms
+2025-05-27 09:28:08.564 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/Contributors - application/json 55
+2025-05-27 09:28:08.570 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 09:28:08.572 +02:00 [INF] Executing endpoint 'HTTP: POST /Contributors'
+2025-05-27 10:06:56.730 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 10:06:56.762 +02:00 [INF] Registered 9 endpoints in 1,864 milliseconds.
+2025-05-27 10:06:58.246 +02:00 [INF] Executed DbCommand (50ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 10:06:58.318 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 10:06:58.324 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 10:06:58.342 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 10:06:58.536 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 10:06:58.543 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 10:06:59.139 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 10:06:59.141 +02:00 [INF] Hosting environment: Development
+2025-05-27 10:06:59.143 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 10:07:11.295 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/ - null null
+2025-05-27 10:07:11.424 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/ - 302 0 null 134.3745ms
+2025-05-27 10:07:11.433 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 10:07:11.474 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 41.3852ms
+2025-05-27 10:07:11.511 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 10:07:11.521 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 9.9924ms
+2025-05-27 10:07:11.716 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 10:07:11.755 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 39.3431ms
+2025-05-27 10:07:11.813 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 10:07:11.917 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 103.6466ms
+2025-05-27 10:07:16.120 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/Contributors - application/json 55
+2025-05-27 10:07:16.225 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:07:16.231 +02:00 [INF] Executing endpoint 'HTTP: POST /Contributors'
+2025-05-27 10:07:16.287 +02:00 [INF] Handling CreateContributorCommand
+2025-05-27 10:07:16.290 +02:00 [INF] Property Name : Contributor Name
+2025-05-27 10:07:16.294 +02:00 [INF] Property PhoneNumber : null
+2025-05-27 10:07:16.514 +02:00 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?', @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Contributors" ("Name", "Status")
+VALUES (@p0, @p1)
+RETURNING "Id";
+2025-05-27 10:07:16.549 +02:00 [INF] Handled CreateContributorCommand with Ardalis.Result.Result`1[System.Int32] in 252 ms
+2025-05-27 10:07:16.560 +02:00 [INF] Executed endpoint 'HTTP: POST /Contributors'
+2025-05-27 10:07:16.569 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/Contributors - 200 null application/json; charset=utf-8 448.4627ms
+2025-05-27 10:10:17.324 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 10:10:17.341 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 17.139ms
+2025-05-27 10:10:17.400 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 10:10:17.405 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 5.6267ms
+2025-05-27 10:10:17.669 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 10:10:17.702 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 32.8675ms
+2025-05-27 10:10:17.803 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 10:10:17.812 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 8.6869ms
+2025-05-27 10:10:30.265 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 10:10:30.275 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 10.0996ms
+2025-05-27 10:10:30.332 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 10:10:30.338 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 6.0268ms
+2025-05-27 10:10:30.482 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 10:10:30.496 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 14.5629ms
+2025-05-27 10:10:30.575 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 10:10:30.580 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 4.8237ms
+2025-05-27 10:10:36.336 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/api/businessprofiles/my - null null
+2025-05-27 10:10:36.350 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:10:36.431 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 10:10:36.444 +02:00 [INF] Executing endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:10:36.461 +02:00 [INF] Handling GetMyBusinessProfileQuery
+2025-05-27 10:10:36.463 +02:00 [INF] Property VendorId : 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 10:10:36.497 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__vendorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."Address", b."Description", b."Name", b."PhoneNumber", b."VendorId"
+FROM "BusinessProfiles" AS b
+WHERE b."VendorId" = @__vendorId_0
+LIMIT 1
+2025-05-27 10:10:36.502 +02:00 [INF] Handled GetMyBusinessProfileQuery with Ardalis.Result.Result`1[TNK.UseCases.BusinessProfiles.BusinessProfileDTO] in 37 ms
+2025-05-27 10:10:36.508 +02:00 [INF] Executed endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:10:36.510 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/api/businessprofiles/my - 404 null null 174.9645ms
+2025-05-27 10:10:51.919 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/api/businessprofiles/my - null null
+2025-05-27 10:10:51.928 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:10:51.930 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 10:10:51.933 +02:00 [INF] Executing endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:10:51.935 +02:00 [INF] Handling GetMyBusinessProfileQuery
+2025-05-27 10:10:51.936 +02:00 [INF] Property VendorId : 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 10:10:51.942 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__vendorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."Address", b."Description", b."Name", b."PhoneNumber", b."VendorId"
+FROM "BusinessProfiles" AS b
+WHERE b."VendorId" = @__vendorId_0
+LIMIT 1
+2025-05-27 10:10:51.947 +02:00 [INF] Handled GetMyBusinessProfileQuery with Ardalis.Result.Result`1[TNK.UseCases.BusinessProfiles.BusinessProfileDTO] in 7 ms
+2025-05-27 10:10:51.949 +02:00 [INF] Executed endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:10:51.951 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/api/businessprofiles/my - 404 null null 31.8738ms
+2025-05-27 10:11:00.447 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/api/businessprofiles/my - null null
+2025-05-27 10:11:00.454 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:11:00.456 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 10:11:00.460 +02:00 [INF] Executing endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:11:00.464 +02:00 [INF] Handling GetMyBusinessProfileQuery
+2025-05-27 10:11:00.467 +02:00 [INF] Property VendorId : 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 10:11:00.475 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__vendorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."Address", b."Description", b."Name", b."PhoneNumber", b."VendorId"
+FROM "BusinessProfiles" AS b
+WHERE b."VendorId" = @__vendorId_0
+LIMIT 1
+2025-05-27 10:11:00.479 +02:00 [INF] Handled GetMyBusinessProfileQuery with Ardalis.Result.Result`1[TNK.UseCases.BusinessProfiles.BusinessProfileDTO] in 8 ms
+2025-05-27 10:11:00.481 +02:00 [INF] Executed endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:11:00.484 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/api/businessprofiles/my - 404 null null 36.6544ms
+2025-05-27 10:11:31.924 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 10:11:31.957 +02:00 [INF] Registered 9 endpoints in 600 milliseconds.
+2025-05-27 10:11:33.279 +02:00 [INF] Executed DbCommand (51ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 10:11:33.381 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 10:11:33.389 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 10:11:33.431 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 10:11:33.637 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 10:11:33.644 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 10:11:34.256 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 10:11:34.258 +02:00 [INF] Hosting environment: Development
+2025-05-27 10:11:34.259 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 10:11:38.890 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/api/businessprofiles/my - null null
+2025-05-27 10:11:39.037 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:11:39.099 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 10:11:39.112 +02:00 [INF] Executing endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:11:49.347 +02:00 [INF] Handling GetMyBusinessProfileQuery
+2025-05-27 10:11:49.350 +02:00 [INF] Property VendorId : 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 10:11:49.425 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__vendorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."Address", b."Description", b."Name", b."PhoneNumber", b."VendorId"
+FROM "BusinessProfiles" AS b
+WHERE b."VendorId" = @__vendorId_0
+LIMIT 1
+2025-05-27 10:11:49.457 +02:00 [INF] Handled GetMyBusinessProfileQuery with Ardalis.Result.Result`1[TNK.UseCases.BusinessProfiles.BusinessProfileDTO] in 103 ms
+2025-05-27 10:11:56.502 +02:00 [INF] Executed endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:11:56.513 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/api/businessprofiles/my - 404 null null 17628.0017ms
+2025-05-27 10:13:23.084 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/api/businessprofiles/my - null null
+2025-05-27 10:13:38.332 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:13:39.745 +02:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/27/2025 8:13:03 AM', Current time (UTC): '5/27/2025 8:13:39 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-05-27 10:13:42.684 +02:00 [ERR] JWT Authentication Failed
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/27/2025 8:13:03 AM', Current time (UTC): '5/27/2025 8:13:39 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-05-27 10:13:42.693 +02:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/27/2025 8:13:03 AM', Current time (UTC): '5/27/2025 8:13:39 AM'.
+2025-05-27 10:13:42.698 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 10:13:42.708 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-27 10:13:42.710 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/api/businessprofiles/my - 401 0 null 19636.0724ms
+2025-05-27 10:13:56.055 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/api/businessprofiles/my - null null
+2025-05-27 10:13:56.061 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:13:56.063 +02:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/27/2025 8:13:03 AM', Current time (UTC): '5/27/2025 8:13:56 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-05-27 10:13:56.066 +02:00 [ERR] JWT Authentication Failed
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/27/2025 8:13:03 AM', Current time (UTC): '5/27/2025 8:13:56 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-05-27 10:13:56.069 +02:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/27/2025 8:13:03 AM', Current time (UTC): '5/27/2025 8:13:56 AM'.
+2025-05-27 10:13:56.071 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 10:13:56.073 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-27 10:13:56.075 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/api/businessprofiles/my - 401 0 null 20.3099ms
+2025-05-27 10:13:58.250 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/api/businessprofiles/my - null null
+2025-05-27 10:13:58.255 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:13:58.258 +02:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/27/2025 8:13:03 AM', Current time (UTC): '5/27/2025 8:13:58 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-05-27 10:13:58.262 +02:00 [ERR] JWT Authentication Failed
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/27/2025 8:13:03 AM', Current time (UTC): '5/27/2025 8:13:58 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-05-27 10:13:58.265 +02:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '5/27/2025 8:13:03 AM', Current time (UTC): '5/27/2025 8:13:58 AM'.
+2025-05-27 10:13:58.267 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 10:13:58.269 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-27 10:13:58.270 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/api/businessprofiles/my - 401 0 null 20.0529ms
+2025-05-27 10:14:07.517 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 67
+2025-05-27 10:14:07.523 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:14:07.525 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 10:14:07.595 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 10:14:07.781 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 10:14:07.801 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 10:14:07.813 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 10:14:07.815 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 298.6891ms
+2025-05-27 10:14:25.089 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/api/businessprofiles/my - null null
+2025-05-27 10:14:25.093 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:14:25.095 +02:00 [INF] JWT Token Validated for: john.doe@example.com
+2025-05-27 10:14:25.097 +02:00 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Vendor)
+2025-05-27 10:14:25.101 +02:00 [INF] AuthenticationScheme: Bearer was forbidden.
+2025-05-27 10:14:25.104 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/api/businessprofiles/my - 403 0 null 15.1078ms
+2025-05-27 10:14:40.712 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 66
+2025-05-27 10:14:40.719 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:14:40.721 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 10:14:40.732 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 10:14:40.808 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 10:14:40.815 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 10:14:40.820 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 10:14:40.822 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 109.7453ms
+2025-05-27 10:14:52.975 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/api/businessprofiles/my - null null
+2025-05-27 10:14:52.980 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:14:52.982 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 10:14:52.984 +02:00 [INF] Executing endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:14:59.737 +02:00 [INF] Handling GetMyBusinessProfileQuery
+2025-05-27 10:14:59.740 +02:00 [INF] Property VendorId : 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 10:14:59.745 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__vendorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."Address", b."Description", b."Name", b."PhoneNumber", b."VendorId"
+FROM "BusinessProfiles" AS b
+WHERE b."VendorId" = @__vendorId_0
+LIMIT 1
+2025-05-27 10:14:59.748 +02:00 [INF] Handled GetMyBusinessProfileQuery with Ardalis.Result.Result`1[TNK.UseCases.BusinessProfiles.BusinessProfileDTO] in 6 ms
+2025-05-27 10:14:59.750 +02:00 [INF] Executed endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:14:59.752 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/api/businessprofiles/my - 404 null null 6776.8984ms
+2025-05-27 10:15:04.404 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/api/businessprofiles/my - null null
+2025-05-27 10:15:04.409 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:15:04.411 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 10:15:04.413 +02:00 [INF] Executing endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:16:13.412 +02:00 [INF] Handling GetMyBusinessProfileQuery
+2025-05-27 10:16:13.414 +02:00 [INF] Property VendorId : 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 10:16:13.420 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__vendorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."Address", b."Description", b."Name", b."PhoneNumber", b."VendorId"
+FROM "BusinessProfiles" AS b
+WHERE b."VendorId" = @__vendorId_0
+LIMIT 1
+2025-05-27 10:16:13.439 +02:00 [INF] Handled GetMyBusinessProfileQuery with Ardalis.Result.Result`1[TNK.UseCases.BusinessProfiles.BusinessProfileDTO] in 22 ms
+2025-05-27 10:18:41.001 +02:00 [INF] Executed endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:18:41.009 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/api/businessprofiles/my - 404 null null 216604.6859ms
+2025-05-27 10:18:46.195 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/businessprofiles - application/json 99
+2025-05-27 10:18:46.202 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:18:46.203 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 10:18:46.205 +02:00 [INF] Executing endpoint 'HTTP: POST /api/businessprofiles'
+2025-05-27 10:18:46.212 +02:00 [INF] Handling CreateBusinessProfileCommand
+2025-05-27 10:18:46.214 +02:00 [INF] Property VendorId : 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 10:18:46.216 +02:00 [INF] Property Name : string
+2025-05-27 10:18:46.219 +02:00 [INF] Property Address : string
+2025-05-27 10:18:46.222 +02:00 [INF] Property PhoneNumber : string
+2025-05-27 10:18:46.223 +02:00 [INF] Property Description : string
+2025-05-27 10:18:46.229 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__vendorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."Address", b."Description", b."Name", b."PhoneNumber", b."VendorId"
+FROM "BusinessProfiles" AS b
+WHERE b."VendorId" = @__vendorId_0
+LIMIT 1
+2025-05-27 10:18:46.342 +02:00 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?', @p1='?', @p2='?', @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "BusinessProfiles" ("Address", "Description", "Name", "PhoneNumber", "VendorId")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2025-05-27 10:18:46.377 +02:00 [INF] Handled CreateBusinessProfileCommand with Ardalis.Result.Result`1[System.Int32] in 152 ms
+2025-05-27 10:18:46.383 +02:00 [INF] Executed endpoint 'HTTP: POST /api/businessprofiles'
+2025-05-27 10:18:46.387 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/businessprofiles - 201 null application/json; charset=utf-8 191.6366ms
+2025-05-27 10:18:59.635 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/api/businessprofiles/my - null null
+2025-05-27 10:18:59.640 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 10:18:59.642 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 10:18:59.643 +02:00 [INF] Executing endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:19:03.193 +02:00 [INF] Handling GetMyBusinessProfileQuery
+2025-05-27 10:19:03.194 +02:00 [INF] Property VendorId : 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 10:19:03.199 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__vendorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."Address", b."Description", b."Name", b."PhoneNumber", b."VendorId"
+FROM "BusinessProfiles" AS b
+WHERE b."VendorId" = @__vendorId_0
+LIMIT 1
+2025-05-27 10:19:03.221 +02:00 [INF] Handled GetMyBusinessProfileQuery with Ardalis.Result.Result`1[TNK.UseCases.BusinessProfiles.BusinessProfileDTO] in 25 ms
+2025-05-27 10:19:06.555 +02:00 [INF] Executed endpoint 'HTTP: GET /api/businessprofiles/my'
+2025-05-27 10:19:06.557 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/api/businessprofiles/my - 200 null application/json; charset=utf-8 6922.2265ms
+2025-05-27 11:13:23.410 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 11:13:23.443 +02:00 [INF] Registered 10 endpoints in 1,952 milliseconds.
+2025-05-27 11:13:24.994 +02:00 [INF] Executed DbCommand (49ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 11:13:25.067 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 11:13:25.073 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 11:13:25.090 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 11:13:25.261 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 11:13:25.268 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 11:13:25.872 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 11:13:25.875 +02:00 [INF] Hosting environment: Development
+2025-05-27 11:13:25.876 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 11:13:35.357 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/ - null null
+2025-05-27 11:13:35.481 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/ - 302 0 null 128.3427ms
+2025-05-27 11:13:35.491 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 11:13:35.528 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 36.9014ms
+2025-05-27 11:13:35.765 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 11:13:35.777 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 11.9975ms
+2025-05-27 11:13:35.780 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 11:13:35.821 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 40.9044ms
+2025-05-27 11:13:35.891 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 11:13:35.985 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 93.8499ms
+2025-05-27 11:13:41.751 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 66
+2025-05-27 11:13:41.830 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 11:13:41.836 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 11:13:41.993 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 11:13:42.210 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 11:13:42.258 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 11:13:42.273 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 11:13:42.283 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 532.5829ms
+2025-05-27 11:14:22.360 +02:00 [INF] Request starting HTTP/2 PUT https://localhost:57679/api/businessprofiles/my - application/json 108
+2025-05-27 11:14:22.392 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 11:14:22.436 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 11:14:22.447 +02:00 [INF] Executing endpoint 'HTTP: PUT /api/businessprofiles/my'
+2025-05-27 11:14:22.460 +02:00 [INF] Handling UpdateBusinessProfileCommand
+2025-05-27 11:14:22.463 +02:00 [INF] Property VendorId : 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 11:14:22.466 +02:00 [INF] Property Name : My Updated Salon Name
+2025-05-27 11:14:22.468 +02:00 [INF] Property Address : null
+2025-05-27 11:14:22.471 +02:00 [INF] Property PhoneNumber : 555-9876
+2025-05-27 11:14:22.474 +02:00 [INF] Property Description : null
+2025-05-27 11:14:22.485 +02:00 [INF] Attempting to update business profile for VendorId: 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 11:14:22.515 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__vendorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."Address", b."Description", b."Name", b."PhoneNumber", b."VendorId"
+FROM "BusinessProfiles" AS b
+WHERE b."VendorId" = @__vendorId_0
+LIMIT 1
+2025-05-27 11:14:22.633 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?', @p1='?', @p2='?', @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "BusinessProfiles" SET "Address" = @p0, "Description" = @p1, "Name" = @p2, "PhoneNumber" = @p3, "VendorId" = @p4
+WHERE "Id" = @p5;
+2025-05-27 11:14:22.651 +02:00 [INF] Business profile updated successfully for VendorId: 5904cb75-889b-4a3b-9988-5b1223ee0db8, ProfileId: 1
+2025-05-27 11:14:22.656 +02:00 [INF] Handled UpdateBusinessProfileCommand with Ardalis.Result.Result`1[TNK.UseCases.BusinessProfiles.BusinessProfileDTO] in 179 ms
+2025-05-27 11:14:22.662 +02:00 [INF] Executed endpoint 'HTTP: PUT /api/businessprofiles/my'
+2025-05-27 11:14:22.665 +02:00 [INF] Request finished HTTP/2 PUT https://localhost:57679/api/businessprofiles/my - 200 null application/json; charset=utf-8 306.9956ms
+2025-05-27 11:14:58.433 +02:00 [INF] Request starting HTTP/2 PUT https://localhost:57679/api/businessprofiles/my - application/json 109
+2025-05-27 11:14:58.445 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 11:14:58.446 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 11:14:58.449 +02:00 [INF] Executing endpoint 'HTTP: PUT /api/businessprofiles/my'
+2025-05-27 11:14:58.451 +02:00 [INF] Handling UpdateBusinessProfileCommand
+2025-05-27 11:14:58.453 +02:00 [INF] Property VendorId : 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 11:14:58.455 +02:00 [INF] Property Name : My Updated Salon Name
+2025-05-27 11:14:58.457 +02:00 [INF] Property Address : null
+2025-05-27 11:14:58.460 +02:00 [INF] Property PhoneNumber : 555-9876
+2025-05-27 11:14:58.462 +02:00 [INF] Property Description : Yoo
+2025-05-27 11:14:58.465 +02:00 [INF] Attempting to update business profile for VendorId: 5904cb75-889b-4a3b-9988-5b1223ee0db8
+2025-05-27 11:14:58.470 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__vendorId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT b."Id", b."Address", b."Description", b."Name", b."PhoneNumber", b."VendorId"
+FROM "BusinessProfiles" AS b
+WHERE b."VendorId" = @__vendorId_0
+LIMIT 1
+2025-05-27 11:14:58.481 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@p5='?' (DbType = Int32), @p0='?', @p1='?', @p2='?', @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "BusinessProfiles" SET "Address" = @p0, "Description" = @p1, "Name" = @p2, "PhoneNumber" = @p3, "VendorId" = @p4
+WHERE "Id" = @p5;
+2025-05-27 11:14:58.486 +02:00 [INF] Business profile updated successfully for VendorId: 5904cb75-889b-4a3b-9988-5b1223ee0db8, ProfileId: 1
+2025-05-27 11:14:58.489 +02:00 [INF] Handled UpdateBusinessProfileCommand with Ardalis.Result.Result`1[TNK.UseCases.BusinessProfiles.BusinessProfileDTO] in 24 ms
+2025-05-27 11:14:58.492 +02:00 [INF] Executed endpoint 'HTTP: PUT /api/businessprofiles/my'
+2025-05-27 11:14:58.495 +02:00 [INF] Request finished HTTP/2 PUT https://localhost:57679/api/businessprofiles/my - 200 null application/json; charset=utf-8 62.1429ms
+2025-05-27 12:13:20.842 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 12:13:20.890 +02:00 [INF] Registered 10 endpoints in 1,019 milliseconds.
+2025-05-27 12:13:22.841 +02:00 [INF] Executed DbCommand (70ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 12:13:22.933 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 12:13:22.940 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 12:13:22.964 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 12:13:23.166 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 12:13:23.174 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 12:13:23.880 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 12:13:23.882 +02:00 [INF] Hosting environment: Development
+2025-05-27 12:13:23.884 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 14:37:41.664 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 14:37:41.949 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 14:37:41.956 +02:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-05-27 14:37:41.958 +02:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-05-27 14:37:41.964 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 405 0 null 310.4791ms
+2025-05-27 14:37:50.296 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 14:37:50.306 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 14:37:50.308 +02:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-05-27 14:37:50.311 +02:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-05-27 14:37:50.314 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 405 0 null 18.5789ms
+2025-05-27 14:38:36.732 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 14:38:36.744 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 14:38:36.747 +02:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-05-27 14:38:36.749 +02:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-05-27 14:38:36.751 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 405 0 null 19.2025ms
+2025-05-27 14:39:52.359 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 14:39:52.401 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 14:39:52.403 +02:00 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-05-27 14:39:52.404 +02:00 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-05-27 14:39:52.406 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 405 0 null 46.7331ms
+2025-05-27 14:44:27.788 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 14:44:27.822 +02:00 [INF] Registered 10 endpoints in 851 milliseconds.
+2025-05-27 14:44:29.116 +02:00 [INF] Executed DbCommand (52ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 14:44:29.201 +02:00 [INF] Executed DbCommand (7ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 14:44:29.209 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 14:44:29.240 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 14:44:29.425 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 14:44:29.431 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 14:44:30.019 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 14:44:30.021 +02:00 [INF] Hosting environment: Development
+2025-05-27 14:44:30.023 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 14:47:57.579 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 14:47:57.624 +02:00 [INF] Registered 10 endpoints in 800 milliseconds.
+2025-05-27 14:47:59.010 +02:00 [INF] Executed DbCommand (55ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 14:47:59.079 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 14:47:59.085 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 14:47:59.106 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 14:47:59.318 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 14:47:59.325 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 14:48:00.003 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 14:48:00.005 +02:00 [INF] Hosting environment: Development
+2025-05-27 14:48:00.007 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 14:48:16.119 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 14:48:16.172 +02:00 [INF] CORS policy execution successful.
+2025-05-27 14:48:16.180 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 65.9647ms
+2025-05-27 14:48:16.188 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 52
+2025-05-27 14:48:16.196 +02:00 [INF] CORS policy execution successful.
+2025-05-27 14:48:16.252 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 14:48:16.258 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 14:48:16.370 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 14:48:16.376 +02:00 [WRN] Login failed: User maremilojkovic@gmail.com not found.
+2025-05-27 14:48:16.383 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 14:48:16.391 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 401 null null 203.1065ms
+2025-05-27 14:48:34.628 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/index.html - null null
+2025-05-27 14:48:34.759 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/index.html - 200 null text/html; charset=utf-8 130.9912ms
+2025-05-27 14:48:35.166 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-27 14:48:35.182 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/_vs/browserLink - null null
+2025-05-27 14:48:35.184 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_framework/aspnetcore-browser-refresh.js - 200 16499 application/javascript; charset=utf-8 17.7581ms
+2025-05-27 14:48:35.241 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/_vs/browserLink - 200 null text/javascript; charset=UTF-8 58.84ms
+2025-05-27 14:48:35.296 +02:00 [INF] Request starting HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - null null
+2025-05-27 14:48:35.372 +02:00 [INF] Request finished HTTP/2 GET https://localhost:57679/swagger/v1/swagger.json - 200 null application/json; charset=utf-8 76.0672ms
+2025-05-27 14:48:48.668 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 14:48:48.674 +02:00 [INF] CORS policy execution successful.
+2025-05-27 14:48:48.675 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 7.3525ms
+2025-05-27 14:48:48.677 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 57
+2025-05-27 14:48:48.686 +02:00 [INF] CORS policy execution successful.
+2025-05-27 14:48:48.688 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 14:48:48.690 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 14:48:48.710 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 14:48:48.886 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 14:48:48.924 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 14:48:48.937 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 14:48:48.939 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 262.418ms
+2025-05-27 14:59:50.739 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 14:59:50.750 +02:00 [INF] CORS policy execution successful.
+2025-05-27 14:59:50.751 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 12.4041ms
+2025-05-27 14:59:50.753 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 137
+2025-05-27 14:59:50.760 +02:00 [INF] CORS policy execution successful.
+2025-05-27 14:59:50.764 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 14:59:50.808 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 14:59:50.811 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 14:59:50.823 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 14:59:50.825 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 72.393ms
+2025-05-27 14:59:57.842 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 14:59:57.848 +02:00 [INF] CORS policy execution successful.
+2025-05-27 14:59:57.851 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 8.6201ms
+2025-05-27 14:59:57.854 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 141
+2025-05-27 14:59:57.863 +02:00 [INF] CORS policy execution successful.
+2025-05-27 14:59:57.865 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 14:59:57.868 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 14:59:57.871 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 14:59:57.873 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 14:59:57.875 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 21.1282ms
+2025-05-27 15:00:03.674 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 15:00:03.680 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:00:03.682 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 7.8493ms
+2025-05-27 15:00:03.684 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 141
+2025-05-27 15:00:03.697 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:00:03.699 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 15:00:03.701 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 15:00:03.703 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:00:03.706 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:00:03.709 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 24.2658ms
+2025-05-27 15:05:36.078 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 15:05:36.090 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:05:36.093 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 14.5275ms
+2025-05-27 15:05:36.095 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 151
+2025-05-27 15:05:36.104 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:05:36.107 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 15:05:36.109 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 15:05:36.110 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:05:36.112 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:05:36.114 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 19.5097ms
+2025-05-27 15:07:16.257 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 15:07:16.294 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:07:16.295 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 37.5008ms
+2025-05-27 15:07:16.297 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 133
+2025-05-27 15:07:16.305 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:07:16.306 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 15:07:16.308 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:07:16.310 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:07:16.311 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 14.9227ms
+2025-05-27 15:44:27.168 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 15:44:27.179 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:44:27.181 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 12.6588ms
+2025-05-27 15:44:27.182 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 137
+2025-05-27 15:44:27.190 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:44:27.192 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 15:44:27.194 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 15:44:27.196 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:45:23.138 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:45:23.176 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 55993.641ms
+2025-05-27 15:45:34.148 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 15:45:34.153 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:45:34.155 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 6.4483ms
+2025-05-27 15:45:34.158 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 137
+2025-05-27 15:45:34.172 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:45:34.174 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 15:45:34.176 +02:00 [INF] JWT Token Validated for: john.doe@vendor.com
+2025-05-27 15:45:34.179 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:49:11.744 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:49:11.752 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 217593.982ms
+2025-05-27 15:57:04.348 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 15:57:04.358 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:57:04.361 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 12.5287ms
+2025-05-27 15:57:04.363 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 137
+2025-05-27 15:57:04.373 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:57:04.374 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 15:57:04.376 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:57:20.826 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:57:20.830 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 16466.5127ms
+2025-05-27 15:57:40.316 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 15:57:40.322 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:57:40.325 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 8.5381ms
+2025-05-27 15:57:40.327 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 137
+2025-05-27 15:57:40.336 +02:00 [INF] CORS policy execution successful.
+2025-05-27 15:57:40.338 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 15:57:40.339 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:57:44.132 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 15:57:44.134 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 3807.4449ms
+2025-05-27 16:01:57.079 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 16:01:57.111 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:01:57.113 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 33.5974ms
+2025-05-27 16:01:57.115 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 137
+2025-05-27 16:01:57.123 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:01:57.125 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:01:57.126 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:04:26.950 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:04:26.958 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 149842.81ms
+2025-05-27 16:07:13.512 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 16:07:13.519 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:07:13.520 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 7.7956ms
+2025-05-27 16:07:13.557 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 126
+2025-05-27 16:07:13.569 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:07:13.571 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:07:13.573 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:07:17.325 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:07:17.333 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:07:17.342 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:07:17.345 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 3788.033ms
+2025-05-27 16:07:23.623 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 16:07:23.630 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:07:23.633 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 10.1412ms
+2025-05-27 16:07:23.636 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 126
+2025-05-27 16:07:23.648 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:07:23.650 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:07:23.652 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:07:26.030 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:07:32.862 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:09:16.008 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:09:16.048 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 112410.9728ms
+2025-05-27 16:09:20.875 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 16:09:20.880 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:09:20.881 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 5.9653ms
+2025-05-27 16:09:20.883 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 126
+2025-05-27 16:09:20.893 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:09:20.895 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:09:20.896 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:09:24.217 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:09:24.227 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:09:24.232 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:09:24.234 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 3350.889ms
+2025-05-27 16:09:27.328 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 16:09:27.333 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:09:27.334 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 6.2346ms
+2025-05-27 16:09:27.336 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 126
+2025-05-27 16:09:27.344 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:09:27.346 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:09:27.347 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:09:35.748 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:09:35.757 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:09:35.760 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:09:35.761 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 8425.5723ms
+2025-05-27 16:09:37.102 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 16:09:37.107 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:09:37.109 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 6.8156ms
+2025-05-27 16:09:37.111 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 126
+2025-05-27 16:09:37.118 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:09:37.120 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:09:37.121 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:09:40.641 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:09:41.037 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:10:07.676 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:10:07.679 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 30567.7862ms
+2025-05-27 16:10:08.999 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 16:10:09.008 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:10:09.010 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 11.0643ms
+2025-05-27 16:10:09.012 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 136
+2025-05-27 16:10:09.027 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:10:09.029 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:10:09.032 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:10:11.116 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:10:11.123 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:10:11.126 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:10:11.128 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 400 null application/problem+json; charset=utf-8 2116.0616ms
+2025-05-27 16:10:13.661 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 136
+2025-05-27 16:10:13.665 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:10:13.667 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:10:13.669 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:10:22.529 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:10:22.536 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:10:47.639 +02:00 [INF] User profile is available. Using 'C:\Users\marem\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-27 16:10:47.671 +02:00 [INF] Registered 10 endpoints in 1,913 milliseconds.
+2025-05-27 16:10:49.601 +02:00 [INF] Executed DbCommand (49ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:10:49.677 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:10:49.684 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:10:49.702 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Contributors" AS c)
+2025-05-27 16:10:49.945 +02:00 [INF] Now listening on: https://localhost:57679
+2025-05-27 16:10:49.953 +02:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2025-05-27 16:10:50.760 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-27 16:10:50.762 +02:00 [INF] Hosting environment: Development
+2025-05-27 16:10:50.763 +02:00 [INF] Content root path: C:\Users\marem\projects\TNK\src\TNK.Web
+2025-05-27 16:11:12.252 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 16:11:12.330 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:11:12.337 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 89.1033ms
+2025-05-27 16:11:12.343 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 126
+2025-05-27 16:11:12.356 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:11:12.424 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:11:12.430 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:11:12.538 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:11:12.554 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:11:12.650 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-05-27 16:11:12.658 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:11:12.815 +02:00 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?', @p1='?' (DbType = Int32), @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime), @p9='?', @p10='?', @p11='?', @p12='?', @p13='?' (DbType = Boolean), @p14='?', @p15='?' (DbType = Boolean), @p16='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUsers" ("Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16);
+2025-05-27 16:11:12.843 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-05-27 16:11:12.883 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-05-27 16:11:12.890 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-05-27 16:11:12.907 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-05-27 16:11:12.913 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:11:12.947 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?', @p1='?', @p18='?', @p2='?' (DbType = Int32), @p3='?', @p19='?', @p4='?', @p5='?' (DbType = Boolean), @p6='?', @p7='?', @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime), @p10='?', @p11='?', @p12='?', @p13='?', @p14='?' (DbType = Boolean), @p15='?', @p16='?' (DbType = Boolean), @p17='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUserRoles" ("RoleId", "UserId")
+VALUES (@p0, @p1);
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p2, "ConcurrencyStamp" = @p3, "Email" = @p4, "EmailConfirmed" = @p5, "FirstName" = @p6, "LastName" = @p7, "LockoutEnabled" = @p8, "LockoutEnd" = @p9, "NormalizedEmail" = @p10, "NormalizedUserName" = @p11, "PasswordHash" = @p12, "PhoneNumber" = @p13, "PhoneNumberConfirmed" = @p14, "SecurityStamp" = @p15, "TwoFactorEnabled" = @p16, "UserName" = @p17
+WHERE "Id" = @p18 AND "ConcurrencyStamp" = @p19;
+2025-05-27 16:11:12.971 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:11:12.980 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 200 null application/json; charset=utf-8 637.271ms
+2025-05-27 16:11:17.108 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 16:11:17.115 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:11:17.116 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 8.4501ms
+2025-05-27 16:11:17.118 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 43
+2025-05-27 16:11:17.126 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:11:17.128 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:11:17.130 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:11:17.151 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:11:17.284 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 16:11:17.321 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 16:11:17.333 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:11:17.336 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 218.2765ms
+2025-05-27 16:15:28.416 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 16:15:28.426 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:15:28.428 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 11.7712ms
+2025-05-27 16:15:28.430 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 38
+2025-05-27 16:15:28.438 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:15:28.440 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:15:28.442 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:15:28.449 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:15:28.455 +02:00 [WRN] Login failed: User Dasda@fda not found.
+2025-05-27 16:15:28.458 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:15:28.459 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 401 null null 29.5149ms
+2025-05-27 16:15:37.884 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 16:15:37.888 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:15:37.889 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 4.6532ms
+2025-05-27 16:15:37.891 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 42
+2025-05-27 16:15:37.899 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:15:37.900 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:15:37.902 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:15:37.906 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:15:37.909 +02:00 [WRN] Login failed: User Dasda@fda.com not found.
+2025-05-27 16:15:37.912 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:15:37.915 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 401 null null 23.8107ms
+2025-05-27 16:15:49.784 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 16:15:49.790 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:15:49.792 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 7.5636ms
+2025-05-27 16:15:49.794 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 42
+2025-05-27 16:15:49.801 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:15:49.802 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:15:49.803 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:15:49.808 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:15:49.813 +02:00 [WRN] Login failed: User Dasda@fda.com not found.
+2025-05-27 16:15:49.815 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:15:49.816 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 401 null null 22.757ms
+2025-05-27 16:16:07.974 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 16:16:07.980 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:16:07.982 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 8.0877ms
+2025-05-27 16:16:07.997 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 42
+2025-05-27 16:16:08.001 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:16:08.002 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:16:08.004 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:16:08.028 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:16:08.031 +02:00 [WRN] Login failed: User Dasda@fda.com not found.
+2025-05-27 16:16:08.033 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:16:08.035 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 401 null null 37.2928ms
+2025-05-27 16:16:22.408 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 16:16:22.414 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:16:22.416 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 7.8336ms
+2025-05-27 16:16:22.430 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 42
+2025-05-27 16:16:22.435 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:16:22.436 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:16:22.438 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:16:22.444 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:16:22.447 +02:00 [WRN] Login failed: User Dasda@fda.com not found.
+2025-05-27 16:16:22.449 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:16:22.451 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 401 null null 21.134ms
+2025-05-27 16:17:03.495 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 16:17:03.511 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:17:03.515 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 19.39ms
+2025-05-27 16:17:03.525 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 42
+2025-05-27 16:17:03.536 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:17:03.538 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:17:03.541 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:17:03.545 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:17:03.549 +02:00 [WRN] Login failed: User Dasda@fda.com not found.
+2025-05-27 16:17:03.551 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:17:03.553 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 401 null null 28.2132ms
+2025-05-27 16:17:18.899 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 16:17:18.905 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:17:18.906 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 6.6777ms
+2025-05-27 16:17:18.908 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 43
+2025-05-27 16:17:18.915 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:17:18.917 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:17:18.919 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:17:18.926 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:17:19.003 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 16:17:19.011 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 16:17:19.015 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:17:19.017 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 109.6153ms
+2025-05-27 16:22:14.116 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/register - null null
+2025-05-27 16:22:14.121 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:22:14.122 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/register - 204 null null 6.3543ms
+2025-05-27 16:22:14.124 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/register - application/json 120
+2025-05-27 16:22:14.132 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:22:14.134 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:22:14.173 +02:00 [INF] JWT Token Validated for: prodavac@local
+2025-05-27 16:22:14.176 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:22:14.198 +02:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-05-27 16:22:14.204 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:22:14.274 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-05-27 16:22:14.279 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:22:14.287 +02:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?', @p1='?' (DbType = Int32), @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime), @p9='?', @p10='?', @p11='?', @p12='?', @p13='?' (DbType = Boolean), @p14='?', @p15='?' (DbType = Boolean), @p16='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUsers" ("Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16);
+2025-05-27 16:22:14.293 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-05-27 16:22:14.298 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-05-27 16:22:14.302 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-05-27 16:22:14.307 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-05-27 16:22:14.311 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:22:14.317 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?', @p1='?', @p18='?', @p2='?' (DbType = Int32), @p3='?', @p19='?', @p4='?', @p5='?' (DbType = Boolean), @p6='?', @p7='?', @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime), @p10='?', @p11='?', @p12='?', @p13='?', @p14='?' (DbType = Boolean), @p15='?', @p16='?' (DbType = Boolean), @p17='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUserRoles" ("RoleId", "UserId")
+VALUES (@p0, @p1);
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p2, "ConcurrencyStamp" = @p3, "Email" = @p4, "EmailConfirmed" = @p5, "FirstName" = @p6, "LastName" = @p7, "LockoutEnabled" = @p8, "LockoutEnd" = @p9, "NormalizedEmail" = @p10, "NormalizedUserName" = @p11, "PasswordHash" = @p12, "PhoneNumber" = @p13, "PhoneNumberConfirmed" = @p14, "SecurityStamp" = @p15, "TwoFactorEnabled" = @p16, "UserName" = @p17
+WHERE "Id" = @p18 AND "ConcurrencyStamp" = @p19;
+2025-05-27 16:22:14.324 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/register'
+2025-05-27 16:22:14.326 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/register - 200 null application/json; charset=utf-8 201.2191ms
+2025-05-27 16:29:30.199 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 16:29:30.211 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:29:30.213 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 14.7678ms
+2025-05-27 16:29:30.215 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 43
+2025-05-27 16:29:30.223 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:29:30.225 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:29:30.227 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:29:30.254 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:29:30.326 +02:00 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 16:29:30.332 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 16:29:30.335 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:29:30.337 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 122.0393ms
+2025-05-27 16:29:42.745 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 16:29:42.750 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:29:42.751 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 6.2873ms
+2025-05-27 16:29:42.753 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 43
+2025-05-27 16:29:42.762 +02:00 [INF] CORS policy execution successful.
+2025-05-27 16:29:42.764 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 16:29:42.765 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:29:42.769 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 16:29:42.841 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 16:29:42.847 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 16:29:42.851 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 16:29:42.853 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 100.6449ms
+2025-05-27 17:47:13.418 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 17:47:13.487 +02:00 [INF] CORS policy execution successful.
+2025-05-27 17:47:13.489 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 71.036ms
+2025-05-27 17:47:13.491 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 43
+2025-05-27 17:47:13.500 +02:00 [INF] CORS policy execution successful.
+2025-05-27 17:47:13.501 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 17:47:13.504 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 17:47:13.554 +02:00 [INF] Executed DbCommand (16ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 17:47:13.638 +02:00 [INF] Executed DbCommand (6ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 17:47:13.646 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 17:47:13.651 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 17:47:13.654 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 163.5773ms
+2025-05-27 17:50:04.179 +02:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:57679/api/auth/login - null null
+2025-05-27 17:50:04.207 +02:00 [INF] CORS policy execution successful.
+2025-05-27 17:50:04.223 +02:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:57679/api/auth/login - 204 null null 47.8523ms
+2025-05-27 17:50:04.275 +02:00 [INF] Request starting HTTP/2 POST https://localhost:57679/api/auth/login - application/json 43
+2025-05-27 17:50:04.289 +02:00 [INF] CORS policy execution successful.
+2025-05-27 17:50:04.291 +02:00 [INF] JWT Message Received. Token found in header: false
+2025-05-27 17:50:04.296 +02:00 [INF] JWT Token Validated for: prodavac@local
+2025-05-27 17:50:04.302 +02:00 [INF] Executing endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 17:50:04.311 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."Email", a."EmailConfirmed", a."FirstName", a."LastName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-05-27 17:50:04.490 +02:00 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 17:50:04.862 +02:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-05-27 17:50:05.160 +02:00 [INF] Executed endpoint 'HTTP: POST /api/auth/login'
+2025-05-27 17:50:05.388 +02:00 [INF] Request finished HTTP/2 POST https://localhost:57679/api/auth/login - 200 null application/json; charset=utf-8 1112.2732ms
