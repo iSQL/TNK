@@ -1,29 +1,31 @@
-﻿using Ardalis.Result.FluentValidation;
+﻿using Ardalis.Result;
+using Ardalis.Result.FluentValidation;
+using Ardalis.SharedKernel;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using TNK.Core.ServiceManagementAggregate.Entities;
-// Assuming you have a way to get current user's BusinessProfileId if needed
-// using TNK.Core.Interfaces; // For something like ICurrentUserService
+using TNK.Core.Interfaces; // For ICurrentUserService
 
 namespace TNK.UseCases.Services.Create;
 
 public class CreateServiceHandler : IRequestHandler<CreateServiceCommand, Result<Guid>>
 {
-  private readonly IRepository<Service> _repository; // Using generic IRepository<Service>
+  private readonly IRepository<Service> _repository;
   private readonly IValidator<CreateServiceCommand> _validator;
   private readonly ILogger<CreateServiceHandler> _logger;
-  // private readonly ICurrentUserService _currentUserService; // Example if needed for auth/scoping
+  private readonly ICurrentUserService _currentUserService; // Inject the service
 
   public CreateServiceHandler(
       IRepository<Service> repository,
       IValidator<CreateServiceCommand> validator,
-      ILogger<CreateServiceHandler> logger)
+      ILogger<CreateServiceHandler> logger,
+      ICurrentUserService currentUserService) // Add to constructor
   {
     _repository = repository;
     _validator = validator;
     _logger = logger;
-    // _currentUserService = currentUserService;
+    _currentUserService = currentUserService; // Assign
   }
 
   public async Task<Result<Guid>> Handle(CreateServiceCommand request, CancellationToken cancellationToken)
@@ -37,20 +39,34 @@ public class CreateServiceHandler : IRequestHandler<CreateServiceCommand, Result
       return Result<Guid>.Invalid(validationResult.AsErrors());
     }
 
-    // Authorization check: Ensure the current user is authorized to create a service for the given BusinessProfileId.
-    // This logic might involve an ICurrentUserService or similar to get the authenticated user's claims
-    // and verify they own/manage the request.BusinessProfileId.
-    // For example:
-    // var currentUserBusinessProfileId = await _currentUserService.GetBusinessProfileIdAsync();
-    // if (currentUserBusinessProfileId != request.BusinessProfileId && !await _currentUserService.IsAdminAsync())
-    // {
-    //     _logger.LogWarning("User not authorized to create service for BusinessProfileId {TargetBusinessProfileId}", request.BusinessProfileId);
-    //     return Result<Guid>.Unauthorized();
-    // }
+    // Authorization check:
+    if (!_currentUserService.IsAuthenticated)
+    {
+      _logger.LogWarning("User is not authenticated.");
+      return Result<Guid>.Unauthorized();
+    }
 
+    var authenticatedUserBusinessProfileId = _currentUserService.BusinessProfileId;
+
+    // Ensure the user is associated with a business profile
+    if (authenticatedUserBusinessProfileId == null)
+    {
+      _logger.LogWarning("User {UserId} is not associated with any BusinessProfileId.", _currentUserService.UserId);
+      return Result<Guid>.Forbidden("User is not associated with a business profile.");
+    }
+
+    // Ensure the command's BusinessProfileId matches the authenticated user's BusinessProfileId
+    // This is crucial for vendor owners creating services for their own business.
+    // Admins might have different logic.
+    if (authenticatedUserBusinessProfileId != request.BusinessProfileId && !_currentUserService.IsInRole("Admin")) // Example admin override
+    {
+      _logger.LogWarning("User (BusinessProfileId: {AuthUserBusinessId}) is not authorized to create a service for the target BusinessProfileId ({TargetBusinessId}).",
+          authenticatedUserBusinessProfileId, request.BusinessProfileId);
+      return Result<Guid>.Forbidden("User is not authorized for the specified business profile.");
+    }
 
     var newService = new Service(
-        request.BusinessProfileId,
+        request.BusinessProfileId, // Use the validated and authorized BusinessProfileId
         request.Name,
         request.DurationInMinutes,
         request.Price
@@ -65,12 +81,11 @@ public class CreateServiceHandler : IRequestHandler<CreateServiceCommand, Result
     {
       newService.SetImageUrl(request.ImageUrl);
     }
-    // IsActive is true by default in the Service constructor.
 
     try
     {
       var createdService = await _repository.AddAsync(newService, cancellationToken);
-      await _repository.SaveChangesAsync(cancellationToken); // Ensure changes are saved if AddAsync doesn't do it immediately.
+      await _repository.SaveChangesAsync(cancellationToken);
 
       if (createdService == null || createdService.Id == Guid.Empty)
       {
@@ -84,7 +99,6 @@ public class CreateServiceHandler : IRequestHandler<CreateServiceCommand, Result
     catch (Exception ex)
     {
       _logger.LogError(ex, "Error creating service for BusinessProfileId {BusinessProfileId}: {ErrorMessage}", request.BusinessProfileId, ex.Message);
-      // It's often better to return a generic error to the client unless specific errors are expected and handled.
       return Result<Guid>.Error($"An error occurred while creating the service: {ex.Message}");
     }
   }

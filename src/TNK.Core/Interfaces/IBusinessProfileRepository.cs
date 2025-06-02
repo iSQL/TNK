@@ -1,5 +1,5 @@
 ﻿
-using Ardalis.SharedKernel; // Provides IRepository<T> and IReadRepository<T>
+using Ardalis.SharedKernel; 
 using TNK.Core.BusinessAggregate; 
 
 namespace TNK.Core.Interfaces;

@@ -5,7 +5,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using TNK.Core.ServiceManagementAggregate.Entities;
-// using TNK.Core.Interfaces; // Placeholder for your ICurrentUserService or similar
+using TNK.Core.Interfaces; 
 
 namespace TNK.UseCases.Services.Delete;
 
@@ -14,18 +14,18 @@ public class DeleteServiceHandler : IRequestHandler<DeleteServiceCommand, Result
   private readonly IRepository<Service> _repository;
   private readonly IValidator<DeleteServiceCommand> _validator;
   private readonly ILogger<DeleteServiceHandler> _logger;
-  // private readonly ICurrentUserService _currentUserService; // For authorization
+  private readonly ICurrentUserService _currentUserService;  
 
   public DeleteServiceHandler(
       IRepository<Service> repository,
       IValidator<DeleteServiceCommand> validator,
-      ILogger<DeleteServiceHandler> logger)
-  // ICurrentUserService currentUserService) // Uncomment and inject for authorization
+      ILogger<DeleteServiceHandler> logger,
+   ICurrentUserService currentUserService) 
   {
     _repository = repository;
     _validator = validator;
     _logger = logger;
-    // _currentUserService = currentUserService; // Uncomment for authorization
+    _currentUserService = currentUserService; 
   }
 
   public async Task<Result> Handle(DeleteServiceCommand request, CancellationToken cancellationToken)
@@ -48,19 +48,13 @@ public class DeleteServiceHandler : IRequestHandler<DeleteServiceCommand, Result
       return Result.NotFound($"Service with Id {request.ServiceId} not found.");
     }
 
-    // Authorization Check:
-    // 1. TODO: Get the BusinessProfileId of the currently authenticated user (e.g., from _currentUserService.GetBusinessProfileIdAsync()).
-    // 2. Compare it with request.BusinessProfileId to ensure the user is acting on behalf of the correct business.
-    // 3. Compare serviceToDelete.BusinessProfileId with request.BusinessProfileId to ensure the service belongs to that business.
-
-    // Example conceptual authorization:
-    // var authenticatedUserBusinessProfileId = await _currentUserService.GetBusinessProfileIdAsync();
-    // if (authenticatedUserBusinessProfileId == null || authenticatedUserBusinessProfileId != request.BusinessProfileId)
-    // {
-    //     _logger.LogWarning("User (Authenticated BusinessProfileId: {AuthUserBusinessId}) is not authorized or mismatch with command's BusinessProfileId ({CommandBusinessId}) for ServiceId {ServiceId}.",
-    //         authenticatedUserBusinessProfileId, request.BusinessProfileId, request.ServiceId);
-    //     return Result.Forbidden("User is not authorized for the specified business profile.");
-    // }
+    var authenticatedUserBusinessProfileId = _currentUserService.BusinessProfileId;
+    if (authenticatedUserBusinessProfileId == null || authenticatedUserBusinessProfileId != request.BusinessProfileId)
+    {
+      _logger.LogWarning("User (Authenticated BusinessProfileId: {AuthUserBusinessId}) is not authorized or mismatch with command's BusinessProfileId ({CommandBusinessId}) for ServiceId {ServiceId}.",
+          authenticatedUserBusinessProfileId, request.BusinessProfileId, request.ServiceId);
+      return Result.Forbidden("User is not authorized for the specified business profile.");
+    }
 
     if (serviceToDelete.BusinessProfileId != request.BusinessProfileId)
     {

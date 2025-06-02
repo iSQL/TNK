@@ -8,8 +8,8 @@ using Microsoft.Extensions.Logging;
 using TNK.Core.ServiceManagementAggregate.Entities;
 using TNK.UseCases.Services.Specifications; // For ServicesByBusinessSpec
 using TNK.UseCases.Services; // For ServiceDTO
-// using TNK.Core.Interfaces; // For ICurrentUserService
-// using TNK.UseCases.Common.Models; // For PagedResult if using pagination
+using TNK.Core.Interfaces; // For ICurrentUserService
+using TNK.UseCases.Common.Models; // For PagedResult if using pagination
 
 namespace TNK.UseCases.Services.ListByBusiness;
 
@@ -18,18 +18,18 @@ public class ListServicesByBusinessQueryHandler : IRequestHandler<ListServicesBy
   private readonly IReadRepository<Service> _repository;
   private readonly IValidator<ListServicesByBusinessQuery> _validator;
   private readonly ILogger<ListServicesByBusinessQueryHandler> _logger;
-  // private readonly ICurrentUserService _currentUserService; // For authorization
+  private readonly ICurrentUserService _currentUserService; // For authorization
 
   public ListServicesByBusinessQueryHandler(
       IReadRepository<Service> repository,
       IValidator<ListServicesByBusinessQuery> validator,
-      ILogger<ListServicesByBusinessQueryHandler> logger)
-  // ICurrentUserService currentUserService) // For authorization
+      ILogger<ListServicesByBusinessQueryHandler> logger,
+   ICurrentUserService currentUserService) // For authorization
   {
     _repository = repository;
     _validator = validator;
     _logger = logger;
-    // _currentUserService = currentUserService;
+    _currentUserService = currentUserService;
   }
 
   public async Task<Result<List<ServiceDTO>>> Handle(ListServicesByBusinessQuery request, CancellationToken cancellationToken)
@@ -47,13 +47,13 @@ public class ListServicesByBusinessQueryHandler : IRequestHandler<ListServicesBy
     // TODO: Ensure the currently authenticated user is authorized to view services for request.BusinessProfileId.
     // This usually means their own BusinessProfileId should match request.BusinessProfileId, or they are an admin.
     // Example:
-    // var authenticatedUserBusinessProfileId = await _currentUserService.GetBusinessProfileIdAsync();
-    // if (authenticatedUserBusinessProfileId == null || (authenticatedUserBusinessProfileId != request.BusinessProfileId && !await _currentUserService.IsAdminAsync()))
-    // {
-    //     _logger.LogWarning("User (Authenticated BusinessProfileId: {AuthUserBusinessId}) is not authorized to list services for BusinessProfileId: {QueryBusinessId}.",
-    //         authenticatedUserBusinessProfileId, request.BusinessProfileId);
-    //     return Result<List<ServiceDTO>>.Forbidden("User is not authorized for the specified business profile.");
-    // }
+    var authenticatedUserBusinessProfileId = _currentUserService.BusinessProfileId;
+    if (authenticatedUserBusinessProfileId == null || (authenticatedUserBusinessProfileId != request.BusinessProfileId && _currentUserService.Roles.Contains("Admin")))
+    {
+      _logger.LogWarning("User (Authenticated BusinessProfileId: {AuthUserBusinessId}) is not authorized to list services for BusinessProfileId: {QueryBusinessId}.",
+          authenticatedUserBusinessProfileId, request.BusinessProfileId);
+      return Result<List<ServiceDTO>>.Forbidden("User is not authorized for the specified business profile.");
+    }
 
     var spec = new ServicesByBusinessSpec(request.BusinessProfileId);
     // If implementing pagination:

@@ -1,8 +1,10 @@
 ﻿using System.Globalization;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
+using TNK.Core.Interfaces;
 using TNK.Web.Configurations;
 using TNK.Web.Resources;
+using TNK.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,7 @@ var appLogger = new SerilogLoggerFactory(logger)
 
 builder.Services.AddOptionConfigs(builder.Configuration, appLogger, builder);
 builder.Services.AddServiceConfigs(appLogger, builder);
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>(); // Or AddTransient/AddSingleton depending on lifetime needs, Scoped is common
 
 var app = builder.Build();
 

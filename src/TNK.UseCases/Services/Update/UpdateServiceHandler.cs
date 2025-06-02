@@ -6,8 +6,8 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using TNK.Core.ServiceManagementAggregate.Entities;
 using TNK.UseCases.Services; // For ServiceDto
-// using TNK.Core.ServiceManagementAggregate.Interfaces; // Specific repository if preferred
-// using TNK.Core.Interfaces; // For ICurrentUserService
+using TNK.Core.ServiceManagementAggregate.Interfaces; // Specific repository if preferred
+using TNK.Core.Interfaces; // For ICurrentUserService
 
 namespace TNK.UseCases.Services.Update;
 
@@ -16,18 +16,18 @@ public class UpdateServiceHandler : IRequestHandler<UpdateServiceCommand, Result
   private readonly IRepository<Service> _repository;
   private readonly IValidator<UpdateServiceCommand> _validator;
   private readonly ILogger<UpdateServiceHandler> _logger;
-  // private readonly ICurrentUserService _currentUserService; // For authorization
+  private readonly ICurrentUserService _currentUserService; 
 
   public UpdateServiceHandler(
       IRepository<Service> repository,
       IValidator<UpdateServiceCommand> validator,
-      ILogger<UpdateServiceHandler> logger)
-  // ICurrentUserService currentUserService) // For authorization
+      ILogger<UpdateServiceHandler> logger,
+   ICurrentUserService currentUserService) 
   {
     _repository = repository;
     _validator = validator;
     _logger = logger;
-    // _currentUserService = currentUserService;
+    _currentUserService = currentUserService;
   }
 
   public async Task<Result<ServiceDTO>> Handle(UpdateServiceCommand request, CancellationToken cancellationToken)
@@ -48,21 +48,14 @@ public class UpdateServiceHandler : IRequestHandler<UpdateServiceCommand, Result
       return Result<ServiceDTO>.NotFound($"Service with Id {request.ServiceId} not found.");
     }
 
-    // TODO: Authorization check:
-    // 1. Get the current authenticated user's BusinessProfileId (e.g., via _currentUserService).
-    // 2. Ensure current authenticated user's BusinessProfileId matches request.BusinessProfileId.
-    // 3. Ensure serviceToUpdate.BusinessProfileId also matches request.BusinessProfileId.
-    // This prevents a user from one business updating a service of another business,
-    // and also prevents updating a service if the command's BusinessProfileId doesn't match the service's actual owner.
 
-    // Example (conceptual - adapt with your actual ICurrentUserService):
-    // var authenticatedUserBusinessProfileId = await _currentUserService.GetBusinessProfileIdAsync();
-    // if (authenticatedUserBusinessProfileId != request.BusinessProfileId)
-    // {
-    //     _logger.LogWarning("User (BusinessProfileId: {UserBusinessProfileId}) attempting to update service using an incorrect command BusinessProfileId ({CommandBusinessProfileId}) for ServiceId {ServiceId}.",
-    //         authenticatedUserBusinessProfileId, request.BusinessProfileId, request.ServiceId);
-    //     return Result<ServiceDto>.Forbidden("Operation not allowed.");
-    // }
+     var authenticatedUserBusinessProfileId = _currentUserService.BusinessProfileId;
+    if (authenticatedUserBusinessProfileId != request.BusinessProfileId)
+    {
+      _logger.LogWarning("User (BusinessProfileId: {UserBusinessProfileId}) attempting to update service using an incorrect command BusinessProfileId ({CommandBusinessProfileId}) for ServiceId {ServiceId}.",
+          authenticatedUserBusinessProfileId, request.BusinessProfileId, request.ServiceId);
+      return Result<ServiceDTO>.Forbidden("Operation not allowed.");
+    }
 
     if (serviceToUpdate.BusinessProfileId != request.BusinessProfileId)
     {
