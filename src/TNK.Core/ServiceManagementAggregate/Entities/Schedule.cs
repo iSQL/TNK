@@ -34,6 +34,37 @@ public class Schedule : EntityBase<Guid>, IAggregateRoot
     TimeZoneId = Guard.Against.NullOrWhiteSpace(timeZoneId, nameof(timeZoneId)); // Validate against known TimeZoneInfo.GetSystemTimeZones() if possible
     IsDefault = isDefault;
   }
+  public void AddOverride(DateOnly date, string reason, bool isWorkingDay, TimeOnly? startTime = null, TimeOnly? endTime = null)
+  {
+    // Constructor of ScheduleOverride handles validation for startTime/endTime based on isWorkingDay
+    var newOverride = new ScheduleOverride(this.Id, date, reason, isWorkingDay, startTime, endTime);
+
+    // Check for existing override on the same date
+    if (Overrides.Any(o => o.OverrideDate == date))
+    {
+      throw new ArgumentException($"An override for the date {date.ToShortDateString()} already exists. Please update the existing one.");
+    }
+    Overrides.Add(newOverride);
+  }
+  /// <summary>
+  /// Removes an override from this schedule.
+  /// </summary>
+  /// <param name="scheduleOverrideId">The ID of the override to remove.</param>
+  /// <returns>True if the item was found and removed, false otherwise.</returns>
+  public bool RemoveOverride(Guid scheduleOverrideId)
+  {
+    var overrideToRemove = Overrides.FirstOrDefault(o => o.Id == scheduleOverrideId);
+    if (overrideToRemove != null)
+    {
+      Overrides.Remove(overrideToRemove);
+      // If ScheduleOverride had any dependent owned entities that need cleanup, handle here.
+      // (Currently, it does not have breaks directly as per our simplified design).
+      return true;
+    }
+    return false;
+  }
+
+
 
   public void UpdateInfo(string title, DateOnly effectiveStartDate, DateOnly? effectiveEndDate, string timeZoneId, bool isDefault)
   {
@@ -77,11 +108,6 @@ public class Schedule : EntityBase<Guid>, IAggregateRoot
     RuleItems.Add(newItem);
   }
 
-  public void AddOverride(DateOnly date, string reason, bool isWorkingDay, TimeOnly? startTime = null, TimeOnly? endTime = null)
-  {
-    var newOverride = new ScheduleOverride(this.Id, date, reason, isWorkingDay, startTime, endTime);
-    Overrides.Add(newOverride);
-  }
 }
 
 // Represents a single rule within a schedule template (e.g., Monday 9-5)
@@ -247,6 +273,38 @@ public class ScheduleOverride : EntityBase<Guid> // Owned by Schedule
         throw new ArgumentException("Start/End time should not be set for a non-working override day.");
       }
     }
+  }
+  /// <summary>
+  /// Updates the details of this schedule override.
+  /// The OverrideDate itself is not updated by this method.
+  /// </summary>
+  public void UpdateDetails(string newReason, bool newIsWorkingDay, TimeOnly? newStartTime, TimeOnly? newEndTime)
+  {
+    Reason = Guard.Against.NullOrWhiteSpace(newReason, nameof(newReason));
+    IsWorkingDay = newIsWorkingDay;
+
+    if (IsWorkingDay)
+    {
+      Guard.Against.Null(newStartTime, nameof(newStartTime), "Start time is required for a working override day.");
+      Guard.Against.Null(newEndTime, nameof(newEndTime), "End time is required for a working override day.");
+      if (newStartTime.Value >= newEndTime.Value)
+      {
+        throw new ArgumentException("For a working override day, start time must be before end time.");
+      }
+      this.StartTime = newStartTime;
+      this.EndTime = newEndTime;
+    }
+    else
+    {
+      if (newStartTime.HasValue || newEndTime.HasValue)
+      {
+        throw new ArgumentException("Start/End time should not be set for a non-working override day.");
+      }
+      this.StartTime = null;
+      this.EndTime = null;
+    }
+    // Note: Managing breaks on overrides is not part of this method.
+    // If overrides have breaks, that would be handled separately.
   }
 
   public void AddBreak(string breakName, TimeOnly breakStartTime, TimeOnly breakEndTime)
