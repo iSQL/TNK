@@ -48,6 +48,25 @@ public class Schedule : EntityBase<Guid>, IAggregateRoot
       throw new ArgumentException("Effective end date cannot be before effective start date.");
     }
   }
+  /// <summary>
+  /// Removes a rule item from this schedule.
+  /// </summary>
+  /// <param name="scheduleRuleItemId">The ID of the rule item to remove.</param>
+  /// <returns>True if the item was found and removed, false otherwise.</returns>
+  public bool RemoveRuleItem(Guid scheduleRuleItemId)
+  {
+    var ruleItemToRemove = RuleItems.FirstOrDefault(ri => ri.Id == scheduleRuleItemId);
+    if (ruleItemToRemove != null)
+    {
+      RuleItems.Remove(ruleItemToRemove);
+      // If ScheduleRuleItem had any dependent owned entities that need cleanup beyond what EF Core handles by removing from collection,
+      // that logic could go here or be handled by EF Core's cascade settings for owned types.
+      // For BreakRules, since they are part of ScheduleRuleItem, removing ScheduleRuleItem should also remove its breaks
+      // if ScheduleRuleItem is configured as the principal in that relationship with cascade delete for its Breaks.
+      return true;
+    }
+    return false;
+  }
 
   public void SetAsDefault(bool isDefault) => IsDefault = isDefault;
 
@@ -93,16 +112,66 @@ public class ScheduleRuleItem : EntityBase<Guid> // Owned by Schedule or separat
       throw new ArgumentException("For a working day, start time must be before end time.");
     }
   }
+  /// <summary>
+  /// Updates the details of this schedule rule item.
+  /// DayOfWeek is not updatable here; manage that by deleting and re-adding if necessary.
+  /// </summary>
+  public void UpdateDetails(TimeOnly newStartTime, TimeOnly newEndTime, bool newIsWorkingDay)
+  {
+    IsWorkingDay = newIsWorkingDay;
+    if (newIsWorkingDay)
+    {
+      Guard.Against.InvalidInput(newStartTime, nameof(newStartTime), st => st < newEndTime, "For a working day, start time must be before end time.");
+      StartTime = newStartTime;
+      EndTime = newEndTime;
+    }
+    else
+    {
+      // Convention for non-working days
+      StartTime = TimeOnly.MinValue;
+      EndTime = TimeOnly.MinValue;
+    }
+    // Note: Managing breaks (add/update/remove) within this rule item
+    // would typically be done through separate methods or by directly manipulating the Breaks collection
+    // followed by saving the aggregate root (Schedule).
+  }
 
   public void AddBreak(string breakName, TimeOnly breakStartTime, TimeOnly breakEndTime)
   {
+    Guard.Against.NullOrWhiteSpace(breakName, nameof(breakName));
+    if (!IsWorkingDay)
+    {
+      throw new InvalidOperationException("Breaks can only be added to a working day rule item.");
+    }
+    Guard.Against.InvalidInput(breakStartTime, nameof(breakStartTime), bst => bst >= this.StartTime && bst < this.EndTime, "Break must be within the working hours of the rule item.");
+    Guard.Against.InvalidInput(breakEndTime, nameof(breakEndTime), bet => bet <= this.EndTime && bet > this.StartTime, "Break must be within the working hours of the rule item.");
     Guard.Against.InvalidInput(breakStartTime, nameof(breakStartTime), bst => bst < breakEndTime, "Break start time must be before break end time.");
-    Guard.Against.InvalidInput(breakStartTime, nameof(breakStartTime), bst => bst >= this.StartTime && bst < this.EndTime, "Break must be within working hours.");
-    Guard.Against.InvalidInput(breakEndTime, nameof(breakEndTime), bet => bet <= this.EndTime && bet > this.StartTime, "Break must be within working hours.");
 
-    var newBreak = new BreakRule(this.Id, breakName, breakStartTime, breakEndTime);
+    // Check for overlapping breaks
+    foreach (var existingBreak in Breaks)
+    {
+      if (breakStartTime < existingBreak.EndTime && breakEndTime > existingBreak.StartTime)
+      {
+        throw new ArgumentException("The new break overlaps with an existing break.");
+      }
+    }
+
+    var newBreak = new BreakRule(this.Id, breakName, breakStartTime, breakEndTime); // Assumes BreakRule constructor takes ScheduleRuleItemId
     Breaks.Add(newBreak);
   }
+  /// <summary>
+  /// Removes eak from this schedule rule item.
+  /// </summary>
+  /// <param name="breakRuleId"></param>
+  public void RemoveBreak(Guid breakRuleId)
+  {
+    var breakToRemove = Breaks.FirstOrDefault(b => b.Id == breakRuleId);
+    if (breakToRemove != null)
+    {
+      Breaks.Remove(breakToRemove);
+    }
+  }
+
 }
 
 // Represents a break within a ScheduleRuleItem
@@ -125,6 +194,14 @@ public class BreakRule : EntityBase<Guid> // Owned by ScheduleRuleItem
     {
       throw new ArgumentException("Break start time must be before end time.");
     }
+  }
+  public void UpdateDetails(string newName, TimeOnly newStartTime, TimeOnly newEndTime)
+  {
+    Name = Guard.Against.NullOrWhiteSpace(newName, nameof(newName));
+    Guard.Against.InvalidInput(newStartTime, nameof(newStartTime), st => st < newEndTime, "Break start time must be before break end time.");
+
+    StartTime = newStartTime;
+    EndTime = newEndTime;
   }
 }
 
