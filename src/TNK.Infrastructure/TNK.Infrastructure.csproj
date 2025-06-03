@@ -25,4 +25,8 @@
     <ProjectReference Include="..\TNK.Core\TNK.Core.csproj" />
     <ProjectReference Include="..\TNK.UseCases\TNK.UseCases.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
 </Project>

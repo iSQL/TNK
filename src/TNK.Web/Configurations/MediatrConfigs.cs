@@ -3,6 +3,7 @@ using TNK.Core.ContributorAggregate;
 using TNK.UseCases.Contributors.Create;
 using MediatR;
 using System.Reflection;
+using FluentValidation;
 
 namespace TNK.Web.Configurations;
 
@@ -19,6 +20,11 @@ public static class MediatrConfigs
     services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(mediatRAssemblies!))
             .AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>))
             .AddScoped<IDomainEventDispatcher, MediatRDomainEventDispatcher>();
+
+    if (mediatRAssemblies.Length > 0)
+    {
+      services.AddValidatorsFromAssemblies(mediatRAssemblies!);
+    }
 
     return services;
   }

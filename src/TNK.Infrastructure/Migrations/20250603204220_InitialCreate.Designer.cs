@@ -9,11 +9,11 @@ using TNK.Infrastructure.Data;
 
 #nullable disable
 
-namespace TNK.Infrastructure.Data.Migrations
+namespace TNK.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250531212733_AddServiceManagementSchema")]
-    partial class AddServiceManagementSchema
+    [Migration("20250603204220_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
