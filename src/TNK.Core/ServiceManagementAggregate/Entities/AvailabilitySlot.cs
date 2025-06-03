@@ -86,22 +86,63 @@ public class AvailabilitySlot : EntityBase<Guid>, IAggregateRoot
     BookingId = null;
   }
 
-  public void UpdateTime(DateTime newStartTime, DateTime newEndTime)
+  /// <summary>
+  /// Updates the time of the availability slot.
+  /// </summary>
+  /// <param name="newStartTime">The new start time.</param>
+  /// <param name="newEndTime">The new end time.</param>
+  /// <param name="isRescheduleOfBookedSlot">
+  /// Set to true if this time update is part of a reschedule for an already booked slot.
+  /// This flag helps differentiate between updating an open slot vs. adjusting a booked one.
+  /// The application service/handler is responsible for updating the associated Booking entity's times if this is true.
+  /// </param>
+  public void UpdateTime(DateTime newStartTime, DateTime newEndTime, bool isRescheduleOfBookedSlot = false)
   {
-    // Add validation, ensure it doesn't conflict with existing bookings if status is Booked, etc.
-    // This is a complex operation if the slot is already booked.
-    if (Status == AvailabilitySlotStatus.Booked)
-    {
-      throw new InvalidOperationException("Cannot directly update time for a booked slot. Consider rescheduling the booking.");
-    }
-
     Guard.Against.Default(newStartTime, nameof(newStartTime));
     Guard.Against.Default(newEndTime, nameof(newEndTime));
     if (newEndTime <= newStartTime)
     {
       throw new ArgumentException("New end time must be after new start time.");
     }
+
+    if (Status == AvailabilitySlotStatus.Booked && !isRescheduleOfBookedSlot)
+    {
+      // Prevent accidental direct time changes on booked slots without going through a "reschedule" flow
+      // that also handles the booking entity.
+      throw new InvalidOperationException("Cannot directly update time for a booked slot without explicit reschedule intent. Associated booking must also be updated.");
+    }
+
     StartTime = newStartTime;
     EndTime = newEndTime;
+    // Note: Changing time might make it conflict with other slots.
+    // Collision detection should be handled by the Application Service before calling this method.
+  }
+
+  public void ClearBookingLink()
+  {
+    this.BookingId = null;
+    // Optionally, if clearing the booking link should always make the slot 'Available'
+    // (and it's not already being set to something else like 'Unavailable'), you could add:
+    // if (this.Status == AvailabilitySlotStatus.Booked) // Or any other relevant check
+    // {
+    //     this.Status = AvailabilitySlotStatus.Available;
+    // }
+    // However, the UpdateAvailabilitySlotHandler currently manages setting the new status explicitly
+    // before potentially calling this, which is a cleaner separation of concerns.
+    // So, just clearing BookingId here is sufficient if the handler sets the status.
+  }
+
+  /// <summary>
+  /// Updates the status of the availability slot.
+  /// Handles unlinking booking if status changes from Booked.
+  /// </summary>
+  public void UpdateStatus(AvailabilitySlotStatus newStatus)
+  {
+    if (Status == newStatus) return;
+
+    // If the slot was booked and is now becoming something else, the BookingId should be cleared by the handler/service.
+    // If the slot is becoming Booked, the BookingId should be set by the handler/service (via BookSlot).
+    // This method just updates the status. The handler coordinates BookingId.
+    Status = newStatus;
   }
 }

@@ -87,6 +87,15 @@ public class Booking : EntityBase<Guid>, IAggregateRoot
     UpdatedAt = DateTime.UtcNow;
     // Domain Event: BookingCancelledEvent
   }
+  public void UpdateTimes(DateTime newStartTime, DateTime newEndTime)
+  {
+    // Add validation if needed, e.g., newEndTime > newStartTime
+    // Also consider if this should change the booking status, e.g., to 'Rescheduled'.
+    BookingStartTime = newStartTime;
+    BookingEndTime = newEndTime;
+    UpdatedAt = DateTime.UtcNow;
+    // Consider raising a domain event here too if appropriate
+  }
 
   public void MarkAsCompleted()
   {
