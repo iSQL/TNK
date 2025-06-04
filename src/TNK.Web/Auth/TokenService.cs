@@ -81,7 +81,7 @@ public class TokenService
                                             .FirstOrDefaultAsync(bp => bp.VendorId == user.Id);
         if (businessProfile != null)
         {
-          claims.Add(new Claim("business_profile_id", businessProfile.Id.ToString()));
+          claims.Add(new Claim("BusinessProfileId", businessProfile.Id.ToString()));
           _logger.LogInformation("[TokenService] Added 'business_profile_id': {BusinessProfileId} to JWT for Vendor User: {UserName}", businessProfile.Id, user.UserName);
         }
         else

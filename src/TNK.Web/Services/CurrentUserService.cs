@@ -24,7 +24,7 @@ public class CurrentUserService : ICurrentUserService
   {
     get
     {
-      var businessProfileIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirstValue("business_profile_id");
+      var businessProfileIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirstValue("BusinessProfileId");
       if (int.TryParse(businessProfileIdClaim, out var businessProfileId))
       {
         return businessProfileId;
