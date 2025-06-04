@@ -4,6 +4,7 @@ using Microsoft.Extensions.Localization;
 using TNK.Core.Identity;
 using TNK.Infrastructure.Data;
 using TNK.Web.Resources;
+using TNK.Core.Constants;
 
 namespace TNK.Web.Auth;
 
@@ -61,14 +62,14 @@ public class RegisterEndpoint : Endpoint<RegisterRequest, RegisterResponse>
     {
       s.Summary = "Register a new user";
       s.Description = "Registers a new user with the specified details and role.";
-      s.ExampleRequest = new RegisterRequest { FirstName = "John", LastName = "Doe", Email = "john.doe@example.com", Password = "Password123!", ConfirmPassword = "Password123!", Role = SeedData.CustomerRole };
+      s.ExampleRequest = new RegisterRequest { FirstName = "John", LastName = "Doe", Email = "john.doe@example.com", Password = "Password123!", ConfirmPassword = "Password123!", Role = Core.Constants.Roles.Admin };
     });
   }
 
   public override async Task HandleAsync(RegisterRequest req, CancellationToken ct)
   {
-    var validRoles = new[] { SeedData.VendorRole, SeedData.CustomerRole, SeedData.AdminRole };
-    if (!validRoles.Contains(req.Role) || !await _roleManager.RoleExistsAsync(req.Role))
+    string[] validRoles = new[] { Core.Constants.Roles.Admin, Core.Constants.Roles.Customer, Core.Constants.Roles.Admin };
+    if (! validRoles.Contains(req.Role) || !await _roleManager.RoleExistsAsync(req.Role))
     {
       // Use localized string with parameter
       AddError(r => r.Role, _localizer["InvalidRole", string.Join(", ", validRoles)]);

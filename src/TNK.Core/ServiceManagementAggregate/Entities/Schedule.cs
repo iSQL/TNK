@@ -27,6 +27,7 @@ public class Schedule : EntityBase<Guid>, IAggregateRoot
 
   public Schedule(Guid workerId, int businessProfileId, string title, DateOnly effectiveStartDate, string timeZoneId, bool isDefault = false)
   {
+    Id = Guid.NewGuid(); // Generate ID on client side
     WorkerId = Guard.Against.Default(workerId, nameof(workerId));
     BusinessProfileId = Guard.Against.Default(businessProfileId, nameof(businessProfileId));
     Title = Guard.Against.NullOrWhiteSpace(title, nameof(title));

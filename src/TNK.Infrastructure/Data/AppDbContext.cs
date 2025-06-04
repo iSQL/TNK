@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using TNK.Core.BusinessAggregate;
 using TNK.Core.ContributorAggregate;
 using TNK.Core.Identity;
+using TNK.Core.ServiceManagementAggregate.Entities;
 
 namespace TNK.Infrastructure.Data;
 
@@ -22,7 +23,13 @@ public class AppDbContext
 
   public DbSet<Contributor> Contributors { get; set; }
   public DbSet<BusinessProfile> BusinessProfiles { get; set; }
+  public DbSet<Service> Services { get; set; }
+  public DbSet<Worker> Workers { get; set; }
+  public DbSet<ScheduleRuleItem> ScheduleRuleItems { get; set; }
+  public DbSet<Schedule> Schedules { get; set; }
 
+  public DbSet<AvailabilitySlot> AvailabilitySlots { get; set; }
+  public DbSet<Booking> Bookings { get; set; }
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);

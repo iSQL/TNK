@@ -21,7 +21,7 @@ public class Endpoint : EndpointWithoutRequest<BusinessProfileDTO>
     Get("/api/businessprofiles/my");
     Description(d => d.AutoTagOverride("BusinessProfiles"));
 
-    Roles(SeedData.VendorRole); 
+    Roles(Core.Constants.Roles.Vendor); 
     Summary(s =>
     {
       s.Summary = "Get the current vendor's business profile";

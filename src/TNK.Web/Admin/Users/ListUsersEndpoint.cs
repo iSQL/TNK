@@ -23,7 +23,7 @@ public class ListUsersEndpoint : Endpoint<ListUsersRequest, Result<UseCases.Comm
     Description(d => d.AutoTagOverride("Admin_Users"));
 
     AuthSchemes(JwtBearerDefaults.AuthenticationScheme); 
-    Roles(SeedData.AdminRole); 
+    Roles(Core.Constants.Roles.Admin); 
     
     Summary(s => {
       s.ExampleRequest = new ListUsersRequest

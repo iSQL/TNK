@@ -45,7 +45,7 @@ public class Endpoint : Endpoint<CreateBusinessProfileRequest, CreateBusinessPro
     Post("/api/businessprofiles");
     Description(d => d.AutoTagOverride("BusinessProfiles"));
 
-    Roles(SeedData.VendorRole);
+    Roles(Core.Constants.Roles.Admin);
     Summary(s =>
     {
       s.Summary = "Create a new business profile";

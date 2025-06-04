@@ -39,7 +39,7 @@ public class Endpoint : Endpoint<UpdateBusinessProfileRequest, BusinessProfileDT
   {
     Put("/api/businessprofiles/my");
     Description(d => d.AutoTagOverride("BusinessProfiles"));
-    Roles(SeedData.VendorRole);
+    Roles(Core.Constants.Roles.Admin);
     Summary(s =>
     {
       s.Summary = "Update the current vendor's business profile";

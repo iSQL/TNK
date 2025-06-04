@@ -54,7 +54,7 @@ public class Create : Endpoint<CreateAdminBusinessProfileRequest, BusinessProfil
     Post("/api/admin/businessprofiles");
     Description(d => d.AutoTagOverride("Admin_BusinessProfiles"));
     AuthSchemes(JwtBearerDefaults.AuthenticationScheme);
-    Roles(SeedData.AdminRole);
+    Roles(Core.Constants.Roles.Admin);
     Summary(s =>
     {
       s.Summary = "Create a new Business Profile (Admin)";

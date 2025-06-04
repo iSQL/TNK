@@ -31,7 +31,7 @@ public class List : Endpoint<ListAdminRequest, UseCases.Common.Models.PagedResul
     Get("/api/admin/businessprofiles");
     Description(d => d.AutoTagOverride("Admin_BusinessProfiles"));
     AuthSchemes(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme);
-    Roles(SeedData.AdminRole);
+    Roles(Core.Constants.Roles.Admin);
     Summary(s =>
     {
       s.Summary = "List Business Profiles (Admin)";

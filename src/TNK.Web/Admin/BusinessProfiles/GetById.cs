@@ -34,7 +34,7 @@ public class GetById : Endpoint<GetByIdAdminRequest, BusinessProfileDTO>
     Get("/api/admin/businessprofiles/{BusinessProfileId}");
     Description(d => d.AutoTagOverride("Admin_BusinessProfiles"));
     AuthSchemes(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme); 
-    Roles(SeedData.AdminRole); 
+    Roles(Core.Constants.Roles.Admin); 
     Summary(s =>
     {
       s.Summary = "Get a specific Business Profile by ID (Admin)";

@@ -34,7 +34,7 @@ public class Delete : Endpoint<DeleteAdminBusinessProfileRequest>
     Delete("/api/admin/businessprofiles/{BusinessProfileId}");
     Description(d => d.AutoTagOverride("Admin_BusinessProfiles"));
     AuthSchemes(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme);
-    Roles(SeedData.AdminRole);
+    Roles(Core.Constants.Roles.Admin);
     Summary(s =>
     {
       s.Summary = "Delete an existing Business Profile (Admin)";
