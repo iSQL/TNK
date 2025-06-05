@@ -41,4 +41,9 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AvailabilitySlots\" />
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>

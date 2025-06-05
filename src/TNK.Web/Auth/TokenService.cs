@@ -1,6 +1,6 @@
 ﻿// Suggested Location: TNK.Web/Auth/TokenService.cs (or wherever it currently resides)
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore; // For AsNoTracking, FirstOrDefaultAsync
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -10,28 +10,28 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using TNK.Core.Identity;        // For ApplicationUser
-using TNK.Infrastructure.Data;  // For AppDbContext (ensure this using is correct)
-// using TNK.Core.Constants;    // If you need Roles constants here
+using TNK.Core.Identity;
+using TNK.Infrastructure.Data;  // For AppDbContext
+using Microsoft.Extensions.Logging; // For ILogger
 
-namespace TNK.Web.Auth; // Or your appropriate namespace
+namespace TNK.Web.Auth;
 
 public class TokenService
 {
   private readonly IConfiguration _configuration;
   private readonly UserManager<ApplicationUser> _userManager;
-  private readonly AppDbContext _dbContext; // Inject AppDbContext
+  private readonly AppDbContext _dbContext;
   private readonly ILogger<TokenService> _logger;
 
   public TokenService(
       IConfiguration configuration,
       UserManager<ApplicationUser> userManager,
-      AppDbContext dbContext, // Add AppDbContext
+      AppDbContext dbContext,
       ILogger<TokenService> logger)
   {
     _configuration = configuration;
     _userManager = userManager;
-    _dbContext = dbContext; // Store injected AppDbContext
+    _dbContext = dbContext;
     _logger = logger;
   }
 
@@ -39,6 +39,7 @@ public class TokenService
   {
     if (user == null)
     {
+      _logger.LogError("[TokenService] Attempted to generate JWT for a null user.");
       throw new ArgumentNullException(nameof(user));
     }
 
@@ -46,24 +47,24 @@ public class TokenService
 
     var claims = new List<Claim>
           {
-              new Claim(JwtRegisteredClaimNames.Sub, user.Id), // Subject (user ID)
+              new Claim(JwtRegisteredClaimNames.Sub, user.Id),
               new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
-              new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()), // JWT ID unique for each token
-              new Claim(ClaimTypes.NameIdentifier, user.Id), // Standard claim for User ID
-              new Claim(ClaimTypes.Name, user.UserName ?? string.Empty), // Standard claim for UserName
+              new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+              new Claim(ClaimTypes.NameIdentifier, user.Id),
+              new Claim(ClaimTypes.Name, user.UserName ?? string.Empty),
           };
 
-    // Add FirstName and LastName if they exist
     if (!string.IsNullOrEmpty(user.FirstName))
     {
       claims.Add(new Claim(ClaimTypes.GivenName, user.FirstName));
+      _logger.LogInformation("[TokenService] Added GivenName Claim: {FirstName} for User: {UserName}", user.FirstName, user.UserName);
     }
     if (!string.IsNullOrEmpty(user.LastName))
     {
       claims.Add(new Claim(ClaimTypes.Surname, user.LastName));
+      _logger.LogInformation("[TokenService] Added Surname Claim: {LastName} for User: {UserName}", user.LastName, user.UserName);
     }
 
-    // Add roles as claims
     var roles = await _userManager.GetRolesAsync(user);
     foreach (var role in roles)
     {
@@ -72,7 +73,7 @@ public class TokenService
     }
 
     // Add BusinessProfileId claim if the user is a Vendor
-    if (roles.Contains(Core.Constants.Roles.Vendor)) // Assuming Roles.Vendor is "Vendor"
+    if (roles.Contains(Core.Constants.Roles.Vendor))
     {
       try
       {
@@ -82,11 +83,11 @@ public class TokenService
         if (businessProfile != null)
         {
           claims.Add(new Claim("BusinessProfileId", businessProfile.Id.ToString()));
-          _logger.LogInformation("[TokenService] Added 'business_profile_id': {BusinessProfileId} to JWT for Vendor User: {UserName}", businessProfile.Id, user.UserName);
+          _logger.LogInformation("[TokenService] Added 'BusinessProfileId': {BusinessProfileId} to JWT for Vendor User: {UserName}", businessProfile.Id, user.UserName);
         }
         else
         {
-          _logger.LogWarning("[TokenService] No BusinessProfile found for Vendor User ID: {UserId}. 'business_profile_id' claim NOT added to JWT.", user.Id);
+          _logger.LogWarning("[TokenService] No BusinessProfile found for Vendor User ID: {UserId}. 'BusinessProfileId' claim NOT added to JWT.", user.Id);
         }
       }
       catch (Exception ex)
@@ -99,7 +100,7 @@ public class TokenService
     var secretKey = jwtSettings["SecretKey"];
     if (string.IsNullOrEmpty(secretKey))
     {
-      _logger.LogError("[TokenService] JWT SecretKey is null or empty in configuration.");
+      _logger.LogCritical("[TokenService] JWT SecretKey is null or empty in configuration. Cannot generate token.");
       throw new InvalidOperationException("JWT SecretKey is not configured.");
     }
     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
@@ -108,7 +109,7 @@ public class TokenService
     var durationInMinutesString = jwtSettings["DurationInMinutes"];
     if (!double.TryParse(durationInMinutesString, out var durationInMinutes))
     {
-      durationInMinutes = 360; // Default duration if parsing fails or not configured
+      durationInMinutes = 360;
       _logger.LogWarning("[TokenService] JWT DurationInMinutes not configured or invalid, defaulting to {DefaultDuration} minutes.", durationInMinutes);
     }
     var expires = DateTime.UtcNow.AddMinutes(durationInMinutes);
@@ -123,9 +124,9 @@ public class TokenService
     };
 
     var tokenHandler = new JwtSecurityTokenHandler();
-    var token = tokenHandler.CreateToken(tokenDescriptor);
+    var securityToken = tokenHandler.CreateToken(tokenDescriptor); // Changed variable name to avoid conflict
 
-    _logger.LogInformation("[TokenService] JWT successfully generated for User: {UserName}", user.UserName);
-    return tokenHandler.WriteToken(token);
+    _logger.LogInformation("[TokenService] JWT successfully generated for User: {UserName}, expiring at {Expiration}", user.UserName, expires);
+    return tokenHandler.WriteToken(securityToken);
   }
 }
