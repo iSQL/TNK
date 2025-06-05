@@ -9,7 +9,8 @@ public class WorkersByBusinessSpec : Specification<Worker>
   {
     Query.Where(worker => worker.BusinessProfileId == businessProfileId)
          .OrderBy(worker => worker.LastName) // Default order by last name
-         .ThenBy(worker => worker.FirstName); // Then by first name
+         .ThenBy(worker => worker.FirstName) // Then by first name
+         .Include(w => w.Services); 
   }
 
   // Optional constructor for pagination (if you implement it)

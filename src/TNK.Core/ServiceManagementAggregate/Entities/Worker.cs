@@ -1,16 +1,16 @@
 ﻿using Ardalis.GuardClauses;
 using Ardalis.SharedKernel;
-using TNK.Core.BusinessAggregate; // Assuming BusinessProfileId is a Guid
-using TNK.Core.Identity; // For ApplicationUser if Worker is linked to a system user
+using System.Collections.Generic; // Required for ICollection
+using TNK.Core.BusinessAggregate;
+using TNK.Core.Identity;
 
 namespace TNK.Core.ServiceManagementAggregate.Entities;
 
 public class Worker : EntityBase<Guid>, IAggregateRoot
 {
-  public int BusinessProfileId { get; private set; } // FK to BusinessProfile
-  public virtual BusinessProfile? BusinessProfile { get; private set; } // Navigation property
+  public int BusinessProfileId { get; private set; }
+  public virtual BusinessProfile? BusinessProfile { get; private set; }
 
-  // Optional: If worker is also a platform user
   public string? ApplicationUserId { get; private set; }
   public virtual ApplicationUser? ApplicationUser { get; private set; }
 
@@ -20,15 +20,17 @@ public class Worker : EntityBase<Guid>, IAggregateRoot
   public string? Email { get; private set; }
   public string? PhoneNumber { get; private set; }
   public bool IsActive { get; private set; }
-  public string? ImageUrl { get; private set; } // Optional image for the worker
-  public string? Specialization { get; private set; } // e.g., "Haircuts", "Massages"
+  public string? ImageUrl { get; private set; }
+  public string? Specialization { get; private set; }
 
   // Navigation properties
   public virtual ICollection<Schedule> Schedules { get; private set; } = new List<Schedule>();
   public virtual ICollection<AvailabilitySlot> AvailabilitySlots { get; private set; } = new List<AvailabilitySlot>();
   public virtual ICollection<Booking> Bookings { get; private set; } = new List<Booking>();
 
-  // Private constructor for EF Core
+  // --- NEW: Many-to-many relationship with Service ---
+  public virtual ICollection<Service> Services { get; private set; } = new List<Service>();
+
   private Worker() { }
 
   public Worker(int businessProfileId, string firstName, string lastName)
@@ -37,13 +39,14 @@ public class Worker : EntityBase<Guid>, IAggregateRoot
     FirstName = Guard.Against.NullOrWhiteSpace(firstName, nameof(firstName));
     LastName = Guard.Against.NullOrWhiteSpace(lastName, nameof(lastName));
     IsActive = true;
+    // Services collection is initialized above
   }
 
   public void UpdateDetails(string firstName, string lastName, string? email, string? phoneNumber, string? imageUrl, string? specialization)
   {
     FirstName = Guard.Against.NullOrWhiteSpace(firstName, nameof(firstName));
     LastName = Guard.Against.NullOrWhiteSpace(lastName, nameof(lastName));
-    Email = email; // Basic validation for email format can be added
+    Email = email;
     PhoneNumber = phoneNumber;
     ImageUrl = imageUrl;
     Specialization = specialization;
@@ -56,4 +59,29 @@ public class Worker : EntityBase<Guid>, IAggregateRoot
 
   public void Activate() => IsActive = true;
   public void Deactivate() => IsActive = false;
+
+  // --- NEW: Methods to manage services for this worker ---
+  public void AddService(Service service)
+  {
+    Guard.Against.Null(service, nameof(service));
+    if (!Services.Any(s => s.Id == service.Id))
+    {
+      Services.Add(service);
+    }
+  }
+
+  public void RemoveService(Service service)
+  {
+    Guard.Against.Null(service, nameof(service));
+    var existingService = Services.FirstOrDefault(s => s.Id == service.Id);
+    if (existingService != null)
+    {
+      Services.Remove(existingService);
+    }
+  }
+
+  public void ClearServices()
+  {
+    Services.Clear();
+  }
 }

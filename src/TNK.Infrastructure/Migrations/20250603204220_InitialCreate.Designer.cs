@@ -157,7 +157,7 @@ namespace TNK.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TNK.Core.BusinessAggregate.BusinessProfile", b =>
+            modelBuilder.Entity("TNK.Core.BusinessAggregate.VendorBusiness", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -678,11 +678,11 @@ namespace TNK.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TNK.Core.BusinessAggregate.BusinessProfile", b =>
+            modelBuilder.Entity("TNK.Core.BusinessAggregate.VendorBusiness", b =>
                 {
                     b.HasOne("TNK.Core.Identity.ApplicationUser", "Vendor")
-                        .WithOne("BusinessProfile")
-                        .HasForeignKey("TNK.Core.BusinessAggregate.BusinessProfile", "VendorId")
+                        .WithOne("VendorBusiness")
+                        .HasForeignKey("TNK.Core.BusinessAggregate.VendorBusiness", "VendorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -720,7 +720,7 @@ namespace TNK.Infrastructure.Migrations
 
             modelBuilder.Entity("TNK.Core.ServiceManagementAggregate.Entities.AvailabilitySlot", b =>
                 {
-                    b.HasOne("TNK.Core.BusinessAggregate.BusinessProfile", "BusinessProfile")
+                    b.HasOne("TNK.Core.BusinessAggregate.VendorBusiness", "VendorBusiness")
                         .WithMany()
                         .HasForeignKey("BusinessProfileId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -737,7 +737,7 @@ namespace TNK.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BusinessProfile");
+                    b.Navigation("VendorBusiness");
 
                     b.Navigation("GeneratingSchedule");
 
@@ -752,7 +752,7 @@ namespace TNK.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("TNK.Core.BusinessAggregate.BusinessProfile", "BusinessProfile")
+                    b.HasOne("TNK.Core.BusinessAggregate.VendorBusiness", "VendorBusiness")
                         .WithMany()
                         .HasForeignKey("BusinessProfileId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -778,7 +778,7 @@ namespace TNK.Infrastructure.Migrations
 
                     b.Navigation("AvailabilitySlot");
 
-                    b.Navigation("BusinessProfile");
+                    b.Navigation("VendorBusiness");
 
                     b.Navigation("Customer");
 
@@ -804,7 +804,7 @@ namespace TNK.Infrastructure.Migrations
 
             modelBuilder.Entity("TNK.Core.ServiceManagementAggregate.Entities.Schedule", b =>
                 {
-                    b.HasOne("TNK.Core.BusinessAggregate.BusinessProfile", "BusinessProfile")
+                    b.HasOne("TNK.Core.BusinessAggregate.VendorBusiness", "VendorBusiness")
                         .WithMany()
                         .HasForeignKey("BusinessProfileId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -816,7 +816,7 @@ namespace TNK.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BusinessProfile");
+                    b.Navigation("VendorBusiness");
 
                     b.Navigation("Worker");
                 });
@@ -845,13 +845,13 @@ namespace TNK.Infrastructure.Migrations
 
             modelBuilder.Entity("TNK.Core.ServiceManagementAggregate.Entities.Service", b =>
                 {
-                    b.HasOne("TNK.Core.BusinessAggregate.BusinessProfile", "BusinessProfile")
+                    b.HasOne("TNK.Core.BusinessAggregate.VendorBusiness", "VendorBusiness")
                         .WithMany()
                         .HasForeignKey("BusinessProfileId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("BusinessProfile");
+                    b.Navigation("VendorBusiness");
                 });
 
             modelBuilder.Entity("TNK.Core.ServiceManagementAggregate.Entities.Worker", b =>
@@ -861,7 +861,7 @@ namespace TNK.Infrastructure.Migrations
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("TNK.Core.BusinessAggregate.BusinessProfile", "BusinessProfile")
+                    b.HasOne("TNK.Core.BusinessAggregate.VendorBusiness", "VendorBusiness")
                         .WithMany()
                         .HasForeignKey("BusinessProfileId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -869,12 +869,12 @@ namespace TNK.Infrastructure.Migrations
 
                     b.Navigation("ApplicationUser");
 
-                    b.Navigation("BusinessProfile");
+                    b.Navigation("VendorBusiness");
                 });
 
             modelBuilder.Entity("TNK.Core.Identity.ApplicationUser", b =>
                 {
-                    b.Navigation("BusinessProfile");
+                    b.Navigation("VendorBusiness");
                 });
 
             modelBuilder.Entity("TNK.Core.ServiceManagementAggregate.Entities.AvailabilitySlot", b =>
