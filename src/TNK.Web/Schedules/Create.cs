@@ -134,7 +134,7 @@ public class CreateScheduleEndpoint : Endpoint<CreateScheduleRequest, CreateSche
     {
       s.Summary = "Create a new schedule for a worker.";
       s.Description = "Creates a new schedule for the specified worker, associated with a business profile. Requires authentication and authorization (Admin or Business Owner who owns the worker).";
-      s.ExampleRequest = new CreateScheduleRequest { Title = "Default Weekday Schedule", EffectiveStartDate = DateOnly.FromDateTime(DateTime.UtcNow), TimeZoneId = "Europe/Belgrade", IsDefault = true };
+      s.ExampleRequest = new CreateScheduleRequest { Title = "Default Weekday Schedule", EffectiveStartDate = DateOnly.FromDateTime(DateTime.UtcNow), TimeZoneId = "UTC", IsDefault = true };
       s.Responses[201] = "Schedule created successfully.";
       s.Responses[400] = "Invalid request parameters.";
       s.Responses[401] = "User is not authenticated.";

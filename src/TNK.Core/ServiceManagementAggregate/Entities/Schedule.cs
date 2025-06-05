@@ -17,7 +17,7 @@ public class Schedule : EntityBase<Guid>, IAggregateRoot
   public bool IsDefault { get; private set; } // Indicates if this is the default schedule for the worker
   public DateOnly EffectiveStartDate { get; private set; }
   public DateOnly? EffectiveEndDate { get; private set; } // Nullable for ongoing schedules
-  public string TimeZoneId { get; private set; } = "Europe/Belgrade"; // e.g., "Europe/Belgrade", "UTC". Store TimeZoneInfo.Id
+  public string TimeZoneId { get; private set; } = "UTC"; // e.g., "Europe/Belgrade", "UTC". Store TimeZoneInfo.Id
 
   public virtual ICollection<ScheduleRuleItem> RuleItems { get; private set; } = new List<ScheduleRuleItem>();
   public virtual ICollection<ScheduleOverride> Overrides { get; private set; } = new List<ScheduleOverride>();

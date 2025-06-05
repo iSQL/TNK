@@ -312,7 +312,7 @@ public static class SeedData
           businessProfile.Id,
           "John's Regular Hours",
           DateOnly.FromDateTime(DateTime.UtcNow.Date),
-          "Europe/Belgrade",
+          "UTC",
           true
       );
       dbContext.Schedules.Add(scheduleJohn);
