@@ -48,7 +48,7 @@ public class Update(IMediator mediator, ICurrentUserService currentUserService) 
       s.Summary = "Updates an existing worker.";
       s.Description = "This endpoint allows an authenticated vendor or admin to update the details of an existing worker. Vendors must operate on workers within their own BusinessProfileId.";
       s.ExampleRequest = new UpdateWorkerRequest { WorkerId = Guid.NewGuid(), BusinessProfileId = 1, FirstName = "Jane", LastName = "Doe", Email = "jane.doe@example.com", PhoneNumber = "0987654321", IsActive = true };
-      s.ResponseExamples[200] = new WorkerDTO(Guid.NewGuid(), 1, null, "Jane", "Doe", "Jane Doe", "jane.doe@example.com", "0987654321", true, null, null);
+      s.ResponseExamples[200] = new WorkerDTO(Guid.NewGuid(), 1, null, "Jane", "Doe", "Jane Doe", "jane.doe@example.com", "0987654321", true, null, null, null);
     });
   }
 

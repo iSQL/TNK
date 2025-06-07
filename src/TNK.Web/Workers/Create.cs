@@ -42,7 +42,7 @@ public class Create(IMediator mediator) : Endpoint<CreateWorkerRequest, WorkerDT
       s.Summary = "Creates a new worker.";
       s.Description = "This endpoint allows an authenticated vendor to create a new worker associated with their business profile. The BusinessProfileId in the request should match the vendor's claimed BusinessProfileId.";
       s.ExampleRequest = new CreateWorkerRequest { BusinessProfileId = 1, FirstName = "John", LastName = "Doe", Email = "john.doe@example.com", PhoneNumber = "1234567890" };
-      s.ResponseExamples[201] = new WorkerDTO(Guid.NewGuid(), 1, null, "John", "Doe", "John Doe", "john.doe@example.com", "1234567890", true, null, null);
+      s.ResponseExamples[201] = new WorkerDTO(Guid.NewGuid(), 1, null, "John", "Doe", "John Doe", "john.doe@example.com", "1234567890", true, null, null, null);
     });
   }
 

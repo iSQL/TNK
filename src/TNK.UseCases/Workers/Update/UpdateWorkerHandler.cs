@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using TNK.Core.Interfaces; // For ICurrentUserService
 using TNK.Core.ServiceManagementAggregate.Entities; // For Worker entity
+using TNK.UseCases.Services;
 using TNK.UseCases.Workers; // For WorkerDTO
 // Optional: Inject UserManager<ApplicationUser> if you need to verify/update ApplicationUserId links
 // using Microsoft.AspNetCore.Identity;
@@ -157,7 +158,17 @@ public class UpdateWorkerHandler : IRequestHandler<UpdateWorkerCommand, Result<W
           workerToUpdate.PhoneNumber,
           workerToUpdate.IsActive,
           workerToUpdate.ImageUrl,
-          workerToUpdate.Specialization
+          workerToUpdate.Specialization,
+          Services: workerToUpdate.Services?.Select(service => new ServiceDTO(
+              service.Id,
+                service.BusinessProfileId,
+                service.Name,
+                service.Description,
+                service.DurationInMinutes,
+                service.Price,
+                service.IsActive,
+                service.ImageUrl
+          )).ToList() // Assuming Worker entity has a collection of Services
       );
 
       _logger.LogInformation("Successfully updated Worker with Id: {WorkerId}", workerToUpdate.Id);

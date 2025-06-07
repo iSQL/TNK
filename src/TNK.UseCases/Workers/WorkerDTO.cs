@@ -1,4 +1,6 @@
 ﻿// File: TNK.UseCases/Workers/WorkerDTO.cs
+using TNK.UseCases.Services;
+
 namespace TNK.UseCases.Workers;
 
 public record WorkerDTO(
@@ -12,5 +14,7 @@ public record WorkerDTO(
     string? PhoneNumber,
     bool IsActive,
     string? ImageUrl,
-    string? Specialization
+    string? Specialization,
+    IEnumerable<ServiceDTO>? Services 
+
 );

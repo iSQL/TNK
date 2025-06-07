@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using TNK.Core.Interfaces; // For ICurrentUserService
 using TNK.Core.ServiceManagementAggregate.Entities; // For Worker entity
+using TNK.UseCases.Services;
 using TNK.UseCases.Workers; // For WorkerDTO
 
 namespace TNK.UseCases.Workers.GetById;
@@ -88,7 +89,21 @@ public class GetWorkerByIdQueryHandler : IRequestHandler<GetWorkerByIdQuery, Res
         worker.PhoneNumber,
         worker.IsActive,
         worker.ImageUrl,
-        worker.Specialization
+        worker.Specialization,
+        Services: worker.Services?.Select(service => new ServiceDTO(
+            service.Id,
+                service.BusinessProfileId,
+                service.Name,
+                service.Description,
+                service.DurationInMinutes,
+                service.Price,
+                service.IsActive,
+                service.ImageUrl
+        )
+        {
+
+        }).ToList() ?? new List<ServiceDTO>()
+
     );
 
     _logger.LogInformation("Successfully retrieved Worker with Id: {WorkerId}", worker.Id);

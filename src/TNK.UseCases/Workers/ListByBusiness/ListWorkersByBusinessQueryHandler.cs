@@ -6,8 +6,9 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using TNK.Core.Interfaces; // For ICurrentUserService
 using TNK.Core.ServiceManagementAggregate.Entities; // For Worker entity
-using TNK.UseCases.Workers.Specifications; // For WorkersByBusinessSpec
+using TNK.UseCases.Services;
 using TNK.UseCases.Workers; // For WorkerDTO
+using TNK.UseCases.Workers.Specifications; // For WorkersByBusinessSpec
 // using TNK.UseCases.Common.Models; // For PagedResult if using pagination
 
 namespace TNK.UseCases.Workers.ListByBusiness;
@@ -42,7 +43,7 @@ public class ListWorkersByBusinessQueryHandler : IRequestHandler<ListWorkersByBu
       return Result<List<WorkerDTO>>.Invalid(validationResult.AsErrors());
     }
 
-    // Authorization: Check if user is authenticated
+    
     if (!_currentUserService.IsAuthenticated)
     {
       _logger.LogWarning("User is not authenticated to list workers.");
@@ -50,7 +51,7 @@ public class ListWorkersByBusinessQueryHandler : IRequestHandler<ListWorkersByBu
     }
 
     var authenticatedUserBusinessProfileId = _currentUserService.BusinessProfileId;
-    if (authenticatedUserBusinessProfileId == null)
+    if (authenticatedUserBusinessProfileId == null && !_currentUserService.IsInRole(Core.Constants.Roles.Admin))
     {
       _logger.LogWarning("Authenticated user {UserId} is not associated with any BusinessProfileId.", _currentUserService.UserId);
       return Result<List<WorkerDTO>>.Forbidden("User is not associated with a business profile.");
@@ -88,7 +89,18 @@ public class ListWorkersByBusinessQueryHandler : IRequestHandler<ListWorkersByBu
             worker.PhoneNumber,
             worker.IsActive,
             worker.ImageUrl,
-            worker.Specialization))
+            worker.Specialization,
+            worker.Services?.Select(service => new ServiceDTO( 
+                service.Id,
+                service.BusinessProfileId,
+                service.Name,
+                service.Description,
+                service.DurationInMinutes,
+                service.Price,
+                service.IsActive,
+                service.ImageUrl
+            )).ToList() ?? new List<ServiceDTO>() // If Services is null, provide an empty list
+            ))
         .ToList();
 
     // If implementing pagination:
